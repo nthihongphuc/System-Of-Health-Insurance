@@ -1,6 +1,8 @@
 // import library here
-import React from "react";
-import { Breadcrumb, Layout, Menu, theme, Button, Image, Row, Col } from "antd";
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+import { Layout, Menu, Button, Image, Row, Col, Avatar } from "antd";
+import { UserOutlined } from "@ant-design/icons";
 const { Header, Content, Footer } = Layout;
 
 import { useNavigate, Outlet, Link } from "react-router-dom";
@@ -24,7 +26,24 @@ const menuItems = [
 
 // Define Our component
 const BasicLayout = () => {
+  const isAuthenticated = true; // get from context
+
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const [selected, setSelected] = useState("home");
+
+  useEffect(() => {
+    if (location.pathname.includes("home")) {
+      setSelected("home");
+    } else if (location.pathname.includes("product")) {
+      setSelected("product");
+    } else if (location.pathname.includes("support")) {
+      setSelected("support");
+    } else {
+      setSelected("");
+    }
+  }, [location]);
 
   const toLogin = (path) => {
     navigate(path);
@@ -38,16 +57,37 @@ const BasicLayout = () => {
             <Image src={logo} preview={false} />
           </Link>
         </div>
-        <div style={{ float: "right" }}>
-          <Button type="primary" onClick={() => toLogin("/login")}>
-            Đăng nhập
-          </Button>
-        </div>
+        {isAuthenticated ? (
+          <div style={{ float: "right" }}>
+            <Avatar
+              size="large"
+              icon={<UserOutlined />}
+              onClick={() => navigate("/profile")}
+              style={{ background: "rgba(255,255,255,0.5)", cursor: "pointer" }}
+            />
+          </div>
+        ) : (
+          <div style={{ float: "right" }}>
+            <Button
+              type="primary"
+              onClick={() => toLogin("/login")}
+              style={{ marginInline: 20 }}
+            >
+              Đăng nhập
+            </Button>
+            <Button type="primary" onClick={() => toLogin("/register")}>
+              Đăng ký
+            </Button>
+          </div>
+        )}
         <Menu
           theme="dark"
           mode="horizontal"
-          defaultSelectedKeys={["2"]}
+          selectedKeys={[selected]}
           items={menuItems}
+          onClick={(item) => {
+            navigate(`/${item.key}`);
+          }}
           style={{ background: "transparent" }}
         />
       </Header>
