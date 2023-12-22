@@ -1,5 +1,5 @@
 // import library here
-import React from "react";
+import React, { useState } from "react";
 import {
   Form,
   Input,
@@ -17,6 +17,7 @@ const { Header, Content, Footer } = Layout;
 import { Link } from "react-router-dom";
 
 import logo from "../assets/react.svg";
+import axios from "axios";
 
 const menuItems = [
   {
@@ -38,6 +39,18 @@ const ActivationPage = () => {
   const onFinish = (values) => {
     console.log(values);
   };
+
+const [a, setA] = useState()
+
+  const handleClickButton=()=>{
+        const a = axios.post("API","body")
+              .then(data=>{
+                  setA(data.a)
+              })
+              .catch(err=>{
+
+              })
+  }
 
   return (
     <Row
@@ -84,9 +97,11 @@ const ActivationPage = () => {
 
           <Form.Item>
             <Button
+
               type="primary"
               htmlType="submit"
               className="login-form-button"
+              onclick = {}
             >
               Kích hoạt
             </Button>
