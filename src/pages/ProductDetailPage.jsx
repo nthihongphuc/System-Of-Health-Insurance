@@ -3,7 +3,9 @@
 const ProductDetailPage = () => {
   const { id } = useParams();
 
-  return <div>hello {id}</div>;
+    return (
+        <div>hello {id}</div>
+    );
 };
 
 export default ProductDetailPage;
