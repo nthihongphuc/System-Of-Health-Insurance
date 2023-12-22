@@ -1,17 +1,10 @@
 // import library here
 import { Form, Input, Button, Row, Card } from "antd";
 import { Link } from "react-router-dom";
-import {useForm} from 'react-hook-form';
-import axios from "axios";
 
 // Define Our component
 const LoginPage = () => {
-  const {
-    handleFinish
-  }= useForm();
-
   const onFinish = (values) => {
-    axios.post()
     console.log(values);
   };
 
@@ -30,7 +23,7 @@ const LoginPage = () => {
           initialValues={{
             remember: true,
           }}
-          onFinish={handleFinish(onFinish)}
+          onFinish={(onFinish)}
         >
           <Form.Item
             name="username"
@@ -60,9 +53,13 @@ const LoginPage = () => {
               type="password"
               placeholder="Mật khẩu"
             />
+            
           </Form.Item>
 
           <Form.Item style={{ textAlign: "center" }}>
+            <div style={{ fontSize: 12, textAlign:"left", marginBottom:15}}>
+             <Link to="/register">Quên tài khoản/mật khẩu</Link>
+            </div>
             <Button
               type="primary"
               htmlType="submit"

@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 const ProductDetailPage = () => {
   const { id } = useParams();
 
-  return <div>heello {id}</div>;
+  return <div>hello {id}</div>;
 };
 
 export default ProductDetailPage;

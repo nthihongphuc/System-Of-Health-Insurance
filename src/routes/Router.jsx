@@ -6,6 +6,7 @@ import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
 import ProfilePage from "../pages/ProfilePage";
 import ProfilePage_update from "../pages/ProfilePage_update";
+import ResetPasswordPage from "../pages/ResetPasswordPage";
 
 // import ActivationPage from "../pages/ActivationPage";
 import ProductPage from "../pages/ProductPage";
@@ -26,6 +27,7 @@ const Router = () => {
                     <Route path="/register" element={<RegisterPage />} />
                     <Route path="/profile" element={<ProfilePage />} />
                     <Route path="/profile_update" element={<ProfilePage_update />} />
+                    <Route path="/resetpass" element={<ResetPasswordPage/>}/>
                     {/* <Route path="/activation" element={<ActivationPage />} /> */}
                 </Route>
             </Routes>

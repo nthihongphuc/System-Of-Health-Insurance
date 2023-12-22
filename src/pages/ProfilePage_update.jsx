@@ -1,25 +1,18 @@
 ﻿//import { Layout, Sider, Menu, UserOutlined, collapsed } from "antd";
 
 import React from 'react';
-import { UploadOutlined, UserOutlined, VideoCameraOutlined } from '@ant-design/icons';
+import { MedicineBoxOutlined, MoneyCollectOutlined, IdcardOutlined , UnlockOutlined } from '@ant-design/icons';
 import { Layout, Menu, theme } from 'antd';
 
 const { Header, Content, Sider } = Layout;
 
-/*const items = [UserOutlined, VideoCameraOutlined, UploadOutlined, UserOutlined].map(
-    (icon, index) => ({
-        key: String(index + 1),
-        icon: React.createElement(icon),
-        label: `nav ${index + 1}`,
-    }),
-);*/
-const items = [UserOutlined, VideoCameraOutlined, UploadOutlined, UserOutlined].map(
-    (icon, index) => ({
-        key: String(index + 1),
-        icon: React.createElement(icon),
-        label: `nav ${index + 1}`,
-    }),
-);
+const icons = [IdcardOutlined,MedicineBoxOutlined, MoneyCollectOutlined, UnlockOutlined];
+const labels = ["Thông tin cá nhân","Gói bảo hiểm","Hóa đơn", "Bảo mật"];
+const items = icons.map((icon, index) => ({
+  key: String(index + 1),
+  icon: React.createElement(icon),
+  label: labels[index],
+}))
 
 const ProfilePage_update = () => {
     const {
@@ -28,7 +21,8 @@ const ProfilePage_update = () => {
 
     return (
         <Layout>
-            <Sider
+            <Sider 
+                width={230}
                 breakpoint="lg"
                 collapsedWidth="0"
                 onBreakpoint={(broken) => {
