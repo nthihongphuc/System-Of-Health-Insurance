@@ -7,8 +7,7 @@ import RegisterPage from "../pages/RegisterPage";
 import ProfilePage from "../pages/ProfilePage";
 import ProfilePage_update from "../pages/ProfilePage_update";
 import ResetPasswordPage from "../pages/ResetPasswordPage";
-
-// import ActivationPage from "../pages/ActivationPage";
+import RegisteredInsurancePage from"../pages/RegisteredInsurancePage";
 import ProductPage from "../pages/ProductPage";
 import ProductDetailPage from "../pages/ProductDetailPage";
 import SupportPage from "../pages/SupportPage";
@@ -28,6 +27,7 @@ const Router = () => {
                     <Route path="/profile" element={<ProfilePage />} />
                     <Route path="/profile_update" element={<ProfilePage_update />} />
                     <Route path="/resetpass" element={<ResetPasswordPage/>}/>
+                    <Route path="/regis_insurance" element={<RegisteredInsurancePage/>}/>
                     {/* <Route path="/activation" element={<ActivationPage />} /> */}
                 </Route>
             </Routes>
