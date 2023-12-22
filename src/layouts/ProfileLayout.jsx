@@ -17,7 +17,7 @@ const icons = [
   MoneyCollectOutlined,
   UnlockOutlined,
 ];
-const labels = ["Thông tin cá nhân", "Gói bảo hiểm", "Hóa đơn", "Bảo mật"];
+const labels = ["Tài khoản", "Gói bảo hiểm", "Hóa đơn", "Bảo mật"];
 const items = icons.map((icon, index) => ({
   key: String(index + 1),
   icon: React.createElement(icon),
