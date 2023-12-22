@@ -1,7 +1,16 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\public",
+    "\\src",
+    "\\src\\assets",
+    "\\src\\components",
+    "\\src\\components\\ProductCard",
+    "\\src\\components\\ReviewCard",
+    "\\src\\layouts",
+    "\\src\\pages",
+    "\\src\\routes"
   ],
-  "SelectedNode": "\\C:\\Users\\Admin\\Source\\Repos\\System-Of-Health-Insurance",
+  "SelectedNode": "\\src\\components\\ProductCard\\index.jsx",
   "PreviewInSolutionExplorer": false
 }
