@@ -2,16 +2,17 @@ import React from 'react';
 import { MedicineBoxOutlined, MoneyCollectOutlined, IdcardOutlined, UnlockOutlined } from '@ant-design/icons';
 import { Layout, Menu, theme, Card } from 'antd';
 import { Collapse } from 'antd';
+import { Content } from 'antd/es/layout/layout';
 
 const { Header, Sider } = Layout;
 
-const icons = [IdcardOutlined, MedicineBoxOutlined, MoneyCollectOutlined, UnlockOutlined];
-const labels = ["Thông tin cá nhân", "Gói bảo hiểm", "Hóa đơn", "Bảo mật"];
-const items = icons.map((icon, index) => ({
-  id: String(index + 1),
-  icon: React.createElement(icon),
-  label: labels[index],
-}));
+// const icons = [IdcardOutlined, MedicineBoxOutlined, MoneyCollectOutlined, UnlockOutlined];
+// const labels = ["Thông tin cá nhân", "Gói bảo hiểm", "Hóa đơn", "Bảo mật"];
+// const items = icons.map((icon, index) => ({
+//   id: String(index + 1),
+//   icon: React.createElement(icon),
+//   label: labels[index],
+// }));
 
 const items_renamed = [
   {
@@ -38,33 +39,19 @@ const RegisteredInsurancePage = () => {
   } = theme.useToken();
 
   return (
-    <Layout>
-      <Sider
-        width={230}
-        breakpoint="lg"
-        collapsedWidth="0"
-        onBreakpoint={(broken) => {
-          console.log(broken);
-        }}
-        onCollapse={(collapsed, type) => {
-          console.log(collapsed, type);
-        }}
-      >
-        <div className="demo-logo-vertical" />
-        <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']} items={items} />
-      </Sider>
-      <Layout>
-        <Header style={{ padding: 38, background: colorBgContainer, display: 'flex', alignItems: 'center' }}>
+    <Layout style={{height: "100%"}}>
+      <Header style={{ padding: 38, background: colorBgContainer, display: 'flex', alignItems: 'center' }}>
           <span style={{ justifyContent: 'center', fontSize: 26, fontWeight: 'bold' }}>Thông tin bảo hiểm đã đăng ký</span>
         </Header>
-        <Card
-          style={{ margin: 40, width: "100%", maxWidth: 10000 }}
-          bodyStyle={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
-        >
-          {/* Corrected usage of Collapse */}
-          <Collapse accordion items={items_renamed} style={{ width: '100%', border: 'none' }} />
-        </Card>
-      </Layout>
+        <Content style={{margin: 40}}>
+          <Card
+            style={{ width: "100%", maxWidth: 10000, minHeight: "100vh" }}
+            bodyStyle={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
+          >
+            {/* Corrected usage of Collapse */}
+            <Collapse accordion items={items_renamed} style={{ width: '100%', border: 'none' }} />
+          </Card>
+        </Content>
     </Layout>
   );
 };
