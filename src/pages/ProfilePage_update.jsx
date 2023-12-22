@@ -10,7 +10,6 @@ import {
 import { Layout, Menu, theme } from "antd";
 
 const { Header, Content, Sider } = Layout;
-
 const icons = [
   IdcardOutlined,
   MedicineBoxOutlined,
