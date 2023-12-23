@@ -1,86 +1,113 @@
-import { Button, Card, Table } from "antd";
+//import { Layout, Sider, Menu, UserOutlined, collapsed } from "antd";
+import React, { useState } from "react";
+import {
+  MedicineBoxOutlined,
+  MoneyCollectOutlined,
+  IdcardOutlined,
+  UnlockOutlined,
+} from "@ant-design/icons";
+import { Layout, Form, Input, Button, Menu, theme, Card, Select } from "antd";
+import { Content } from "antd/es/layout/layout";
 
-const profile = {
-  fullname: "Lê Thị Cà Dzốt",
-  phone: "0101010101",
-  email: "ragot@email.com",
-  address: "12 rau củ quả, phường vườn rau",
-};
+const { Header, Sider } = Layout;
 
-const columns = [
-  {
-    title: "Tên bảo hiểm",
-    dataIndex: "name",
-    key: "name",
-  },
-  {
-    title: "Thời gian đăng ký",
-    dataIndex: "startDate",
-    key: "startDate",
-  },
-  {
-    title: "Thời gian hết hạn",
-    dataIndex: "endDate",
-    key: "endDate",
-  },
-  {
-    title: "Tình trạng",
-    dataIndex: "status",
-    key: "status",
-  },
-  {
-    title: "Thao tác",
-    key: "action",
-    render: (_, record) => (
-      <div>
-        <Button onClick={() => console.log(record.id)}>Xem chi tiết</Button>
-      </div>
-    ),
-  },
-];
-
-const data = [
-  {
-    id: "1",
-    name: "Bảo hiểm nhân thọ",
-    startDate: "12/12/1212",
-    endDate: "12/12/1213",
-    status: "active",
-  },
-  {
-    id: "2",
-    name: "Bảo hiểm tai nạn",
-    startDate: "12/12/1212",
-    endDate: "12/12/1213",
-    status: "active",
-  },
-  {
-    id: "3",
-    name: "Bảo hiểm lao động",
-    startDate: "12/12/1212",
-    endDate: "12/12/1213",
-    status: "active",
-  },
-];
-
-const ProfilePage = () => {
+const ProfilePage_update = () => {
+  const [componentDisabled, setComponentDisabled] = useState(true);
+  const {
+    token: { colorBgContainer },
+  } = theme.useToken();
+  const onFinish = (values) => {
+    console.log(values);
+  };
   return (
-    <div style={{ padding: 20 }}>
-      <div style={{ padding: 20 }}>
-        <Card title="Thông tin cá nhân">
-          <div>Họ và tên: {profile.fullname}</div>
-          <div>Số điện thoại: {profile.phone}</div>
-          <div>Email: {profile.email}</div>
-          <div>Địa chỉ: {profile.address}</div>
+    <Layout style={{ height: "100%" }}>
+      <Header
+        style={{
+          padding: 38,
+          background: colorBgContainer,
+          display: "flex",
+          alignItems: "center",
+        }}
+      >
+        <span
+          style={{ justifyContent: "center", fontSize: 26, fontWeight: "bold" }}
+        >
+          Tài khoản
+        </span>
+      </Header>
+      <Content style={{ margin: 40 }}>
+        <Card
+          style={{ width: "100%", minHeight: "100vh" }}
+          bodyStyle={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <h2 style={{ textAlign: "center" }}>Thông tin cá nhân</h2>
+          <Form
+            name="profile_from"
+            onFinish={onFinish}
+            style={{ width: 300, textAlign: "center" }}
+            layout="vertical"
+          >
+            <Form.Item
+              label="Họ và tên"
+              name="name"
+              rules={[
+                {
+                  required: true,
+                  message: "Vui lòng nhập họ tên!",
+                },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+            <Form.Item label="Ngày sinh" name="birthday">
+              <Input disabled={componentDisabled}/>
+            </Form.Item>
+            <Form.Item label="Giới tính" name="gender">
+              <Input disabled={componentDisabled}/>
+            </Form.Item>
+            <Form.Item
+              label="Số điện thoại"
+              name="phone"
+              rules={[
+                {
+                  required: true,
+                  message: "Vui lòng nhập số điện thoại!",
+                },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+            <Form.Item label="Email" name="email">
+              <Input disabled={componentDisabled}/>
+            </Form.Item>
+            <Form.Item
+              label="Địa chỉ"
+              name="address"
+              rules={[
+                {
+                  required: true,
+                  message: "Vui lòng nhập địa chỉ!",
+                },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+            <Button
+              type="primary"
+              htmlType="submit"
+              style={{ marginTop: 10 }}
+            >
+              Cập nhật
+            </Button>
+          </Form>
         </Card>
-      </div>
-      <div style={{ padding: 20 }}>
-        <Card title="Thông tin bảo hiểm">
-          <Table columns={columns} dataSource={data} />
-        </Card>
-      </div>
-    </div>
+      </Content>
+    </Layout>
   );
 };
 
-export default ProfilePage;
+export default ProfilePage_update;

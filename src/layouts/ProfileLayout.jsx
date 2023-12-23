@@ -7,7 +7,8 @@ import {
   UnlockOutlined,
 } from "@ant-design/icons";
 import { Layout, Menu, theme } from "antd";
-import { useNavigate, Outlet, Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, useLocation, Outlet, Link } from "react-router-dom";
 
 const { Header, Content, Sider } = Layout;
 
@@ -17,41 +18,63 @@ const icons = [
   MoneyCollectOutlined,
   UnlockOutlined,
 ];
-const labels = ["Tài khoản", "Gói bảo hiểm", "Hóa đơn", "Bảo mật"];
-const items = icons.map((icon, index) => ({
-  key: String(index + 1),
-  icon: React.createElement(icon),
-  label: labels[index],
-}));
+
+// const labels = ["Tài khoản", "Gói bảo hiểm", "Hóa đơn", "Bảo mật"];
+// const items = icons.map((icon, index) => ({
+//   key: String(index + 1),
+//   icon: React.createElement(icon),
+//   label: labels[index],
+// }));
+
+const menuItems = [
+  {
+    key: "account",
+    label: "Thông tin cá nhân",
+  },
+  {
+    key: "insurance",
+    label: "Gói bảo hiểm",
+  },
+  {
+    key: "bill",
+    label: "Hóa đơn",
+  },
+  {
+    key: "resetpw",
+    label: "Bảo mật",
+  },
+];
 
 // Define Our component
 const ProfileLayout = () => {
-  // const isAuthenticated = true; // get from context
-
-  // const navigate = useNavigate();
-  // const location = useLocation();
-
-  // const [selected, setSelected] = useState("home");
-
-  // useEffect(() => {
-  //   if (location.pathname.includes("home")) {
-  //     setSelected("home");
-  //   } else if (location.pathname.includes("product")) {
-  //     setSelected("product");
-  //   } else if (location.pathname.includes("support")) {
-  //     setSelected("support");
-  //   } else {
-  //     setSelected("");
-  //   }
-  // }, [location]);
-
-  // const toLogin = (path) => {
-  //   navigate(path);
-  // };
-
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
+
+  const isAuthenticated = true; // get from context
+
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const [selected, setSelected] = useState("account");
+
+  useEffect(() => {
+    if (location.pathname.includes("account")) {
+      setSelected("account");
+    } else if (location.pathname.includes("bill")) {
+      setSelected("bill");
+    } else if (location.pathname.includes("insurance")) {
+      setSelected("insurance");
+    } else if (location.pathname.includes("resetpw")) {
+      setSelected("resetpw");
+    } else {
+      setSelected("");
+    }
+  }, [location]);
+
+  const toLogin = (path) => {
+    navigate(path);
+  };
 
   return (
     <Layout style={{ minHeight: "100vh" }}>
@@ -70,22 +93,16 @@ const ProfileLayout = () => {
         <Menu
           theme="dark"
           mode="inline"
-          defaultSelectedKeys={["4"]}
-          items={items}
+          selectedKeys={[selected]}
+          items={menuItems}
+          onClick={(item) => {
+            navigate(`/profile/${item.key}`);
+          }}
         />
       </Sider>
       <Layout style={{ height: "100%" }}>
         <Content style={{ height: "100%" }}>
-          {/* <div
-            style={{
-              padding: 24,
-              minHeight: 360,
-              background: colorBgContainer,
-              borderRadius: borderRadiusLG,
-            }}
-          > */}
             <Outlet />
-          {/* </div> */}
         </Content>
       </Layout>
     </Layout>

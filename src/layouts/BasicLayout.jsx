@@ -62,7 +62,7 @@ const BasicLayout = () => {
             <Avatar
               size="large"
               icon={<UserOutlined />}
-              onClick={() => navigate("/profile")}
+              onClick={() => navigate("/profile/account")}
               style={{ background: "rgba(255,255,255,0.5)", cursor: "pointer" }}
             />
           </div>

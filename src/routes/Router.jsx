@@ -5,7 +5,6 @@ import HomePage from "../pages/HomePage";
 import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
 import ProfilePage from "../pages/ProfilePage";
-import ProfilePage_update from "../pages/ProfilePage_update";
 import ResetPasswordPage from "../pages/ResetPasswordPage";
 import RegisteredInsurancePage from "../pages/RegisteredInsurancePage";
 import ProductPage from "../pages/ProductPage";
@@ -17,10 +16,10 @@ const ProfileRouter = () => {
   return (
     <Routes>
       <Route element={<ProfileLayout />}>
-        <Route index element={<ProfilePage />} />
-        <Route path="/update" element={<ProfilePage_update />} />
-        <Route path="/resetpass" element={<ResetPasswordPage />} />
-        <Route path="/regis_insurance" element={<RegisteredInsurancePage />} />
+        <Route path="/account" element={<ProfilePage />} />
+        {/* <Route path="/account" element={<ProfilePage_update />} /> */}
+        <Route path="/resetpw" element={<ResetPasswordPage />} />
+        <Route path="/insurance" element={<RegisteredInsurancePage />} />
         {/* <Route path="/activation" element={<ActivationPage />} /> */}
       </Route>
     </Routes>
