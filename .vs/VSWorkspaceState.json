@@ -8,9 +8,8 @@
     "\\src\\components\\ProductCard",
     "\\src\\components\\ReviewCard",
     "\\src\\layouts",
-    "\\src\\pages",
-    "\\src\\routes"
+    "\\src\\pages"
   ],
-  "SelectedNode": "\\src\\pages\\ProfilePage_update.jsx",
+  "SelectedNode": "\\src\\pages\\ProductDetailPage.jsx",
   "PreviewInSolutionExplorer": false
 }
