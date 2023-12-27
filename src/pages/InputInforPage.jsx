@@ -2,7 +2,7 @@
 import { Form, Input, Button, Row, Card } from "antd";
 import { DatePicker, Select } from "antd";
 import { Link } from "react-router-dom";
-import { aaa } from "../data/address";
+import { address } from "../data/address";
 
 const InputInforPage = () => {
   const onFinish = (values) => {
