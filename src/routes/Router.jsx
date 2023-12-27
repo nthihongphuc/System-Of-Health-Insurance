@@ -12,6 +12,8 @@ import ProductDetailPage from "../pages/ProductDetailPage";
 import SupportPage from "../pages/SupportPage";
 import ProfileLayout from "../layouts/ProfileLayout";
 import InputInforPage from "../pages/InputInforPage";
+import RegisterInsurance from "../pages/RegisterInsurance";
+
 
 const ProfileRouter = () => {
   return (
@@ -41,6 +43,8 @@ const Router = () => {
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/infor" element={<InputInforPage />} />
           <Route path="/profile/*" element={<ProfileRouter />} />
+          <Route path="/product/:id/register" element={<RegisterInsurance />} />
+
           {/* <Route path="/profile" element={<ProfilePage />} />
                     <Route path="/profile_update" element={<ProfilePage_update />} />
                     <Route path="/resetpass" element={<ResetPasswordPage/>}/>
