@@ -1,17 +1,27 @@
 // import thư viện ở đây
 import { Form, Input, Button, Row, Card } from "antd";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import callApi from '../utils/index';  // Import hàm callApi
+import api from "../api/endpoint";
 
 // Định nghĩa component
 const LoginPage = () => {
+  const navigate = useNavigate();
+
   const onFinish = async (values) => {
     try {
+      const data = await api.login(values);
+      if (data) {
+        localStorage.setItem('access_token', data.accessToken);
+        navigate('/');
+      } else {
+        alert('Tên đăng nhập hoặc mật khẩu không chính xác');
+      }
       // Gọi API đăng nhập
-      const response = await callApi('/auth/login', 'post', values);
+      // const response = await callApi('/auth/login', 'post', values);
 
       // Xử lý phản hồi từ server (response)
-      console.log(response);
+      // console.log(response);
 
       // Thực hiện các bước tiếp theo, chẳng hạn chuyển hướng trang, hiển thị thông báo thành công, v.v.
     } catch (error) {
