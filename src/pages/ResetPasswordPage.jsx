@@ -1,7 +1,7 @@
 import React from "react";
 import { Layout, Form, Input, Button, Card } from "antd";
 import { Content } from "antd/es/layout/layout";
-import callApi from '../utils/api';  // Import hàm callApi
+import callApi from '../utils/index';  // Import hàm callApi
 
 const { Header } = Layout;
 

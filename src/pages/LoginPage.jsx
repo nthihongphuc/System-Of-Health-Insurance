@@ -1,7 +1,7 @@
 // import thư viện ở đây
 import { Form, Input, Button, Row, Card } from "antd";
 import { Link } from "react-router-dom";
-import callApi from '../utils/api';  // Import hàm callApi
+import callApi from '../utils/index';  // Import hàm callApi
 
 // Định nghĩa component
 const LoginPage = () => {
