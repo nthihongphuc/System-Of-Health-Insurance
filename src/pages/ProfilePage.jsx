@@ -10,6 +10,7 @@ import { Layout, Form, Input, Button, Menu, theme, Card, Select } from "antd";
 import { Content } from "antd/es/layout/layout";
 
 const { Header, Sider } = Layout;
+const { TextArea } = Input;
 
 const ProfilePage_update = () => {
   const [componentDisabled, setComponentDisabled] = useState(true);
@@ -64,10 +65,10 @@ const ProfilePage_update = () => {
               <Input />
             </Form.Item>
             <Form.Item label="Ngày sinh" name="birthday">
-              <Input disabled={componentDisabled}/>
+              <Input disabled={componentDisabled} />
             </Form.Item>
             <Form.Item label="Giới tính" name="gender">
-              <Input disabled={componentDisabled}/>
+              <Input disabled={componentDisabled} />
             </Form.Item>
             <Form.Item
               label="Số điện thoại"
@@ -82,7 +83,7 @@ const ProfilePage_update = () => {
               <Input />
             </Form.Item>
             <Form.Item label="Email" name="email">
-              <Input disabled={componentDisabled}/>
+              <Input disabled={componentDisabled} />
             </Form.Item>
             <Form.Item
               label="Địa chỉ"
@@ -96,11 +97,10 @@ const ProfilePage_update = () => {
             >
               <Input />
             </Form.Item>
-            <Button
-              type="primary"
-              htmlType="submit"
-              style={{ marginTop: 10 }}
-            >
+            <Form.Item label="Sức khỏe">
+              <TextArea rows={4} />
+            </Form.Item>
+            <Button type="primary" htmlType="submit" style={{ marginTop: 10 }}>
               Cập nhật
             </Button>
           </Form>

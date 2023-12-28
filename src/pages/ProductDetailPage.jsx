@@ -1,59 +1,51 @@
 ﻿import { useParams } from "react-router-dom";
-import { Row, Col, Image, Space, Button } from "antd";
-import home1 from "../assets/home3.jpg"; //Thay doi
+import { Row, Col } from "antd";
+import ProductPage from "../pages/ProductPage";
+import { Layout, Menu, theme, Card } from 'antd';
+import { Descriptions, Collapse } from 'antd';
+import { Content } from 'antd/es/layout/layout';
 
+const { Header } = Layout;
+
+const items_renamed = [
+  {
+    key: '10',
+    label: 'Quyền lợi của người sử dụng',
+    children: <p>aaaaaaaaaaaaaaaaa</p>,
+    
+  },
+  {
+    key: '11',
+    label: 'Điều kiện tham gia',
+    children: <p>bbbbbbbbbbbbbbb</p>,
+  },
+  {
+    key: '12',
+    label: 'Điều khoản loại trừ',
+    children: <p></p>,
+  }
+];
 const ProductDetailPage = () => {
-    const { id } = useParams();
+  const {
+    token: { colorBgContainer },
+  } = theme.useToken();
 
-    return (
-        <Space size={12}>
-            <div style={{
-                paddingTop: 30,
-                paddingRight: 0,
-                paddingBottom: 30,
-                paddingLeft: 30
-            }}
-            >
-                <img
-                    src={home1}
-                    style={{
-                        width: 540,
-                        height: 514,
-                        marginTop: 0,
-                        marginRight: "auto",
-                        marginBottom: 0,
-                        marginLeft: 0
-                    }}
-                />
-            </div>
-            <div style={{
-                paddingTop: 30,
-                paddingRight: 0,
-                paddingBottom: 30,
-                paddingLeft: 30
-            }}
-            >
-                <h2> Sản phẩm bảo hiểm nghiệp vụ sức khỏe </h2>
-                <div>
-                    <p>
-                        - Chủ động lựa chọn các gói bảo hiểm khác nhau với mức phí chỉ từ 2k/ tháng
-                        <p>
-                            - Mua nhanh dễ dàng, không cần khám sức khỏe
-                        </p>
-                        - Quyền lợi bảo hiểm đa dạng trước các rủi ro tai nạn/ Ngộ độc thực phẩm/ Bệnh nhiệt đới
-                    </p>
-                </div>
-                <Button
-                    type="primary"
-                    htmlType="submit"
-                    className="register-form-button"
-                    style={{ marginTop: 10 }}
-                >
-                    Đăng ký!
-                </Button>
-            </div>
-        </Space>
-    );
+  return (
+    <Layout style={{height: "100%"}}>
+      <Header style={{ padding: 38, background: colorBgContainer, display: 'flex', alignItems: 'center' }}>
+          <span style={{ justifyContent: 'center', fontSize: 26, fontWeight: 'bold' }}>Thông tin bảo hiểm</span>
+        </Header>
+        <Content style={{margin: 40}}>
+          <Card
+            style={{ width: "100%", maxWidth: 10000, minHeight: "100vh" }}
+            bodyStyle={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
+          >
+            {/* Corrected usage of Collapse */}
+            <Collapse accordion items={items_renamed} style={{ width: '100%', border: 'none' }} />
+          </Card>
+        </Content>
+    </Layout>
+  );
 };
 
 export default ProductDetailPage;
