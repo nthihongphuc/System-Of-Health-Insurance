@@ -1,29 +1,32 @@
-//import { Layout, Sider, Menu, UserOutlined, collapsed } from "antd";
 import React from "react";
-import {
-  MedicineBoxOutlined,
-  MoneyCollectOutlined,
-  IdcardOutlined,
-  UnlockOutlined,
-} from "@ant-design/icons";
-import { Layout, Form, Input, Button, Menu, theme, Card } from "antd";
+import { Layout, Form, Input, Button, Card } from "antd";
 import { Content } from "antd/es/layout/layout";
+import callApi from '../utils/index';  // Import hàm callApi
 
-const { Header, Sider } = Layout;
+const { Header } = Layout;
 
 const ResetPasswordPage = () => {
-  const {
-    token: { colorBgContainer },
-  } = theme.useToken();
-  const onFinish = (values) => {
-    console.log(values);
+  const onFinish = async (values) => {
+    try {
+      // Gọi API đổi mật khẩu
+      const response = await callApi('/auth/changePassword', 'post', values);
+
+      // Xử lý phản hồi từ server (response)
+      console.log(response);
+
+      // Thực hiện các bước tiếp theo, chẳng hạn chuyển hướng trang, hiển thị thông báo thành công, v.v.
+    } catch (error) {
+      console.error('Error during password change:', error);
+      // Xử lý lỗi, chẳng hạn hiển thị thông báo lỗi cho người dùng
+    }
   };
+
   return (
     <Layout style={{ height: "100%" }}>
       <Header
         style={{
           padding: 38,
-          background: colorBgContainer,
+          background: "#yourBackgroundColor",  // Thay #yourBackgroundColor bằng mã màu bạn muốn sử dụng
           display: "flex",
           alignItems: "center",
         }}
@@ -36,7 +39,7 @@ const ResetPasswordPage = () => {
       </Header>
       <Content style={{ margin: 40 }}>
         <Card
-          style={{ width: "100%" , minHeight : "100vh"}}
+          style={{ width: "100%", minHeight: "100vh" }}
           bodyStyle={{
             display: "flex",
             flexDirection: "column",
@@ -50,6 +53,7 @@ const ResetPasswordPage = () => {
             style={{ width: 300, textAlign: "center" }}
             layout="vertical"
           >
+            {/* Các trường nhập liệu mật khẩu hiện tại, mật khẩu mới, và xác nhận mật khẩu mới */}
             <Form.Item
               label="Mật khẩu hiện tại"
               name="oldPassword"
@@ -98,6 +102,7 @@ const ResetPasswordPage = () => {
               <Input.Password />
             </Form.Item>
             <Form.Item style={{ textAlign: "center" }}>
+              {/* Nút đổi mật khẩu */}
               <Button
                 type="primary"
                 htmlType="submit"
