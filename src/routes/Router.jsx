@@ -13,6 +13,7 @@ import SupportPage from "../pages/SupportPage";
 import ProfileLayout from "../layouts/ProfileLayout";
 import InputInforPage from "../pages/InputInforPage";
 import RegisterInsurance from "../pages/RegisterInsurance";
+import BillPage from "../pages/BillPage";
 
 
 const ProfileRouter = () => {
@@ -23,6 +24,7 @@ const ProfileRouter = () => {
         {/* <Route path="/account" element={<ProfilePage_update />} /> */}
         <Route path="/resetpw" element={<ResetPasswordPage />} />
         <Route path="/insurance" element={<RegisteredInsurancePage />} />
+        <Route path="/bill" element={<BillPage />} />
         {/* <Route path="/activation" element={<ActivationPage />} /> */}
       </Route>
     </Routes>

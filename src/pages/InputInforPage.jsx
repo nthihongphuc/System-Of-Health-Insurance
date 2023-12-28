@@ -1,8 +1,9 @@
 // import library here
 import { Form, Input, Button, Row, Card } from "antd";
-import { DatePicker, Select } from "antd";
+import { DatePicker, Select, Cascader } from "antd";
 import { Link } from "react-router-dom";
 import { address } from "../data/address";
+const { TextArea } = Input;
 
 const InputInforPage = () => {
   const onFinish = (values) => {
@@ -15,9 +16,11 @@ const InputInforPage = () => {
     >
       <Card
         style={{ width: "100%", minHeight: "100vh" }}
-        bodyStyle={{ display: "flex",
-        flexDirection: "column",
-        alignItems: "center", }}
+        bodyStyle={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
       >
         <h2 style={{ textAlign: "center" }}>Nhập thông tin</h2>
         <Form
@@ -54,15 +57,15 @@ const InputInforPage = () => {
           >
             <DatePicker />
           </Form.Item>
-          <Form.Item 
-          label="Giới tính"
-          name="gender"
-          rules={[
-            {
+          <Form.Item
+            label="Giới tính"
+            name="gender"
+            rules={[
+              {
                 required: true,
                 message: "Vui lòng chọn giới tính!",
-            },
-          ]}
+              },
+            ]}
           >
             <Select>
               <Select.Option value="male">Nam</Select.Option>
@@ -81,7 +84,26 @@ const InputInforPage = () => {
           >
             <Input />
           </Form.Item>
-          
+          <Form.Item
+            label="Địa chỉ thường trú"
+            name="address"
+            rules={[
+              {
+                required: true,
+                message: "Vui lòng nhập địa chỉ!",
+              },
+            ]}
+          >
+            <Cascader
+              options={[
+
+              ]}
+            />
+            {/* <Input /> */}
+          </Form.Item>
+          <Form.Item label="Tình trạng sức khỏe">
+              <TextArea rows={4} />
+            </Form.Item>
           <Form.Item style={{ textAlign: "center" }}>
             <Button
               type="primary"
@@ -89,11 +111,8 @@ const InputInforPage = () => {
               className="login-form-button"
               style={{ marginTop: 10 }}
             >
-              Đăng ký
+              Xác nhận
             </Button>
-            <div style={{ marginTop: 10 }}>
-              Chưa có tài khoản <Link to="/login">Đăng nhập</Link>
-            </div>
           </Form.Item>
         </Form>
       </Card>

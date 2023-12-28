@@ -1,8 +1,8 @@
 // import library here
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { Layout, Menu, Button, Image, Row, Col, Avatar } from "antd";
-import { UserOutlined } from "@ant-design/icons";
+import { Layout, Menu, Button, Image, Row, Col, Avatar, Dropdown, Space } from "antd";
+import { UserOutlined, DownOutlined } from "@ant-design/icons";
 const { Header, Content, Footer } = Layout;
 
 import { useNavigate, Outlet, Link } from "react-router-dom";
@@ -23,6 +23,32 @@ const menuItems = [
     label: "Hỗ trợ khách hàng",
   },
 ];
+
+const menuProfile = [
+  {
+    key: '0',
+    label: 'hé lô' ,
+    disabled: true,
+  },
+  {
+    type: 'divider',
+  },
+  {
+    key: '1',
+    label: 'Tài khoản',
+  },
+  {
+    key: '2',
+    label: 'Bảo hiểm của tôi',
+  },
+  {
+    type: 'divider',
+  },
+  {
+    key: '3',
+    label: 'Đăng xuất'
+  }
+]
 
 // Define Our component
 const BasicLayout = () => {
@@ -64,7 +90,19 @@ const BasicLayout = () => {
               icon={<UserOutlined />}
               onClick={() => navigate("/profile/account")}
               style={{ background: "rgba(255,255,255,0.5)", cursor: "pointer" }}
-            />
+            >
+              {/* <Dropdown
+                menu={{ menuProfile,
+                }}
+                trigger={['click']}
+              >
+                <a onClick={(e) => e.preventDefault()}>
+                  <Space>
+                    <DownOutlined />
+                  </Space>
+                </a>
+              </Dropdown> */}
+            </Avatar>
           </div>
         ) : (
           <div style={{ float: "right" }}>
