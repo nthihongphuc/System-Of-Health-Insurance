@@ -6,8 +6,9 @@ import {
   IdcardOutlined,
   UnlockOutlined,
 } from "@ant-design/icons";
-import { Layout, Form, Input, Button, Menu, theme, Card, Select } from "antd";
+import { Layout, Form, Input, Button, Menu, theme, Card, Select, Cascader } from "antd";
 import { Content } from "antd/es/layout/layout";
+import { address } from "../data/address";
 
 const { Header, Sider } = Layout;
 const { TextArea } = Input;
@@ -95,7 +96,9 @@ const ProfilePage_update = () => {
                 },
               ]}
             >
-              <Input />
+              <Cascader
+               options={address}
+              />
             </Form.Item>
             <Form.Item label="Sức khỏe">
               <TextArea rows={4} />

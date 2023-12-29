@@ -1,12 +1,12 @@
 import React from "react";
-import { Layout, Form, Input, Button, Card } from "antd";
+import { Layout, Form, Input, Button, Card, theme } from "antd";
 import { Content } from "antd/es/layout/layout";
 import callApi from '../utils/index';  // Import hàm callApi
 
 const { Header } = Layout;
 
 const ResetPasswordPage = () => {
-  const onFinish = async (values) => {
+  const API = async (values) => {
     try {
       // Gọi API đổi mật khẩu
       const response = await callApi('/auth/changePassword', 'post', values);
@@ -21,12 +21,19 @@ const ResetPasswordPage = () => {
     }
   };
 
+  const {
+    token: { colorBgContainer },
+  } = theme.useToken();
+  const onFinish = (values) => {
+    console.log(values);
+  };
+
   return (
     <Layout style={{ height: "100%" }}>
       <Header
         style={{
           padding: 38,
-          background: "#yourBackgroundColor",  // Thay #yourBackgroundColor bằng mã màu bạn muốn sử dụng
+          background: colorBgContainer,  
           display: "flex",
           alignItems: "center",
         }}
