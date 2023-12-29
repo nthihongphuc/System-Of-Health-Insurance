@@ -1,4 +1,5 @@
-﻿import { useParams } from "react-router-dom";
+﻿import { useParams, Link } from "react-router-dom";
+
 import { Row, Col, Space } from "antd";
 import ProductPage from "../pages/ProductPage";
 import { Layout, Menu, theme, Card, Button, Image } from 'antd';
@@ -40,19 +41,35 @@ const ProductDetailPage = () => {
         <Content style={{margin: 40}}>
           <Space size={12}>
             <Image
-              width={500}
+              width={700}
               src={home1}
               placeholder={
                 <Image
                   preview={false}
                   src={home1}
-                  width={500}
+                  width={700}
                 />
               }
             />
-            <Button type="primary" htmlType="submit" style={{ marginTop: 10 }}>
-              Đăng ký bảo hiểm
-            </Button>
+            <div style={{ padding: 50, width: "100%", justifyContent: "center" }}
+            >
+              <h2>
+              Sản phẩm bảo hiểm nghiệp vụ sức khỏe
+              </h2>
+              <p>
+              - Chủ động lựa chọn các gói bảo hiểm khác nhau với mức phí chỉ từ 2k/ tháng
+              </p>
+              <p>
+              - Mua nhanh dễ dàng, không cần khám sức khỏe
+              </p>
+              <p>
+              - Quyền lợi bảo hiểm đa dạng trước các rủi ro tai nạn/ Ngộ độc thực phẩm/ Bệnh nhiệt đới
+              </p>
+              <Button type="primary" htmlType="submit" style={{ marginTop: 10 }}>
+                <Link to="/product/:id/register">Đăng ký</Link>
+              </Button>
+            </div>
+            
           </Space>
           <Card
             style={{ width: "100%", maxWidth: 10000, minHeight: "100vh" }}
