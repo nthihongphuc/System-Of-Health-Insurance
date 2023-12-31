@@ -1,23 +1,35 @@
 import React from "react";
 import { Layout, Form, Input, Button, Card } from "antd";
 import { Content } from "antd/es/layout/layout";
-import callApi from '../utils/index';  // Import hàm callApi
+import api from "../api/endpoint";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const { Header } = Layout;
 
 const ResetPasswordPage = () => {
+  const navigate = useNavigate();
+
   const onFinish = async (values) => {
     try {
       // Gọi API đổi mật khẩu
-      const response = await callApi('/auth/changePassword', 'post', values);
-
-      // Xử lý phản hồi từ server (response)
-      console.log(response);
-
-      // Thực hiện các bước tiếp theo, chẳng hạn chuyển hướng trang, hiển thị thông báo thành công, v.v.
+      const response = await api.changePassword(values);
+      if (response) {
+        navigate('/profile/account');
+      } else {
+        toast.error('Đã có lỗi xảy ra, vui lòng kiểm tra lại');
+      }
     } catch (error) {
       console.error('Error during password change:', error);
       // Xử lý lỗi, chẳng hạn hiển thị thông báo lỗi cho người dùng
+      if (error.response && error.response.data && error.response.data.error) {
+        // Lấy thông báo lỗi từ backend và hiển thị trong toast
+        const errorMessage = error.response.data.error;
+        toast.error(errorMessage);
+      } else {
+          // Xử lý các trường hợp lỗi khác và hiển thị thông báo mặc định
+          toast.error('Đã có lỗi xảy ra, vui lòng kiểm tra lại');
+      }
     }
   };
 
@@ -26,7 +38,7 @@ const ResetPasswordPage = () => {
       <Header
         style={{
           padding: 38,
-          background: "#yourBackgroundColor",  // Thay #yourBackgroundColor bằng mã màu bạn muốn sử dụng
+          // background: "#yourBackgroundColor",  // Thay #yourBackgroundColor bằng mã màu bạn muốn sử dụng
           display: "flex",
           alignItems: "center",
         }}
@@ -56,7 +68,7 @@ const ResetPasswordPage = () => {
             {/* Các trường nhập liệu mật khẩu hiện tại, mật khẩu mới, và xác nhận mật khẩu mới */}
             <Form.Item
               label="Mật khẩu hiện tại"
-              name="oldPassword"
+              name="currentPassword"
               rules={[
                 {
                   required: true,

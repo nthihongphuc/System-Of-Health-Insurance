@@ -20,20 +20,35 @@ const api = {
     }
   },
 
-  changePassword: async () => {
+  changePassword: async ({ currentPassword, newPassword }) => {
     try {
       const token = localStorage.getItem("access_token");
+      if (!token) {
+        // Xử lý trường hợp token không tồn tại
+        console.error("Access token is missing");
+        return null;
+    }
+    
       const { data } = await client.post(
         "/auth/change-password",
-        {},
+        {  currentPassword, newPassword },
         { headers: { Authorization: `Bearer ${token}` } }
       );
-      // client.get("/data", { headers: { Authorization: `Bearer ${token}` } });
       return data;
     } catch (error) {
+      console.log(error)
       return null;
     }
   },
+  register: async ({ username, password, email })=>{
+    try{
+      const { data } = await client.post("/auth/register", { username, password,email });
+      return data;
+    }catch(error){
+      console.log(error)
+      return null;
+    }
+  }
 };
 
 export default api;

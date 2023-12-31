@@ -1,20 +1,38 @@
 import { Form, Input, Button, Row, Card } from "antd";
-import { Link } from "react-router-dom";
-import callApi from '../utils/index';  // Import hàm callApi
+import { Link, useNavigate } from "react-router-dom";
+import api from "../api/endpoint";
+import { toast } from "react-toastify";
 
 const RegisterPage = () => {
+  const navigate =useNavigate();
   const onFinish = async (values) => {
+    const { username, email, password, passwordConfirm } = values;
+
+    // Kiểm tra xem mật khẩu và mật khẩu xác nhận có trùng khớp không
+    if (password !== passwordConfirm) {
+        alert('Mật khẩu xác nhận không trùng khớp với mật khẩu chính');
+        return; // Dừng hàm nếu mật khẩu không trùng khớp
+    }
     try {
       // Gọi API đăng ký
-      const response = await callApi('/auth/register', 'post', values);
-
-      // Xử lý phản hồi từ server (response)
-      console.log(response);
-
-      // Thực hiện các bước tiếp theo, chẳng hạn chuyển hướng trang, hiển thị thông báo thành công, v.v.
+      const data = await api.register(values);
+      if (data) {
+        navigate('/login');
+      } else {
+        toast.error('Đã có lỗi xảy ra, vui lòng kiểm tra lại');
+      }
+      
     } catch (error) {
       console.error('Error during registration:', error);
       // Xử lý lỗi, chẳng hạn hiển thị thông báo lỗi cho người dùng
+      if (error.response && error.response.data && error.response.data.error) {
+        // Lấy thông báo lỗi từ backend và hiển thị trong toast
+        const errorMessage = error.response.data.error;
+        toast.error(errorMessage);
+      } else {
+          // Xử lý các trường hợp lỗi khác và hiển thị thông báo mặc định
+          toast.error('Đã có lỗi xảy ra, vui lòng kiểm tra lại');
+      }
     }
   };
 
@@ -23,8 +41,7 @@ const RegisterPage = () => {
       <Card style={{ margin: 40, width: "100%", maxWidth: 300 }} bodyStyle={{ textAlign: "left" }}>
         <h2 style={{ textAlign: "center" }}>Đăng ký</h2>
         <Form
-          name="normal_login"
-          className="login-form"
+          name="Register-form"
           initialValues={{
             remember: true,
           }}
@@ -62,18 +79,29 @@ const RegisterPage = () => {
               },
             ]}
           >
-            <Input type="password" placeholder="Mật khẩu" />
+            <Input.Password type="password" placeholder="Mật khẩu" />
           </Form.Item>
           <Form.Item
             name="passwordConfirm"
+            dependencies={["password"]}
             rules={[
               {
                 required: true,
-                message: "Vui lòng nhập mật khẩu!",
+                message: "Vui lòng xác nhận mật khẩu!",
               },
+              ({ getFieldValue }) => ({
+                validator(_, value) {
+                  if (!value || getFieldValue("password") === value) {
+                    return Promise.resolve();
+                  }
+                  return Promise.reject(
+                    new Error("Mật khẩu mới không khớp!")
+                  );
+                },
+              }),
             ]}
           >
-            <Input type="password" placeholder="Xác nhận mật khẩu" />
+            <Input.Password type="password" placeholder="Xác nhận mật khẩu" />
           </Form.Item>
 
           <Form.Item style={{ textAlign: "center" }}>

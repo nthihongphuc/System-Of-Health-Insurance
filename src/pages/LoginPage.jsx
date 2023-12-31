@@ -1,8 +1,9 @@
 // import thư viện ở đây
 import { Form, Input, Button, Row, Card } from "antd";
 import { Link, useNavigate } from "react-router-dom";
-import callApi from '../utils/index';  // Import hàm callApi
+// import callApi from '../utils/index';  // Import hàm callApi
 import api from "../api/endpoint";
+import { toast } from "react-toastify";
 
 // Định nghĩa component
 const LoginPage = () => {
@@ -15,7 +16,7 @@ const LoginPage = () => {
         localStorage.setItem('access_token', data.accessToken);
         navigate('/');
       } else {
-        alert('Tên đăng nhập hoặc mật khẩu không chính xác');
+        toast.error('Đã có lỗi xảy ra, vui lòng kiểm tra lại');
       }
       // Gọi API đăng nhập
       // const response = await callApi('/auth/login', 'post', values);
@@ -27,6 +28,14 @@ const LoginPage = () => {
     } catch (error) {
       console.error('Error during login:', error);
       // Xử lý lỗi, chẳng hạn hiển thị thông báo lỗi cho người dùng
+      if (error.response && error.response.data && error.response.data.error) {
+        // Lấy thông báo lỗi từ backend và hiển thị trong toast
+        const errorMessage = error.response.data.error;
+        toast.error(errorMessage);
+      } else {
+          // Xử lý các trường hợp lỗi khác và hiển thị thông báo mặc định
+          toast.error('Đã có lỗi xảy ra, vui lòng kiểm tra lại');
+      }
     }
   };
 
@@ -63,7 +72,7 @@ const LoginPage = () => {
               },
             ]}
           >
-            <Input type="password" placeholder="Mật khẩu" />
+            <Input.Password type="password" placeholder="Mật khẩu" />
           </Form.Item>
 
           <Form.Item style={{ textAlign: "center" }}>
