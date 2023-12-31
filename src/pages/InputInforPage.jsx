@@ -95,11 +95,8 @@ const InputInforPage = () => {
             ]}
           >
             <Cascader
-              options={[
-
-              ]}
+              options={address}
             />
-            {/* <Input /> */}
           </Form.Item>
           <Form.Item label="Tình trạng sức khỏe">
               <TextArea rows={4} />

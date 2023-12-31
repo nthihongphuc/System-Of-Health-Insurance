@@ -15,7 +15,6 @@ import InputInforPage from "../pages/InputInforPage";
 import RegisterInsurance from "../pages/RegisterInsurance";
 import BillPage from "../pages/BillPage";
 
-
 const ProfileRouter = () => {
   return (
     <Routes>

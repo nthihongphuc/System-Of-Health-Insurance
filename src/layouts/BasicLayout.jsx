@@ -1,7 +1,17 @@
 // import library here
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { Layout, Menu, Button, Image, Row, Col, Avatar, Dropdown, Space } from "antd";
+import {
+  Layout,
+  Menu,
+  Button,
+  Image,
+  Row,
+  Col,
+  Avatar,
+  Dropdown,
+  Space,
+} from "antd";
 import { UserOutlined, DownOutlined } from "@ant-design/icons";
 const { Header, Content, Footer } = Layout;
 
@@ -26,29 +36,29 @@ const menuItems = [
 
 const menuProfile = [
   {
-    key: '0',
-    label: 'hé lô' ,
+    key: "0",
+    label: "hé lô",
     disabled: true,
   },
   {
-    type: 'divider',
+    type: "divider",
   },
   {
-    key: '1',
-    label: 'Tài khoản',
+    key: "1",
+    label: "Tài khoản",
   },
   {
-    key: '2',
-    label: 'Bảo hiểm của tôi',
+    key: "2",
+    label: "Bảo hiểm của tôi",
   },
   {
-    type: 'divider',
+    type: "divider",
   },
   {
-    key: '3',
-    label: 'Đăng xuất'
-  }
-]
+    key: "3",
+    label: "Đăng xuất",
+  },
+];
 
 // Define Our component
 const BasicLayout = () => {
@@ -103,6 +113,22 @@ const BasicLayout = () => {
                 </a>
               </Dropdown> */}
             </Avatar>
+            {/* <Dropdown menu={{ menuProfile }} trigger={["click"]}>
+              <Avatar
+                size="large"
+                icon={<UserOutlined />}
+                onClick={() => navigate("/profile/account")}
+                //onClick={(e) => e.preventDefault()}
+                style={{
+                  background: "rgba(255,255,255,0.5)",
+                  cursor: "pointer",
+                }}
+              >
+                <Space>
+                  <DownOutlined />
+                </Space>
+              </Avatar>
+            </Dropdown> */}
           </div>
         ) : (
           <div style={{ float: "right" }}>

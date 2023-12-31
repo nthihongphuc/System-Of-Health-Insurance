@@ -2,118 +2,109 @@ import { Cascader } from "antd";
 
 export const address = [
     {
-        value: 'An Giang',
-        label: 'An Giang',
+        value: 'TP. Hồ Chí Minh',
+        label: 'TP. Hồ Chí Minh',
         children: [
           {
-            value: 'An Phú',
-            label: 'An Phú',
+            value: 'TP. Thủ Đức',
+            label: 'TP. Thủ Đức',
+            children: [
+              {
+                value: 'Quận 2',
+                label: 'Quận 2',
+              },
+              {
+                value: 'Quận 9',
+                label: 'Quận 9',
+              },
+              {
+                value: 'Quận Thủ Đức',
+                label: 'Quận Thủ Đức',
+              },
+            ]
           },
           {
-            value: 'Châu Đốc',
-            label: 'Châu Đốc',
+            value: 'Quận 1',
+            label: 'Quận 1',
           },
           {
-            value: 'Châu Phú',
-            label: 'Châu Phú',
+            value: 'Quận 3',
+            label: 'Quận 3',
           },
           {
-            value: 'Châu Thành',
-            label: 'Châu Thành',
+            value: 'Quận 4',
+            label: 'Quận 4',
           },
           {
-            value: 'Chợ Mới',
-            label: 'Chợ Mới',
+            value: 'Quận 5',
+            label: 'Quận 5',
           },
           {
-            value: 'Long Xuyên',
-            label: 'Long Xuyên',
+            value: 'Quận 6',
+            label: 'Quận 6',
           },
           {
-            value: 'Phú Tân',
-            label: 'Phú Tân',
+            value: 'Quận 7',
+            label: 'Quận 7',
           },
           {
-            value: 'Tân Châu',
-            label: 'Tân Châu',
+            value: 'Quận 8',
+            label: 'Quận 8',
           },
           {
-            value: 'Thoại Sơn',
-            label: 'Thoại Sơn',
+            value: 'Quận 10',
+            label: 'Quận 10',
           },
           {
-            value: 'Tịnh Biên',
-            label: 'Tịnh Biên',
+            value: 'Quận 11',
+            label: 'Quận 11',
           },
           {
-            value: 'Tri Tôn',
-            label: 'Tri Tôn',
+            value: 'Quận 12',
+            label: 'Quận 12',
+          },
+          {
+            value: 'Quận Bình Thạnh',
+            label: 'Quận Bình Thạnh',
+          },
+          {
+            value: 'Quận Gò Vấp',
+            label: 'Quận Gò Vấp',
+          },
+          {
+            value: 'Quận Phú Nhuận',
+            label: 'Quận Phú Nhuận',
+          },
+          {
+            value: 'Quận Tân Bình',
+            label: 'Quận Tân Bình',
+          },
+          {
+            value: 'Quận Tân Phú',
+            label: 'Quận Tân Phú',
+          },
+          {
+            value: 'Huyện Bình Chánh',
+            label: 'Huyện Bình Chánh',
+          },
+          {
+            value: 'Huyện Cần Giờ',
+            label: 'Huyện Cần Giờ',
+          },
+          {
+            value: 'Huyện Củ Chi',
+            label: 'Huyện Củ Chi',
+          },
+          {
+            value: 'Huyện Hóc Môn',
+            label: 'Huyện Hóc Môn',
+          },
+          {
+            value: 'Huyện Nhà Bè',
+            label: 'Huyện Nhà Bè',
           },
         ],
 
       },
 ]
 
-
-// Bà rịa Vũng Tàu
-// Bạc Liêu
-// Bắc Giang
-// Bắc Kạn
-// Bắc Ninh
-// Bến Tre
-// Bình Dương
-// Bình Định
-// Bình Phước
-// Bình Thuận
-// Cà Mau
-// Cao Bằng
-// Cần Thơ
-// Đà Nẵng
-// Đắk Lắk
-// Đắk Nông
-// Điện Biên
-// Đồng Nai
-// Đồng Tháp
-// Gia Lai
-// Hà Giang
-// Hà Nam
-// Hà Nội
-// Hà Tĩnh
-// Hải Dương
-// Hải Phòng
-// Hậu Giang
-// Hòa Bình
-// Hưng Yên
-// Khánh Hòa
-// Kiên Giang
-// Kon Tum
-// Lai Châu
-// Lạng Sơn
-// Lào Cai
-// Lâm Đồng
-// Long An
-// Nam Định
-// Nghệ An
-// Ninh Bình
-// Ninh Thuận
-// Phú Thọ
-// Phú Yên
-// Quảng Bình
-// Quảng Nam
-// Quảng Ngãi
-// Quảng Ninh
-// Quảng Trị
-// Sóc Trăng
-// Sơn La
-// Tây Ninh
-// Thái Bình
-// Thái Nguyên
-// Thanh Hóa
-// Thừa Thiên Huế
-// Tiền Giang
-// TP Hồ Chí Minh
-// Trà Vinh
-// Tuyên Quang
-// Vĩnh Long
-// Vĩnh Phúc
-// Yên Bái
