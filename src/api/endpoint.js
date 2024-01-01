@@ -48,6 +48,24 @@ const api = {
       console.log(error)
       return null;
     }
+  },
+  InputInfoCus: async ({ cusname,birthday,gender,phone,email,address,status })=>{
+    try{
+      const { data } = await client.post("/user/customer-register", { cusname,birthday,gender,phone,email,address,status });
+      return data;
+    }catch(error){
+      console.log(error)
+      return null;
+    }
+  },
+  GetUserInfo: async() =>{
+    try{
+      const { data } = await client.get("/user/UserInfo");
+      return data;
+    }catch(error){
+      console.log(error)
+      return null;
+    }
   }
 };
 
