@@ -19,6 +19,11 @@ const InputInforPage = () => {
       values.email = registrationInfo.email;
       const addressString = values.address.join(', ');
       values.address = addressString;
+
+      const rawDate = new Date(values.birthday); // Chuyển đổi thành đối tượng Date
+      values.birthday = rawDate.toLocaleDateString('vi-VN'); // Định dạng ngày tháng
+
+
       const data = await api.InputInfoCus(values)
       if (data) {
         navigate('/login');

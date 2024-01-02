@@ -58,9 +58,29 @@ const api = {
       return null;
     }
   },
+
   GetUserInfo: async() =>{
     try{
       const { data } = await client.get("/user/UserInfo");
+      return data;
+    }catch(error){
+      console.log(error)
+      return null;
+    }
+  },
+
+  UpdateCusInfo: async({ cusname,phone,address,status })=>{
+    try{
+      const token = localStorage.getItem("access_token");
+      console.log(token);
+      if (!token) {
+        // Xử lý trường hợp token không tồn tại
+        console.error("Access token is missing");
+        return null;
+    }
+      const { data } = await client.post("/user/updateCusInfo",
+       { cusname,phone,address,status },
+       { headers: { Authorization: `Bearer ${token}` }});
       return data;
     }catch(error){
       console.log(error)
