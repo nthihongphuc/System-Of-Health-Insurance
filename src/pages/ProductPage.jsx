@@ -5,6 +5,8 @@ import ProductCard from "../components/ProductCard";
 import home1 from "../assets/home1.jpg";
 import home2 from "../assets/home2.jpg";
 import home3 from "../assets/home3.jpg";
+// import { useEffect, useState } from "react";
+// import api from "../api/endpoint";
 
 const products = [
   {
@@ -60,6 +62,20 @@ const products = [
 ];
 
 const ProductPage = () => {
+  // const [products, setProducts] = useState([]);
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const data=await api.getAllProduct();
+  //       setProducts(data);
+  //     } catch (error) {
+  //       console.error('Error fetching data:', error);
+  //     }
+  //   };
+
+  //   fetchData();
+  // }, []);
   return (
     <div>
       <Row style={{ padding: 10 }}>

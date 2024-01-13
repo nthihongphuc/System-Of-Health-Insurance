@@ -47,6 +47,7 @@ const ProfilePage_update = () => {
   },[]);
 
   useEffect(()=>{
+    console.log(userInfo);
     form.setFieldValue('cusname', userInfo?.Cus?.cusname);
     form.setFieldValue('birthday', userInfo?.Cus?.birthday);
     form.setFieldValue('gender', userInfo?.Cus?.gender);

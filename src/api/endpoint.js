@@ -96,7 +96,7 @@ const api = {
   },
   getAllInsurance: async () => {
     try {
-      const data = await client.get("/insurance/getAllInsurance");
+      const data = await client.get("/insurance/InsuranceInfo");
       return data.data;
     } catch (error) {
       console.log(error)
@@ -112,7 +112,7 @@ const api = {
         console.error("Access token is missing");
         return null;
       }
-      const data = await client.get("/insurance/getRegisterInsurance",
+      const data = await client.get("/insurance/RegisterInsurance",
         { headers: { Authorization: `Bearer ${token}` } });
       return data.data;
     } catch (error) {

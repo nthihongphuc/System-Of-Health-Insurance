@@ -15,9 +15,7 @@ const LoginPage = () => {
   const onFinish = async () => {
     try {
       const data = await api.login({ username, password })
-      console.log(data.data.accessToken);
-    
-      if (data) {
+      if (data.success) {
         localStorage.setItem('access_token', data.data.accessToken);
         navigate('/home');
       } else {

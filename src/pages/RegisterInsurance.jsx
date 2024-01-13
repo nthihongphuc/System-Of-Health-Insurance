@@ -82,10 +82,6 @@ const RegisterInsurance  = () => {
               placeholder="Tình trạng sức khỏe"
               />
           </Form.Item>
-          <div style={{ marginTop: 10 }}>
-              Đã có tài khoản <Link to="/login">Đăng nhập</Link>
-            </div>
-
           <Button
               type="primary"
               htmlType="submit"
