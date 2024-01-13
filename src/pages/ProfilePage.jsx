@@ -13,7 +13,7 @@ import api from "../api/endpoint";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
-const { Header, Sider } = Layout;
+const { Header} = Layout;
 const { TextArea } = Input;
 
 const ProfilePage_update = () => {
@@ -29,8 +29,9 @@ const ProfilePage_update = () => {
   const fetchUserInfo = async () => {
     try {
       const data = await api.GetUserInfo();
-      if (data) {
-        setUserInfo(data);
+      if (data.success) {
+        localStorage.getItem('access_token', data.data.accessToken);
+        setUserInfo(data.data);
       } else {
         toast.error("Đã có lỗi xảy ra, vui lòng kiểm tra lại");
       }
@@ -46,20 +47,21 @@ const ProfilePage_update = () => {
   },[]);
 
   useEffect(()=>{
-    form.setFieldValue('name', userInfo?.Cus?.cusname);
+    form.setFieldValue('cusname', userInfo?.Cus?.cusname);
     form.setFieldValue('birthday', userInfo?.Cus?.birthday);
     form.setFieldValue('gender', userInfo?.Cus?.gender);
     form.setFieldValue('phone', userInfo?.Cus?.phone);
     form.setFieldValue('email', userInfo?.Cus?.email);
     form.setFieldValue('address', userInfo?.Cus?.address);
-    form.setFieldValue('status', userInfo?.infoHeath?.status);
+    form.setFieldValue('status', userInfo?.infoHealth?.status);
   },[userInfo])
 
   const onFinish = async(values) => {
     try{
       const data = await api.UpdateCusInfo(values);
-      if (data) {
-        localStorage.setItem('access_token', data.accessToken);
+      console.log(data.data);
+      if (data.success) {
+        localStorage.getItem('access_token', data.data.accessToken);
         navigate('/profile/account');
       } else {
         toast.error('Đã có lỗi xảy ra, vui lòng kiểm tra lại');
@@ -112,7 +114,7 @@ const ProfilePage_update = () => {
           >
             <Form.Item
               label="Họ và tên"
-              name="name"
+              name="cusname"
               rules={[
                 {
                   required: true,

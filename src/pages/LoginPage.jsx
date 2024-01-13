@@ -3,45 +3,28 @@ import { Form, Input, Button, Row, Card } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import api from "../api/endpoint";
 import { toast } from "react-toastify";
-import React from 'react'
+import React, { useState } from 'react'
 
 // Định nghĩa component
 const LoginPage = () => {
   const navigate = useNavigate();
+  // const[error, setError]= useState(null);
   const [username, setUsername] = React.useState("")
   const [password, setPassword] = React.useState("")
 
   const onFinish = async () => {
     try {
-
       const data = await api.login({ username, password })
-      console.log('Data from server:', data);
-
-      if (data.success) {
+      console.log(data.data.accessToken);
+    
+      if (data) {
         localStorage.setItem('access_token', data.data.accessToken);
         navigate('/home');
       } else {
-        toast.error('Đã có lỗi xảy ra, vui lòng kiểm tra lại');
+        alert('Đã có lỗi xảy ra, vui lòng kiểm tra lại');
       }
-
-      // Gọi API đăng nhập
-      // const response = await callApi('/auth/login', 'post', values);
-
-      // Xử lý phản hồi từ server (response)
-      // console.log(response);
-
-      // Thực hiện các bước tiếp theo, chẳng hạn chuyển hướng trang, hiển thị thông báo thành công, v.v.
     } catch (error) {
       console.error('Error during login:', error);
-      // Xử lý lỗi, chẳng hạn hiển thị thông báo lỗi cho người dùng
-      if (error.success && error.response.data && error.response.data.error) {
-        // Lấy thông báo lỗi từ backend và hiển thị trong toast
-        const errorMessage = error.response.data.error;
-        toast.error(errorMessage);
-      } else {
-        // Xử lý các trường hợp lỗi khác và hiển thị thông báo mặc định
-        toast.error('Đã có lỗi xảy ra, vui lòng kiểm tra lại');
-      }
     }
   };
 
