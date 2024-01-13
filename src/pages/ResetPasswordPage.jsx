@@ -1,5 +1,5 @@
 import React from "react";
-import { Layout, Form, Input, Button, Card } from "antd";
+import { Layout, Form, Input, Button, Card, theme } from "antd";
 import { Content } from "antd/es/layout/layout";
 import api from "../api/endpoint";
 import { useNavigate } from "react-router-dom";
@@ -9,7 +9,10 @@ const { Header } = Layout;
 
 const ResetPasswordPage = () => {
   const navigate = useNavigate();
-
+  const {
+    token: { colorBgContainer },
+  } = theme.useToken();
+  
   const onFinish = async (values) => {
     try {
       // Gọi API đổi mật khẩu
@@ -38,13 +41,14 @@ const ResetPasswordPage = () => {
       <Header
         style={{
           padding: 38,
+          background: colorBgContainer,
           // background: "#yourBackgroundColor",  // Thay #yourBackgroundColor bằng mã màu bạn muốn sử dụng
           display: "flex",
           alignItems: "center",
         }}
       >
         <span
-          style={{ justifyContent: "center", fontSize: 26, fontWeight: "bold" }}
+          style={{ justifyContent: 'center', fontSize: 26, fontWeight: 'bold' }}
         >
           Bảo mật
         </span>
