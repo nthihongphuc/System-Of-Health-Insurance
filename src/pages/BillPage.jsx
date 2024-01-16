@@ -9,18 +9,21 @@ import {
 import { Layout, Form, Input, Button, Menu, theme, Card, Collapse } from "antd";
 import { Content } from "antd/es/layout/layout";
 import { Space, Table, Tag } from 'antd';
+//import BillCard from "../components/BillCard";
+
 const dataSource = [
   {
     key: '1',
     name: 'Bảo hiểm 1',
-    date: '1/1/2023 - 1/1/2024',
+    date: '1/1/2024',
     status: 'Chưa thanh toán',
+    action: 'Thanh toán',
   },
   {
     key: '2',
     name: 'Bảo hiểm 2',
-    date: '1/1/2023 - 1/1/2024',
-    status: 'Đã thanh toán đi',
+    date: '1/1/2023',
+    status: 'Đã thanh toán',
   },
 ];
 
@@ -44,6 +47,11 @@ const columns = [
     title: 'Tình trạng',
     dataIndex: 'status',
     key: 'status',
+  },
+  {
+    title: 'Thanh toán',
+    dataIndex:'action',
+    key: 'action',
   },
 ];
 
