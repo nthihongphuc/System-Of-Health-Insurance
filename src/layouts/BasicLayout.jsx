@@ -32,6 +32,10 @@ const menuItems = [
     key: "support",
     label: "Hỗ trợ khách hàng",
   },
+  {
+    key: "payment_request",
+    label: "Yêu cầu thanh toán",
+  },
 ];
 
 const menuProfile = [
@@ -76,6 +80,8 @@ const BasicLayout = () => {
       setSelected("product");
     } else if (location.pathname.includes("support")) {
       setSelected("support");
+    // } else if (location.pathname.includes("payment_request")) {
+    //   setSelected("payment_request");
     } else {
       setSelected("");
     }

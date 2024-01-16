@@ -14,6 +14,7 @@ import ProfileLayout from "../layouts/ProfileLayout";
 import InputInforPage from "../pages/InputInforPage";
 import RegisterInsurance from "../pages/RegisterInsurance";
 import BillPage from "../pages/BillPage";
+import RequestPayment from "../pages/RequestPayment";
 
 const ProfileRouter = () => {
   return (
@@ -45,6 +46,7 @@ const Router = () => {
           <Route path="/infor" element={<InputInforPage />} />
           <Route path="/profile/*" element={<ProfileRouter />} />
           <Route path="/product/:id/register" element={<RegisterInsurance />} />
+          <Route path="/payment_request" element={<RequestPayment />} />
 
           {/* <Route path="/profile" element={<ProfilePage />} />
                     <Route path="/profile_update" element={<ProfilePage_update />} />
