@@ -12,7 +12,7 @@ import {
   Dropdown,
   Space,
 } from "antd";
-import { UserOutlined, DownOutlined } from "@ant-design/icons";
+import { UserOutlined, DownOutlined, BellOutlined } from "@ant-design/icons";
 const { Header, Content, Footer } = Layout;
 
 import { useNavigate, Outlet, Link } from "react-router-dom";
@@ -94,12 +94,22 @@ const BasicLayout = () => {
           </Link>
         </div>
         {isAuthenticated ? (
-          <div style={{ float: "right" }}>
+          <div style={{ float: "right" }}> 
+          <Space>          
+            <Avatar 
+              style={{ background: "rgba(255,255,255,0.5)", cursor: "pointer", fontSize: 30, verticalAlign: "middle"}}
+              size="large"
+              //shape="square"
+              icon={<BellOutlined />}
+              // Thêm đường dẫn
+              onClick={() => navigate("/profile/notice")}
+              />
             <Avatar
+              style={{ background: "rgba(255,255,255,0.5)", cursor: "pointer" } }
               size="large"
               icon={<UserOutlined />}
               onClick={() => navigate("/profile/account")}
-              style={{ background: "rgba(255,255,255,0.5)", cursor: "pointer" }}
+              
             >
               {/* <Dropdown
                 menu={{ menuProfile,
@@ -113,6 +123,7 @@ const BasicLayout = () => {
                 </a>
               </Dropdown> */}
             </Avatar>
+            </Space> 
             {/* <Dropdown menu={{ menuProfile }} trigger={["click"]}>
               <Avatar
                 size="large"

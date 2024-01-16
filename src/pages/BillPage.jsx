@@ -8,6 +8,45 @@ import {
 } from "@ant-design/icons";
 import { Layout, Form, Input, Button, Menu, theme, Card, Collapse } from "antd";
 import { Content } from "antd/es/layout/layout";
+import { Space, Table, Tag } from 'antd';
+const dataSource = [
+  {
+    key: '1',
+    name: 'Bảo hiểm 1',
+    date: '1/1/2023 - 1/1/2024',
+    status: 'Chưa thanh toán',
+  },
+  {
+    key: '2',
+    name: 'Bảo hiểm 2',
+    date: '1/1/2023 - 1/1/2024',
+    status: 'Đã thanh toán đi',
+  },
+];
+
+const columns = [
+  {
+    title: 'STT',
+    dataIndex: 'key',
+    key: 'stt',
+  },
+  {
+    title: 'Tên bảo hiểm',
+    dataIndex: 'name',
+    key: 'name',
+  },
+  {
+    title: 'Thời hạn đăng ký ',
+    dataIndex: 'date',
+    key: 'date',
+  },
+  {
+    title: 'Tình trạng',
+    dataIndex: 'status',
+    key: 'status',
+  },
+];
+
 
 const { Header} = Layout;
 
@@ -15,13 +54,16 @@ const BillPage = () => {
     const {
       token: { colorBgContainer },
     } = theme.useToken();
+    
     return (
         <Layout style={{height: "100%"}}>
         <Header style={{ padding: 38, background: colorBgContainer, display: 'flex', alignItems: 'center' }}>
             <span style={{ justifyContent: 'center', fontSize: 26, fontWeight: 'bold' }}>Thông tin hóa đơn</span>
           </Header>
-          <Content style={{margin: 40}}>
+          <Content >
+           
           </Content>
+          <Table columns={columns} dataSource={dataSource} />
       </Layout>
     );
   };
