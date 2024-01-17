@@ -158,6 +158,22 @@ const RequestPayment = () => {
               {/* list hóa đơn của khách hàng có cccd vừa nhập */}
               <Cascader/>
             </Form.Item>
+            <Form.Item
+              label="Chọn hình thức thanh toán"
+              name="gender"
+              rules={[
+                {
+                  required: true,
+                  message: "Vui lòng chọn hình thức thanh toán!",
+                },
+              ]}
+            >
+              <Radio.Group>
+                <Radio value="bank"> Ngân hàng</Radio>
+                <Radio value="online"> Momo </Radio>
+                <Radio value="offline"> Tiền mặt </Radio>
+              </Radio.Group>
+            </Form.Item>
             <Card
               label="Minh chứng hóa đơn"
               name="Bill"
