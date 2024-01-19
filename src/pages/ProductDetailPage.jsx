@@ -12,12 +12,6 @@ const { Header } = Layout;
 
 const items_renamed = [
   {
-    key: '10',
-    label: 'Quyền lợi của người sử dụng',
-    children: <p>aaaaaaaaaaaaaaaaa</p>,
-    
-  },
-  {
     key: '11',
     label: 'Điều kiện tham gia',
     children: <p>bbbbbbbbbbbbbbb</p>,
