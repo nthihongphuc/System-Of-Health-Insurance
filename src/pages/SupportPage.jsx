@@ -1,12 +1,6 @@
 //import { Layout, Sider, Menu, UserOutlined, collapsed } from "antd";
 import React, { useState } from "react";
 import {
-  MedicineBoxOutlined,
-  MoneyCollectOutlined,
-  IdcardOutlined,
-  UnlockOutlined,
-} from "@ant-design/icons";
-import {
   Layout,
   Form,
   Input,
@@ -20,6 +14,9 @@ import {
 } from "antd";
 import { Content } from "antd/es/layout/layout";
 import { address } from "../data/address";
+import api from "../api/endpoint";
+import { Navigate, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const { Header } = Layout;
 const { TextArea } = Input;
@@ -29,8 +26,29 @@ const SupportPage = () => {
   const {
     token: { colorBgContainer },
   } = theme.useToken();
-  const onFinish = (values) => {
+  const navigate =useNavigate();
+  const onFinish = async(values) => {
     console.log(values);
+    try{
+      const addressString = values.address.join(', ');
+      values.address = addressString;
+      const data = await api.SupportCustomer(values);
+      if (data) {
+        navigate('/home');
+      } else {
+        toast.error('Đã có lỗi xảy ra, vui lòng kiểm tra lại');
+      }
+    }
+    catch(error){
+      if (error.response && error.response.data && error.response.data.error) {
+        // Lấy thông báo lỗi từ backend và hiển thị trong toast
+        const errorMessage = error.response.data.error;
+        toast.error(errorMessage);
+      } else {
+          // Xử lý các trường hợp lỗi khác và hiển thị thông báo mặc định
+          toast.error('Đã có lỗi xảy ra, vui lòng kiểm tra lại');
+      }
+    }
   };
   return (
     <Layout style={{ height: "100%" }}>
@@ -52,7 +70,7 @@ const SupportPage = () => {
           >
             <Form.Item
               label="Họ và tên"
-              name="name"
+              name="cusname"
               rules={[
                 {
                   required: true,
@@ -73,8 +91,8 @@ const SupportPage = () => {
               ]}
             >
               <Radio.Group>
-                <Radio value="male"> Nam </Radio>
-                <Radio value="female"> Nữ </Radio>
+                <Radio value="Nam"> Nam </Radio>
+                <Radio value="Nữ"> Nữ </Radio>
               </Radio.Group>
             </Form.Item>
             <Form.Item
@@ -115,7 +133,7 @@ const SupportPage = () => {
             </Form.Item>
             <Form.Item 
               label="Bạn muốn được tư vấn về"
-              name="select"
+              name="describe"
               rules={[
                 {
                   required: true,

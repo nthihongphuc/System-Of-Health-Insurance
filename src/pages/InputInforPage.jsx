@@ -1,7 +1,7 @@
 // import library here
 import { Form, Input, Button, Row, Card } from "antd";
 import { DatePicker, Select, Cascader } from "antd";
-import { Link, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import { address } from "../data/address";
 import api from "../api/endpoint";
 import { toast } from "react-toastify";
@@ -14,8 +14,7 @@ const InputInforPage = () => {
   const registrationInfo = storedInfo ? JSON.parse(storedInfo) : {};
   const onFinish = async (values) => {
     try {
-      const { cusname,birthday,gender,phone,email,address,status } = values;
-      // Gọi API đăng ký
+      // const { cusname,birthday,gender,phone,email,address,status } = values;
       values.email = registrationInfo.email;
       const addressString = values.address.join(', ');
       values.address = addressString;

@@ -14,7 +14,6 @@ const RegisteredInsurancePage = () => {
     token: { colorBgContainer },
   } = theme.useToken();
   const [userInfo, setUserInfo] = useState([]);
-  const [userInsuranceData, setUserInsuranceData] = useState([]);
   const { Panel } = Collapse;
 
   useEffect(() => {

@@ -120,6 +120,16 @@ const api = {
       return null;
     }
   },
+  SupportCustomer: async ({ cusname, gender, phone, email, address, describe }) => {
+    try {
+      const data = await client.post("/user/SupportCustomer",
+        { cusname, gender, phone, email, address, describe });
+      return data.data;
+    } catch (error) {
+      console.log(error)
+      return null;
+    }
+  }
 };
 
 export default api;
