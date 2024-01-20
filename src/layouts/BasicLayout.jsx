@@ -1,18 +1,8 @@
 // import library here
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import {
-  Layout,
-  Menu,
-  Button,
-  Image,
-  Row,
-  Col,
-  Avatar,
-  Dropdown,
-  Space,
-} from "antd";
-import { UserOutlined, DownOutlined, BellOutlined } from "@ant-design/icons";
+import {Layout, Menu, Button, Image, Row, Col, Avatar, Dropdown, Space,} from "antd";
+import { UserOutlined, DownOutlined, BellOutlined, PoweroffOutlined, SafetyOutlined } from "@ant-design/icons";
 const { Header, Content, Footer } = Layout;
 
 import { useNavigate, Outlet, Link } from "react-router-dom";
@@ -38,40 +28,21 @@ const menuItems = [
   },
 ];
 
-const menuProfile = [
-  {
-    key: "0",
-    label: "hé lô",
-    disabled: true,
-  },
-  {
-    type: "divider",
-  },
-  {
-    key: "1",
-    label: "Tài khoản",
-  },
-  {
-    key: "2",
-    label: "Bảo hiểm của tôi",
-  },
-  {
-    type: "divider",
-  },
-  {
-    key: "3",
-    label: "Đăng xuất",
-  },
-];
-
 // Define Our component
 const BasicLayout = () => {
-  const isAuthenticated = true; // get from context
-
   const navigate = useNavigate();
   const location = useLocation();
 
   const [selected, setSelected] = useState("home");
+  const [isAuthenticated, setAuthenticated] = useState(false); // get from context
+
+  useEffect(() => {
+    if (localStorage.getItem("access_token")) {
+      setAuthenticated(true);
+    } else {
+      setAuthenticated(false);
+    }
+  }, [location]);
 
   useEffect(() => {
     if (location.pathname.includes("home")) {
@@ -80,8 +51,8 @@ const BasicLayout = () => {
       setSelected("product");
     } else if (location.pathname.includes("support")) {
       setSelected("support");
-    // } else if (location.pathname.includes("payment_request")) {
-    //   setSelected("payment_request");
+      // } else if (location.pathname.includes("payment_request")) {
+      //   setSelected("payment_request");
     } else {
       setSelected("");
     }
@@ -90,6 +61,32 @@ const BasicLayout = () => {
   const toLogin = (path) => {
     navigate(path);
   };
+
+  const handleLogout = () => {
+    localStorage.removeItem("access_token");
+    setAuthenticated(false);
+  };
+
+  const menuProfile = [
+    {
+      key: "1",
+      label: <a href="/profile/account">Tài khoản</a>,
+      icon: <UserOutlined />
+    },
+    {
+      key: "2",
+      label: <a href="/profile/insurance">Bảo hiểm của tôi</a>,
+      icon: <SafetyOutlined />
+    },
+    {
+      type: "divider",
+    },
+    {
+      key: "3",
+      label: <div onClick={handleLogout}>Đăng xuất</div>,
+      icon: <PoweroffOutlined />,
+    },
+  ];
 
   return (
     <Layout>
@@ -100,52 +97,33 @@ const BasicLayout = () => {
           </Link>
         </div>
         {isAuthenticated ? (
-          <div style={{ float: "right" }}> 
-          <Space>          
-            <Avatar 
-              style={{ background: "rgba(255,255,255,0.5)", cursor: "pointer", fontSize: 30, verticalAlign: "middle"}}
-              size="large"
-              //shape="square"
-              icon={<BellOutlined />}
-              // Thêm đường dẫn
-              onClick={() => navigate("/profile/notice")}
-              />
-            <Avatar
-              style={{ background: "rgba(255,255,255,0.5)", cursor: "pointer" } }
-              size="large"
-              icon={<UserOutlined />}
-              onClick={() => navigate("/profile/account")}
-              
-            >
-              {/* <Dropdown
-                menu={{ menuProfile,
-                }}
-                trigger={['click']}
-              >
-                <a onClick={(e) => e.preventDefault()}>
-                  <Space>
-                    <DownOutlined />
-                  </Space>
-                </a>
-              </Dropdown> */}
-            </Avatar>
-            </Space> 
-            {/* <Dropdown menu={{ menuProfile }} trigger={["click"]}>
+          <div style={{ float: "right" }}>
+            <Space>
               <Avatar
-                size="large"
-                icon={<UserOutlined />}
-                onClick={() => navigate("/profile/account")}
-                //onClick={(e) => e.preventDefault()}
                 style={{
                   background: "rgba(255,255,255,0.5)",
                   cursor: "pointer",
+                  fontSize: 30,
+                  verticalAlign: "middle",
+                  marginRight: 10,
                 }}
-              >
-                <Space>
-                  <DownOutlined />
-                </Space>
-              </Avatar>
-            </Dropdown> */}
+                size="large"
+                //shape="square"
+                icon={<BellOutlined />}
+                // Thêm đường dẫn
+                onClick={() => navigate("/profile/notice")}
+              />
+              <Dropdown menu={{ items: menuProfile }} placement="bottomRight">
+                <Avatar
+                  style={{
+                    background: "rgba(255,255,255,0.5)",
+                    cursor: "pointer",
+                  }}
+                  size="large"
+                  icon={<UserOutlined />}
+                />
+              </Dropdown>
+            </Space>
           </div>
         ) : (
           <div style={{ float: "right" }}>

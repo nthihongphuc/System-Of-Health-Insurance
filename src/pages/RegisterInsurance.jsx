@@ -45,6 +45,18 @@ const RegisterInsurance  = () => {
             <Input/>
           </Form.Item>
           <Form.Item
+            label="CCCD/ CMND"
+            name="identify"
+            rules={[
+              {
+                required: true,
+                message: "Vui lòng điền CCCD/ CMND!",
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
             label="Số điện thoại"
             name="phone"
             rules={[

@@ -20,6 +20,11 @@ const items_renamed = [
     key: '12',
     label: 'Điều khoản loại trừ',
     children: <p></p>,
+  },
+  {
+    key: '13',
+    label: 'Phí bảo hiểm',
+    children: <p></p>,
   }
 ];
 const ProductDetailPage = () => {
