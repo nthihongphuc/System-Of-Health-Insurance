@@ -3,9 +3,9 @@ import { Card, Divider } from "antd";
 
 const { Meta } = Card;
 
-const ProductCard = ({ id, cover, title, subtitle, description }) => {
+const ProductCard = ({ id, cover, title, descriptions}) => {
   const navigate = useNavigate();
-
+  console.log(descriptions)
   return (
     <Card
       hoverable
@@ -13,11 +13,11 @@ const ProductCard = ({ id, cover, title, subtitle, description }) => {
       style={{ height: "100%", cursor: "pointer" }}
       // onClick={() => navigate(`/product/${id}`)}
     >
-      <Meta title={title} description={subtitle} />
+      <Meta title={title} />
       <Divider />
-      <p style={{ whiteSpace: "pre-line" }}>{description}</p>
+      <p style={{ whiteSpace: "pre-line" }}>{descriptions}</p>
       <div style={{botton: '5px', color:'#1677ff', textDecoration: 'underline'}}> 
-        <a href="/product/:id">
+        <a href={`/product/${id}`}>
           Xem chi tiết
         </a>
       </div>

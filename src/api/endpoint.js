@@ -129,7 +129,16 @@ const api = {
       console.log(error)
       return null;
     }
-  }
+  },
+  getInsuranceDetail: async ({ id }) => {
+    try {
+      const data = await client.get(`/insurance/InsuranceDetail/${id}`);
+      return data.data;
+    } catch (error) {
+      console.log(error)
+      return null;
+    }
+  },
 };
 
 export default api;

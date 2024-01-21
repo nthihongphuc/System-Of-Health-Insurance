@@ -3,34 +3,68 @@
 import { Row, Col, Space } from "antd";
 import ProductPage from "../pages/ProductPage";
 import { Layout, Menu, theme, Card, Button, Image } from 'antd';
-import { Descriptions, Collapse } from 'antd';
+import { Collapse } from 'antd';
 import { Content } from 'antd/es/layout/layout';
 import home1 from "../assets/home1.jpg";
 import home2 from "../assets/home2.jpg";
 import home3 from "../assets/home3.jpg";
+import { useEffect, useState } from "react";
+import api from "../api/endpoint";
 const { Header } = Layout;
-
-const items_renamed = [
-  {
-    key: '11',
-    label: 'Điều kiện tham gia',
-    children: <p>bbbbbbbbbbbbbbb</p>,
-  },
-  {
-    key: '12',
-    label: 'Điều khoản loại trừ',
-    children: <p></p>,
-  },
-  {
-    key: '13',
-    label: 'Phí bảo hiểm',
-    children: <p></p>,
-  }
-];
+// const { Panel } = Collapse;
 const ProductDetailPage = () => {
   const {
     token: { colorBgContainer },
   } = theme.useToken();
+  const  id  = useParams();
+  // console.log(id);
+  const [product, setProduct] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data=await api.getInsuranceDetail(id);
+        setProduct(data.data);
+       console.log(data.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+  
+  const items_renamed = [
+    {
+      key: '11',
+      label: 'Điều kiện tham gia',
+      children: (
+        <div style={{ whiteSpace: 'pre' }}>
+          {product?.Require && (
+            product.Require.split('\n').map((line, index) => (
+              <span key={index}>
+                {index > 0 && <br />} {/* Thêm xuống dòng trừ dòng đầu tiên */}
+                {`- ${line}`} {/* Thêm đánh dấu a=b vào mỗi dòng */}
+              </span>
+            ))
+          )}
+        </div>
+      ),
+    },    
+    {
+      key: '12',
+      label: 'Điều khoản loại trừ',
+      children: (
+        <div>
+          {product?.Exception && (
+            <pre style={{ whiteSpace: 'pre-line' }}>
+              {product.Exception}
+            </pre>
+          )}
+        </div>
+      ),
+    }
+  ];
 
   return (
     <Layout style={{height: "100%"}}>
@@ -41,7 +75,7 @@ const ProductDetailPage = () => {
           <Space size={12}>
             <Image
               width={700}
-              src={home1}
+              src={product?.imageurl}
               placeholder={
                 <Image
                   preview={false}
@@ -53,17 +87,18 @@ const ProductDetailPage = () => {
             <div style={{ padding: 50, width: "100%", justifyContent: "center" }}
             >
               <h2>
-              Sản phẩm bảo hiểm nghiệp vụ sức khỏe
+                {product?.Ins_Name}
               </h2>
-              <p>
-              - Chủ động lựa chọn các gói bảo hiểm khác nhau với mức phí chỉ từ 2k/ tháng
-              </p>
-              <p>
-              - Mua nhanh dễ dàng, không cần khám sức khỏe
-              </p>
-              <p>
-              - Quyền lợi bảo hiểm đa dạng trước các rủi ro tai nạn/ Ngộ độc thực phẩm/ Bệnh nhiệt đới
-              </p>
+              <div style={{ whiteSpace: 'pre' }}>
+                {product?.Benefit && (
+                  product.Benefit.split('\n').map((line, index) => (
+                    <span key={index}>
+                      {index > 0 && <br />} {/* Thêm xuống dòng trừ dòng đầu tiên */}
+                      {`- ${line}`} {/* Thêm đánh dấu a=b vào mỗi dòng */}
+                    </span>
+                  ))
+                )}
+              </div>
               <Button type="primary" htmlType="submit" style={{ marginTop: 10 }}>
                 <Link to="/product/:id/register">Đăng ký</Link>
               </Button>
@@ -75,7 +110,7 @@ const ProductDetailPage = () => {
             bodyStyle={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
           >
             {/* Corrected usage of Collapse */}
-            <Collapse accordion items={items_renamed} style={{ width: '100%', border: 'none' }} />
+            <Collapse  items={items_renamed} style={{ width: '100%', border: 'none' }} />
           </Card>
         </Content>
     </Layout>
