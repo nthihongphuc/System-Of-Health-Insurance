@@ -9,7 +9,7 @@ const ProductCard = ({ id, cover, title, descriptions}) => {
   return (
     <Card
       hoverable
-      cover={<img alt="product-card" src={cover} />}
+      cover={<img alt="product-card" src={cover} /*style={{width: '100%', maxHeight: '300px', objectFit: 'cover',}} */ />}
       style={{ height: "100%", cursor: "pointer" }}
       // onClick={() => navigate(`/product/${id}`)}
     >

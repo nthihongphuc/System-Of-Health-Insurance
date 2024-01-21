@@ -42,7 +42,7 @@ const RegisterPage = () => {
 
   return (
     <Row style={{ width: "100%", textAlign: "center", justifyContent: "center" }}>
-      <Card style={{ margin: 40, width: "100%", maxWidth: 300 }} bodyStyle={{ textAlign: "left" }}>
+      <Card style={{ margin: 40, width: "100%", maxWidth: 320 }} bodyStyle={{ textAlign: "left" }}>
         <h2 style={{ textAlign: "center" }}>Đăng ký</h2>
         <Form
           name="Register-form"

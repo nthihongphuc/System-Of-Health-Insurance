@@ -36,7 +36,6 @@ const RegisteredInsurancePage = () => {
     fetchUserInfo();
   }, []);
   const handleButtonClick = (userId) => {
-    console.log(`Button clicked for user with ID: ${userId}`);
     navigate('/product/:id');
 
   };
@@ -52,19 +51,20 @@ const RegisteredInsurancePage = () => {
         >
           <Collapse accordion style={{ width: '100%', border: 'none' }}>
           {userInfo?.map((user) => {
-            const key = user.registerForm?._id; 
-            const label = user.insurance?.Type;
+            const key = user.insurance?._id; 
+            const label = user.insurance?.Ins_Name;
             const items = {
               "Tên khách hàng": user?.customer?.cusname,
-              "Loại bảo hiểm": user?.insurance?.Ins_Name,
+              "Loại bảo hiểm": user?.insurance?.Type,
               "Thời gian bắt đầu": user?.registerForm?.timeStart,
               "Tình trạng": user?.registerForm?.status,
               "Chi tiết": user?.registerForm?.detail,
               "Xem thông tin bảo hiểm": (
-                <button onClick={() => handleButtonClick(user?.insurance?._id)}>
-                  Xem chi tiết
-                </button>
-                
+                <div style={{botton: '5px', color:'#1677ff', textDecoration: 'underline', display: 'inline'}}> 
+                  <a href={`/product/${key}`}>
+                    Xem chi tiết
+                  </a>
+                </div>
               ),
             }
 
