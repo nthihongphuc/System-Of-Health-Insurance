@@ -84,7 +84,7 @@ const FogotPasswordPage = () => {
                 className="fogotpass-form-button"
                 style={{ marginTop: 10 }}
               >
-                Xác nhận
+                Gửi mã yêu cầu
               </Button>
             </Form.Item>
           </Form>
