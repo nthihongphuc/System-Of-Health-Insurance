@@ -9,18 +9,16 @@ const { Header } = Layout;
 
 const FogotPasswordPage = () => {
     const navigate = useNavigate();
-    const [state, setState] = useState({ email: "" });
-    const handleOnChange = ({ target }) => {
-      setState(s => ({ ...s, email: target.value }))
-  }
+    // const [state, setState] = useState({ email: "" });
+  
     const {
       token: { colorBgContainer },
     } = theme.useToken();
     
-    const onFinish = async () => {
+    const onFinish = async (values) => {
       try {
         // Gọi API quên mật khẩu
-        const response = await api.forgotPassword(state);
+        const response = await api.forgotPassword(values);
         if (response) {
           navigate('/login');
         } else {
@@ -71,11 +69,6 @@ const FogotPasswordPage = () => {
             <Form.Item
               label="Email"
               name="email"
-              placeholder="your-email@example.com"
-              _placeholder={{ color: 'gray.500' }}
-              type="email"
-              value={state.email}
-              onChange={handleOnChange}
               rules={[
                 {
                   required: true,
