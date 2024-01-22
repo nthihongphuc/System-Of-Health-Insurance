@@ -103,6 +103,23 @@ const BasicLayout = () => {
       icon: <PoweroffOutlined />,
     },
   ];
+  
+  const menuProduct = [
+    {
+      key: "4",
+      label: <a href="/product">Bảo hiểm chăm sóc sức khỏe</a>,
+    },
+    {
+      key: "5",
+      label: <a href="/product">Bảo hiểm y tế</a>,
+    },
+    {
+    },
+    {
+      key: "6",
+      label: <a href="/product">Bảo hiểm tai nạn</a>
+    },
+  ];
 
   return (
     <Layout>
