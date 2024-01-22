@@ -145,35 +145,7 @@ const RequestPayment = () => {
             >
               <Cascader options={address} />
             </Form.Item>
-            <Form.Item
-              label="Hóa đơn"
-              name="payment"
-              rules={[
-                {
-                  required: true,
-                  message: "Vui lòng chọn hóa đơn để thanh toán!",
-                },
-              ]}
-            >
-              {/* list hóa đơn của khách hàng có cccd vừa nhập */}
-              <Cascader/>
-            </Form.Item>
-            <Form.Item
-              label="Chọn hình thức thanh toán"
-              name="gender"
-              rules={[
-                {
-                  required: true,
-                  message: "Vui lòng chọn hình thức thanh toán!",
-                },
-              ]}
-            >
-              <Radio.Group>
-                <Radio value="bank"> Ngân hàng</Radio>
-                <Radio value="online"> Momo </Radio>
-                <Radio value="offline"> Tiền mặt </Radio>
-              </Radio.Group>
-            </Form.Item>
+
             <Card
               label="Minh chứng hóa đơn"
               name="Bill"
@@ -189,10 +161,19 @@ const RequestPayment = () => {
               </Upload>
               
             </Card>
+            {/* Nút để qua trang chọn hình thức thanh toán */}
+            <Button
+                    type="primary"
+                    className="request-payment-button"
+                    style={{ marginTop: 10 }}
+                    onClick={() => navigate("/type_payment")}
+                    >
+                    <div>Chọn hình thức thanh toán</div>
+                </Button>
+            {/* <Button type="primary" htmlType="submit" style={{ marginTop: 10 }}>
+              Chọn hình thức thanh toán
+            </Button> */}
             
-            <Button type="primary" htmlType="submit" style={{ marginTop: 10 }}>
-              Gửi yêu cầu thanh toán
-            </Button>
           </Form>
         </Card>
       </Content>
