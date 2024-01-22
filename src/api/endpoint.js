@@ -143,6 +143,7 @@ const api = {
   forgotPassword: async ({ email }) => {
     try {
       const data = await client.post("/auth/forgot-password", { email });
+      console.log(email);
       return data.data;
     } catch (error) {
       console.log(error)
