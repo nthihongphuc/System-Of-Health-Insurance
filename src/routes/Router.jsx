@@ -15,6 +15,7 @@ import InputInforPage from "../pages/InputInforPage";
 import RegisterInsurance from "../pages/RegisterInsurance";
 import BillPage from "../pages/BillPage";
 import RequestPayment from "../pages/RequestPayment";
+import FogotPasswordPage from "../pages/FogotPasswordPage";
 
 const ProfileRouter = () => {
   return (
@@ -25,6 +26,7 @@ const ProfileRouter = () => {
         <Route path="/resetpw" element={<ResetPasswordPage />} />
         <Route path="/insurance" element={<RegisteredInsurancePage />} />
         <Route path="/bill" element={<BillPage />} />
+        
         {/* <Route path="/activation" element={<ActivationPage />} /> */}
       </Route>
     </Routes>
@@ -47,7 +49,7 @@ const Router = () => {
           <Route path="/profile/*" element={<ProfileRouter />} />
           <Route path="/product/:id/register" element={<RegisterInsurance />} />
           <Route path="/payment_request" element={<RequestPayment />} />
-
+          <Route path="/forgot-password" element={<FogotPasswordPage />} />
           {/* <Route path="/profile" element={<ProfilePage />} />
                     <Route path="/profile_update" element={<ProfilePage_update />} />
                     <Route path="/resetpass" element={<ResetPasswordPage/>}/>
