@@ -8,21 +8,24 @@ import React, { useState } from 'react'
 // Định nghĩa component
 const LoginPage = () => {
   const navigate = useNavigate();
-  // const[error, setError]= useState(null);
+  const [error, setError] = useState(null);
   const [username, setUsername] = React.useState("")
   const [password, setPassword] = React.useState("")
 
   const onFinish = async () => {
     try {
-      const data = await api.login({ username, password })
+      const data = await api.login({ username, password });
       if (data.success) {
         localStorage.setItem('access_token', data.data.accessToken);
         navigate('/home');
       } else {
-        alert('Đã có lỗi xảy ra, vui lòng kiểm tra lại');
+        // Sử dụng toast để hiển thị thông báo lỗi
+        toast.error('Đăng nhập không thành công. Vui lòng kiểm tra lại thông tin đăng nhập.');
       }
     } catch (error) {
       console.error('Error during login:', error);
+      // Sử dụng toast để hiển thị thông báo lỗi
+      toast.error('Đã có lỗi xảy ra, vui lòng kiểm tra lại.');
     }
   };
 

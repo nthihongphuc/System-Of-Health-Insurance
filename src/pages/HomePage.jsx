@@ -1,5 +1,5 @@
 // import library here
-import { Row } from "antd";
+import { Row, Button, Space } from "antd";
 
 import ReviewCard from "../components/ReviewCard";
 
@@ -31,6 +31,8 @@ const HomePage = () => {
                     <ReviewCard cover={home3} detail="Sốp này xịn quá" />
                 </Row>
             </div>
+            {/* Sử dụng Space để cả hai thành phần cùng hàng */}
+
         </div>
     );
 };

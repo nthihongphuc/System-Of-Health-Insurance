@@ -1,7 +1,7 @@
 // import library here
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import {Layout, Menu, Button, Image, Row, Col, Avatar, Dropdown, Space,} from "antd";
+import { Layout, Menu, Button, Image, Row, Col, Avatar, Dropdown, Space, } from "antd";
 import { UserOutlined, DownOutlined, BellOutlined, PoweroffOutlined, SafetyOutlined } from "@ant-design/icons";
 const { Header, Content, Footer } = Layout;
 
@@ -26,6 +26,11 @@ const menuItems = [
     key: "payment_request",
     label: "Yêu cầu thanh toán",
   },
+  {
+    key: "admin",
+    label: "ADMIN",
+  },
+
 ];
 
 // Define Our component
@@ -53,6 +58,8 @@ const BasicLayout = () => {
       setSelected("support");
       // } else if (location.pathname.includes("payment_request")) {
       //   setSelected("payment_request");
+    } else if (location.pathname.includes("ADMIN")) {
+      setSelected("admin");
     } else {
       setSelected("");
     }

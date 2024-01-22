@@ -15,6 +15,13 @@ import InputInforPage from "../pages/InputInforPage";
 import RegisterInsurance from "../pages/RegisterInsurance";
 import BillPage from "../pages/BillPage";
 import RequestPayment from "../pages/RequestPayment";
+import InsuranceListPage from "../pages/InsuranceListPage";
+import AdminPage from "../pages/AdminPage";
+import ApointmentList from "../pages/ApointmentList";
+import PolicyList from "../pages/PolicyList";
+import FeeListPage from "../pages/FeeListPage";
+import UpdatePolicyPage from "../pages/UpdatePolicy";
+import HistoryPaymentList from "../pages/HistoryPaymentList";
 
 const ProfileRouter = () => {
   return (
@@ -47,6 +54,14 @@ const Router = () => {
           <Route path="/profile/*" element={<ProfileRouter />} />
           <Route path="/product/:id/register" element={<RegisterInsurance />} />
           <Route path="/payment_request" element={<RequestPayment />} />
+          <Route path="/admin/" element={<AdminPage />} />
+          <Route path="/admin/InsuranceListPage" element={<InsuranceListPage />} />
+          <Route path="/admin/ApointmentList" element={<ApointmentList />} />
+          <Route path="/admin/PolicyList" element={<PolicyList />} />
+          <Route path="/admin/FeeListPage" element={<FeeListPage />} />
+          <Route path="/admin/UpdatePolicy" element={<UpdatePolicyPage />} />
+          <Route path="/admin/HistoryPaymentList" element={<HistoryPaymentList />} />
+
 
           {/* <Route path="/profile" element={<ProfilePage />} />
                     <Route path="/profile_update" element={<ProfilePage_update />} />
