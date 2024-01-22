@@ -4,6 +4,7 @@ import { Collapse } from 'antd';
 import { Content } from 'antd/es/layout/layout';
 import api from '../api/endpoint';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const { Header} = Layout;
 
@@ -25,7 +26,7 @@ const RegisteredInsurancePage = () => {
           setUserInfo(data?.data?.insuranceData);
 
         } else {
-          alert('Đã có lỗi xảy ra, vui lòng kiểm tra lại');
+          toast.error('Đã có lỗi xảy ra, vui lòng kiểm tra lại');
         }
       } catch (error) {
         console.error('Error fetching user info:', error);
@@ -35,8 +36,7 @@ const RegisteredInsurancePage = () => {
     fetchUserInfo();
   }, []);
   const handleButtonClick = (userId) => {
-    console.log(`Button clicked for user with ID: ${userId}`);
-    navigate('/product/1');
+    navigate('/product/:id');
 
   };
   return (
@@ -50,27 +50,28 @@ const RegisteredInsurancePage = () => {
           bodyStyle={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
         >
           <Collapse accordion style={{ width: '100%', border: 'none' }}>
-          {userInfo?.map((user, index) => {
-            const key = user.registerForm?._id; 
-            const label = user.insurance?.Type;
-            const children = {
+          {userInfo?.map((user) => {
+            const key = user.insurance?._id; 
+            const label = user.insurance?.Ins_Name;
+            const items = {
               "Tên khách hàng": user?.customer?.cusname,
-              "Loại bảo hiểm": user?.insurance?.Ins_Name,
+              "Loại bảo hiểm": user?.TypeInsuranceName?.Type_Name,
               "Thời gian bắt đầu": user?.registerForm?.timeStart,
               "Tình trạng": user?.registerForm?.status,
               "Chi tiết": user?.registerForm?.detail,
               "Xem thông tin bảo hiểm": (
-                <button onClick={() => handleButtonClick(user?.insurance?._id)}>
-                  Xem chi tiết
-                </button>
-                
+                <div style={{botton: '5px', color:'#1677ff', textDecoration: 'underline', display: 'inline'}}> 
+                  <a href={`/product/${key}`}>
+                    Xem chi tiết
+                  </a>
+                </div>
               ),
             }
 
             return (
               <Panel key={key} header={label}>
                 <ul>
-                  {Object.entries(children).map(([fieldName, fieldValue]) => (
+                  {Object.entries(items).map(([fieldName, fieldValue]) => (
                     <li key={fieldName}>
                       <strong>{fieldName}:</strong> {fieldValue}
                     </li>

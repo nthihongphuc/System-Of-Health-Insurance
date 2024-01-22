@@ -1,8 +1,26 @@
 // import library here
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { Layout, Menu, Button, Image, Row, Col, Avatar, Dropdown, Space, } from "antd";
-import { UserOutlined, DownOutlined, BellOutlined, PoweroffOutlined, SafetyOutlined } from "@ant-design/icons";
+
+import {
+  Layout,
+  Menu,
+  Button,
+  Image,
+  Row,
+  Col,
+  Avatar,
+  Dropdown,
+  Space,
+} from "antd";
+import {
+  UserOutlined,
+  DownOutlined,
+  BellOutlined,
+  PoweroffOutlined,
+  SafetyOutlined,
+} from "@ant-design/icons";
+
 const { Header, Content, Footer } = Layout;
 
 import { useNavigate, Outlet, Link } from "react-router-dom";
@@ -17,6 +35,20 @@ const menuItems = [
   {
     key: "product",
     label: "Sản phẩm",
+    children: [
+      {
+        key: "65ae152eaad0c8155f6bcfd4",
+        label: <a href="/product/type/65ae152eaad0c8155f6bcfd4">Bảo hiểm chăm sóc sức khỏe</a>,
+      },
+      {
+        key: "65ae1562aad0c8155f6bcfd5",
+        label: <a href="/product/type/65ae1562aad0c8155f6bcfd5">Bảo hiểm y tế</a>,
+      },
+      {
+        key: "65ae157aaad0c8155f6bcfd6",
+        label: <a href="/product/type/65ae157aaad0c8155f6bcfd6">Bảo hiểm tai nạn</a>
+      },
+    ]
   },
   {
     key: "support",
@@ -78,12 +110,12 @@ const BasicLayout = () => {
     {
       key: "1",
       label: <a href="/profile/account">Tài khoản</a>,
-      icon: <UserOutlined />
+      icon: <UserOutlined />,
     },
     {
       key: "2",
       label: <a href="/profile/insurance">Bảo hiểm của tôi</a>,
-      icon: <SafetyOutlined />
+      icon: <SafetyOutlined />,
     },
     {
       type: "divider",
@@ -97,7 +129,15 @@ const BasicLayout = () => {
 
   return (
     <Layout>
-      <Header>
+      <Header
+        style={{
+          position: "sticky",
+          top: 0,
+          zIndex: 1,
+          backgroundColor: "#ffffff",
+          height: 70,
+        }}
+      >
         <div style={{ float: "left", marginRight: 20 }}>
           <Link to="/">
             <Image src={logo} preview={false} />
@@ -108,7 +148,7 @@ const BasicLayout = () => {
             <Space>
               <Avatar
                 style={{
-                  background: "rgba(255,255,255,0.5)",
+                  background: "#bfbfbf",
                   cursor: "pointer",
                   fontSize: 30,
                   verticalAlign: "middle",
@@ -123,7 +163,7 @@ const BasicLayout = () => {
               <Dropdown menu={{ items: menuProfile }} placement="bottomRight">
                 <Avatar
                   style={{
-                    background: "rgba(255,255,255,0.5)",
+                    background: "#bfbfbf",
                     cursor: "pointer",
                   }}
                   size="large"
@@ -135,26 +175,23 @@ const BasicLayout = () => {
         ) : (
           <div style={{ float: "right" }}>
             <Button
-              type="primary"
               onClick={() => toLogin("/login")}
               style={{ marginInline: 20 }}
             >
               Đăng nhập
             </Button>
-            <Button type="primary" onClick={() => toLogin("/register")}>
-              Đăng ký
-            </Button>
+            <Button onClick={() => toLogin("/register")}>Đăng ký</Button>
           </div>
         )}
         <Menu
-          theme="dark"
+          // theme="dark"
           mode="horizontal"
           selectedKeys={[selected]}
           items={menuItems}
           onClick={(item) => {
             navigate(`/${item.key}`);
           }}
-          style={{ background: "transparent" }}
+          style={{ background: "transparent", height: 70 }}
         />
       </Header>
       <Content style={{ minHeight: "100vh" }}>

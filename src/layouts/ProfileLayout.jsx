@@ -5,6 +5,10 @@ import {
   MoneyCollectOutlined,
   IdcardOutlined,
   UnlockOutlined,
+  UserOutlined,
+  SafetyOutlined,
+  FileTextOutlined,
+  LockOutlined,
 } from "@ant-design/icons";
 import { Layout, Menu, theme } from "antd";
 import { useState, useEffect } from "react";
@@ -30,18 +34,22 @@ const menuItems = [
   {
     key: "account",
     label: "Thông tin cá nhân",
+    icon: <UserOutlined />,
   },
   {
     key: "insurance",
     label: "Gói bảo hiểm",
+    icon: <SafetyOutlined />,
   },
   {
     key: "bill",
     label: "Hóa đơn",
+    icon: <FileTextOutlined />,
   },
   {
     key: "resetpw",
     label: "Bảo mật",
+    icon: <LockOutlined />,
   },
 ];
 
@@ -79,7 +87,7 @@ const ProfileLayout = () => {
   return (
     <Layout style={{ minHeight: "100vh" }}>
       <Sider
-        width={230}
+        width={300}
         breakpoint="lg"
         collapsedWidth="0"
         onBreakpoint={(broken) => {
@@ -88,21 +96,27 @@ const ProfileLayout = () => {
         onCollapse={(collapsed, type) => {
           console.log(collapsed, type);
         }}
+        style={{ backgroundColor: "#f5f5f5", paddingTop: 30 }}
       >
         <div className="demo-logo-vertical" />
         <Menu
-          theme="dark"
+          //theme="dark"
           mode="inline"
           selectedKeys={[selected]}
           items={menuItems}
           onClick={(item) => {
             navigate(`/profile/${item.key}`);
           }}
+          style={{
+            backgroundColor: "#f5f5f5",
+            paddingLeft: 30,
+            height: "100%",
+          }}
         />
       </Sider>
       <Layout style={{ height: "100%" }}>
         <Content style={{ height: "100%" }}>
-            <Outlet />
+          <Outlet />
         </Content>
       </Layout>
     </Layout>

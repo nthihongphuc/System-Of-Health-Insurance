@@ -42,7 +42,7 @@ const RegisterPage = () => {
 
   return (
     <Row style={{ width: "100%", textAlign: "center", justifyContent: "center" }}>
-      <Card style={{ margin: 40, width: "100%", maxWidth: 300 }} bodyStyle={{ textAlign: "left" }}>
+      <Card style={{ margin: 40, width: "100%", maxWidth: 320 }} bodyStyle={{ textAlign: "left" }}>
         <h2 style={{ textAlign: "center" }}>Đăng ký</h2>
         <Form
           name="Register-form"
@@ -118,7 +118,7 @@ const RegisterPage = () => {
               Đăng ký
             </Button>
             <div style={{ marginTop: 10 }}>
-              Chưa có tài khoản <Link to="/login">Đăng nhập</Link>
+              Đã có tài khoản <Link to="/login">Đăng nhập</Link>
             </div>
           </Form.Item>
         </Form>
