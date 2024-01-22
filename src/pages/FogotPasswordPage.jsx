@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Layout, Form, Input, Button, Card, theme } from "antd";
 import { Content } from "antd/es/layout/layout";
 import api from "../api/endpoint";
@@ -9,31 +9,35 @@ const { Header } = Layout;
 
 const FogotPasswordPage = () => {
     const navigate = useNavigate();
+    const [state, setState] = useState({ email: "" });
+    const handleOnChange = ({ target }) => {
+      setState(s => ({ ...s, email: target.value }))
+  }
     const {
       token: { colorBgContainer },
     } = theme.useToken();
     
-    const onFinish = async (values) => {
-    //   try {
-    //     // Gọi API quên mật khẩu
-    //     const response = await api.fogotPassword(values);
-    //     if (response) {
-    //       navigate('/profile/account');
-    //     } else {
-    //       toast.error('Đã có lỗi xảy ra, vui lòng kiểm tra lại');
-    //     }
-    //   } catch (error) {
-    //     console.error('Error during password change:', error);
-    //     // Xử lý lỗi, chẳng hạn hiển thị thông báo lỗi cho người dùng
-    //     if (error.response && error.response.data && error.response.data.error) {
-    //       // Lấy thông báo lỗi từ backend và hiển thị trong toast
-    //       const errorMessage = error.response.data.error;
-    //       toast.error(errorMessage);
-    //     } else {
-    //         // Xử lý các trường hợp lỗi khác và hiển thị thông báo mặc định
-    //         toast.error('Đã có lỗi xảy ra, vui lòng kiểm tra lại');
-    //     }
-    //   }
+    const onFinish = async () => {
+      try {
+        // Gọi API quên mật khẩu
+        const response = await api.forgotPassword(state);
+        if (response) {
+          navigate('/login');
+        } else {
+          toast.error('Đã có lỗi xảy ra, vui lòng kiểm tra lại');
+        }
+      } catch (error) {
+        console.error('Error during password change:', error);
+        // Xử lý lỗi, chẳng hạn hiển thị thông báo lỗi cho người dùng
+        if (error.response && error.response.data && error.response.data.error) {
+          // Lấy thông báo lỗi từ backend và hiển thị trong toast
+          const errorMessage = error.response.data.error;
+          toast.error(errorMessage);
+        } else {
+            // Xử lý các trường hợp lỗi khác và hiển thị thông báo mặc định
+            toast.error('Đã có lỗi xảy ra, vui lòng kiểm tra lại');
+        }
+      }
     };
   return (
     <Layout style={{ height: "100%" }}>
@@ -67,6 +71,11 @@ const FogotPasswordPage = () => {
             <Form.Item
               label="Email"
               name="email"
+              placeholder="your-email@example.com"
+              _placeholder={{ color: 'gray.500' }}
+              type="email"
+              value={state.email}
+              onChange={handleOnChange}
               rules={[
                 {
                   required: true,

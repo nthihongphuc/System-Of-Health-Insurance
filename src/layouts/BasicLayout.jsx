@@ -35,16 +35,16 @@ const menuItems = [
     label: "Sản phẩm",
     children: [
       {
-        key: "4",
-        label: <a href="/product/${id}">Bảo hiểm chăm sóc sức khỏe</a>,
+        key: "65ae152eaad0c8155f6bcfd4",
+        label: <a href="/product/type/65ae152eaad0c8155f6bcfd4">Bảo hiểm chăm sóc sức khỏe</a>,
       },
       {
-        key: "5",
-        label: <a href="/product/${id}">Bảo hiểm y tế</a>,
+        key: "65ae1562aad0c8155f6bcfd5",
+        label: <a href="/product/type/65ae1562aad0c8155f6bcfd5">Bảo hiểm y tế</a>,
       },
       {
-        key: "6",
-        label: <a href="/product/${id}">Bảo hiểm tai nạn</a>
+        key: "65ae157aaad0c8155f6bcfd6",
+        label: <a href="/product/type/65ae157aaad0c8155f6bcfd6">Bảo hiểm tai nạn</a>
       },
     ]
   },
@@ -115,21 +115,6 @@ const BasicLayout = () => {
       key: "3",
       label: <div onClick={handleLogout}>Đăng xuất</div>,
       icon: <PoweroffOutlined />,
-    },
-  ];
-
-  const menuProduct = [
-    {
-      key: "4",
-      label: <a href="/product/${id}">Bảo hiểm chăm sóc sức khỏe</a>,
-    },
-    {
-      key: "5",
-      label: <a href="/product/${id}">Bảo hiểm y tế</a>,
-    },
-    {
-      key: "6",
-      label: <a href="/product/${id}">Bảo hiểm tai nạn</a>
     },
   ];
 

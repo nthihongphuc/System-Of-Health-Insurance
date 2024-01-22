@@ -7,7 +7,7 @@ import { useParams } from "react-router-dom";
 
 const ProductPage = () => {
   const [products, setProducts] = useState([]);
-  const  id  = useParams();
+  const id  = useParams();
   useEffect(() => {
     const fetchData = async () => {
       try {

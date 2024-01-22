@@ -5,7 +5,7 @@ const { Meta } = Card;
 
 const ProductCard = ({ id, cover, title, descriptions}) => {
   const navigate = useNavigate();
-  console.log(descriptions)
+  console.log({ id, cover, title, descriptions})
   return (
     <Card
       hoverable

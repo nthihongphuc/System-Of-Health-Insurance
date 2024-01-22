@@ -55,7 +55,7 @@ const RegisteredInsurancePage = () => {
             const label = user.insurance?.Ins_Name;
             const items = {
               "Tên khách hàng": user?.customer?.cusname,
-              "Loại bảo hiểm": user?.insurance?.Type,
+              "Loại bảo hiểm": user?.TypeInsuranceName?.Type_Name,
               "Thời gian bắt đầu": user?.registerForm?.timeStart,
               "Tình trạng": user?.registerForm?.status,
               "Chi tiết": user?.registerForm?.detail,

@@ -94,15 +94,6 @@ const api = {
       return null;
     }
   },
-  getAllInsurance: async (id) => {
-    try {
-      const data = await client.get(`/insurance/InsuranceInfo/${id}`);
-      return data.data;
-    } catch (error) {
-      console.log(error)
-      return null;
-    }
-  },
   getRegisterInsurance: async () => {
     try {
       const token = localStorage.getItem("access_token");
@@ -130,9 +121,28 @@ const api = {
       return null;
     }
   },
+  getAllInsurance: async ({id}) => {
+    try {
+      const data = await client.get(`/insurance/InsuranceInfo/${id}`);
+      console.log(id);
+      return data.data;
+    } catch (error) {
+      console.log(error)
+      return null;
+    }
+  },
   getInsuranceDetail: async ({ id }) => {
     try {
       const data = await client.get(`/insurance/InsuranceDetail/${id}`);
+      return data.data;
+    } catch (error) {
+      console.log(error)
+      return null;
+    }
+  },
+  forgotPassword: async ({ email }) => {
+    try {
+      const data = await client.post("/auth/forgot-password", { email });
       return data.data;
     } catch (error) {
       console.log(error)

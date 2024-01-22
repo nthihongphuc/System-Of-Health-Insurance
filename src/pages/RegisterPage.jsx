@@ -118,7 +118,7 @@ const RegisterPage = () => {
               Đăng ký
             </Button>
             <div style={{ marginTop: 10 }}>
-              Chưa có tài khoản <Link to="/login">Đăng nhập</Link>
+              Đã có tài khoản <Link to="/login">Đăng nhập</Link>
             </div>
           </Form.Item>
         </Form>
