@@ -94,9 +94,9 @@ const api = {
       return null;
     }
   },
-  getAllInsurance: async () => {
+  getAllInsurance: async (id) => {
     try {
-      const data = await client.get("/insurance/InsuranceInfo");
+      const data = await client.get(`/insurance/InsuranceInfo/${id}`);
       return data.data;
     } catch (error) {
       console.log(error)

@@ -103,7 +103,7 @@ const BasicLayout = () => {
       icon: <PoweroffOutlined />,
     },
   ];
-  
+
   const menuProduct = [
     {
       key: "4",
@@ -112,8 +112,6 @@ const BasicLayout = () => {
     {
       key: "5",
       label: <a href="/product">Bảo hiểm y tế</a>,
-    },
-    {
     },
     {
       key: "6",

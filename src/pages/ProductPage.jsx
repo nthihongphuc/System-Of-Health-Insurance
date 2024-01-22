@@ -1,20 +1,17 @@
 import { Row, Col } from "antd";
 
 import ProductCard from "../components/ProductCard";
-
-import home1 from "../assets/home1.jpg";
-import home2 from "../assets/home2.jpg";
-import home3 from "../assets/home3.jpg";
 import { useEffect, useState } from "react";
 import api from "../api/endpoint";
+import { useParams } from "react-router-dom";
 
 const ProductPage = () => {
   const [products, setProducts] = useState([]);
-
+  const  id  = useParams();
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data=await api.getAllInsurance();
+        const data=await api.getAllInsurance(id);
         setProducts(data.data);
        console.log(data.data);
       } catch (error) {
