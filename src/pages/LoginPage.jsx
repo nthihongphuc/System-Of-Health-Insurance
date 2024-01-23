@@ -16,19 +16,15 @@ const LoginPage = () => {
   const onFinish = async () => {
     try {
       const data = await api.login({ username, password });
-      if (data.success) {
-        localStorage.setItem("access_token", data.data.accessToken);
-        navigate("/home");
+      if (data?.success) {
+        localStorage.setItem('access_token', data.data.accessToken);
+        toast.success('Đăng nhập thành công');
+        navigate('/home');
       } else {
-        // Sử dụng toast để hiển thị thông báo lỗi
-        toast.error(
-          "Đăng nhập không thành công. Vui lòng kiểm tra lại thông tin đăng nhập."
-        );
+      toast.error(data.error.message);
       }
     } catch (error) {
-      console.error("Error during login:", error);
-      // Sử dụng toast để hiển thị thông báo lỗi
-      toast.error("Đã có lỗi xảy ra, vui lòng kiểm tra lại.");
+      toast.error(error.message);
     }
   };
 

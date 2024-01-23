@@ -83,7 +83,7 @@ const TypePayment = () => {
             
             <Form.Item
               label="Chọn hình thức thanh toán"
-              name="gender"
+              name="payment"
               rules={[
                 {
                   required: true,

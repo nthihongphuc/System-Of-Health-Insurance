@@ -1,15 +1,19 @@
 //import { Layout, Sider, Menu, UserOutlined, collapsed } from "antd";
 import React from "react";
-import {
-  MedicineBoxOutlined,
-  MoneyCollectOutlined,
-  IdcardOutlined,
-  UnlockOutlined,
-} from "@ant-design/icons";
+
 import { Layout, Form, Input, Button, Menu, theme, Card, Collapse } from "antd";
 import { Content } from "antd/es/layout/layout";
 import { Space, Table, Tag } from "antd";
+import { useNavigate } from "react-router-dom";
 //import BillCard from "../components/BillCard";
+
+const { Header } = Layout;
+
+const BillPage = () => {
+  const {
+    token: { colorBgContainer },
+  } = theme.useToken();
+  const navigate = useNavigate();
 
 const dataSource = [
   {
@@ -39,7 +43,7 @@ const columns = [
     key: "name",
   },
   {
-    title: "Thời hạn đăng ký ",
+    title: "Thời hạn thanh toán ",
     dataIndex: "date",
     key: "date",
   },
@@ -49,18 +53,20 @@ const columns = [
     key: "status",
   },
   {
-    title: "Thanh toán",
-    dataIndex: "action",
-    key: "action",
+    title: 'Thanh toán',
+    key: 'action',
+    render: (_, record) => (
+      <Space 
+      size="middle"
+      onClick={() => navigate("bill_detail")}
+      >
+        {/* <a>Chi tiết {record.name}</a> */}
+        <a>Xem chi tiết</a>
+        {/* Bấm xem chi tiết, sáng trang thanh toán hóa đơn bảo hiểm */}
+      </Space>
+    ),
   },
 ];
-
-const { Header } = Layout;
-
-const BillPage = () => {
-  const {
-    token: { colorBgContainer },
-  } = theme.useToken();
 
   return (
     <Layout style={{ height: "100%" }}>

@@ -1,12 +1,6 @@
 //import { Layout, Sider, Menu, UserOutlined, collapsed } from "antd";
 import React, { useState } from "react";
-import {
-  MedicineBoxOutlined,
-  MoneyCollectOutlined,
-  IdcardOutlined,
-  UnlockOutlined,
-  UploadOutlined
-} from "@ant-design/icons";
+import { UploadOutlined } from "@ant-design/icons";
 
 import {
   Layout,
@@ -16,36 +10,37 @@ import {
   Menu,
   theme,
   Card,
-  Select,
   Cascader,
   Radio,
-  message, 
-  Upload
+  message,
+  Upload,
 } from "antd";
 import { Content } from "antd/es/layout/layout";
 import { address } from "../data/address";
+import { useNavigate } from "react-router-dom";
+
+
 const props = {
-  name: 'file',
-  action: 'https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188',
+  name: "file",
+  action: "https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188",
   headers: {
-    authorization: 'authorization-text',
+    authorization: "authorization-text",
   },
   onChange(info) {
-    if (info.file.status !== 'uploading') {
+    if (info.file.status !== "uploading") {
       console.log(info.file, info.fileList);
     }
-    if (info.file.status === 'done') {
+    if (info.file.status === "done") {
       message.success(`${info.file.name} file uploaded successfully`);
-    } else if (info.file.status === 'error') {
+    } else if (info.file.status === "error") {
       message.error(`${info.file.name} file upload failed.`);
     }
   },
 };
-const { Header } = Layout;
-const { TextArea } = Input;
 
 const RequestPayment = () => {
-  const [componentDisabled, setComponentDisabled] = useState(true);
+  // const [componentDisabled, setComponentDisabled] = useState(true);
+  const navigate = useNavigate();
   const {
     token: { colorBgContainer },
   } = theme.useToken();
@@ -159,21 +154,25 @@ const RequestPayment = () => {
               <Upload {...props}>
                 <Button icon={<UploadOutlined />}>Tải hóa đơn</Button>
               </Upload>
-              
             </Card>
             {/* Nút để qua trang chọn hình thức thanh toán */}
             <Button
-                    type="primary"
-                    className="request-payment-button"
-                    style={{ marginTop: 10 }}
-                    onClick={() => navigate("/type_payment")}
-                    >
-                    <div>Chọn hình thức thanh toán</div>
-                </Button>
+              type="primary"
+              className="request-payment-button"
+              style={{ marginTop: 10 }}
+              onClick={() => {
+                if (!localStorage.getItem("access_token")) {
+                  navigate("/login");
+                } else {
+                  navigate(`/type_payment`);
+                }
+              }}
+            >
+              <div>Chọn hình thức thanh toán</div>
+            </Button>
             {/* <Button type="primary" htmlType="submit" style={{ marginTop: 10 }}>
               Chọn hình thức thanh toán
             </Button> */}
-            
           </Form>
         </Card>
       </Content>
