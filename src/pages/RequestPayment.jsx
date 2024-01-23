@@ -164,7 +164,7 @@ const RequestPayment = () => {
                 if (!localStorage.getItem("access_token")) {
                   navigate("/login");
                 } else {
-                  navigate(`payment_method`);
+                  navigate(`/type_payment`);
                 }
               }}
             >
