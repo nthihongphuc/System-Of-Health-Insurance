@@ -205,7 +205,7 @@ const BasicLayout = () => {
           </Col>
           <Col span={8}>
             <h3 style={{ fontWeight: "bold" }}>Thông tin liên hệ</h3>
-            <div>Email: example@gmail.com</div>
+            <div>Email: baohiem.bacucarot@gmail.com</div>
             <div>Địa chỉ: 12 Quang Trung, quận 6</div>
             <div>SĐT: 0909090909</div>
           </Col>
