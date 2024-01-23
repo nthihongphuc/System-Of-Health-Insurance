@@ -23,7 +23,7 @@ import FeeListPage from "../pages/FeeListPage";
 import UpdatePolicyPage from "../pages/UpdatePolicy";
 import HistoryPaymentList from "../pages/HistoryPaymentList";
 import TypePayment from "../pages/TypePayment";
-import FogotPasswordPage from "../pages/FogotPasswordPage";
+import FogotPasswordPage from "../pages/ForgotPasswordPage";
 
 const ProfileRouter = () => {
   return (
