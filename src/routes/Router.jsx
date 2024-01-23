@@ -23,6 +23,7 @@ import FeeListPage from "../pages/FeeListPage";
 import UpdatePolicyPage from "../pages/UpdatePolicy";
 import HistoryPaymentList from "../pages/HistoryPaymentList";
 import TypePayment from "../pages/TypePayment";
+import BillDetailPage from "../pages/BillDetailPage";
 
 const ProfileRouter = () => {
   return (
