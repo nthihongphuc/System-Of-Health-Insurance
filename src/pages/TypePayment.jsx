@@ -23,10 +23,12 @@ import {
   Upload,
   Space,
   Col,
-  Row
+  Row,
+  Typography 
 } from "antd";
 import { Content } from "antd/es/layout/layout";
 import { address } from "../data/address";
+
 // const props = {
 //   name: 'file',
 //   action: 'https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188',
@@ -46,7 +48,7 @@ import { address } from "../data/address";
 // };
 const { Header } = Layout;
 const { TextArea } = Input;
-
+const { Text } = Typography;
 const TypePayment = () => {
   const [componentDisabled, setComponentDisabled] = useState(true);
   const {
@@ -114,13 +116,15 @@ const TypePayment = () => {
                       />
                     ) : null}
                     {value === 3 ? (
-                      <Input
-                      placeholder="Tiền mặt - Địa chỉ nhận (VD: Tiền mặt - 12 Quang Trung, Q.6)"
-                        style={{
-                          width: 550,
-                          marginLeft: 10,
-                        }}
-                      />
+                      <Text italic
+                      style={{
+                        width: 550,
+                        marginLeft: 10,
+                        
+                      }}
+                       > 
+                      <p>Khách hàng đến nhận trực tiếp tại công ty. Địa chỉ: 12 Quang Trung, Q6.</p>
+                      </Text>
                     ) : null}
                     {value === 4 ? (
                       <Input
