@@ -23,7 +23,7 @@ import FeeListPage from "../pages/FeeListPage";
 import UpdatePolicyPage from "../pages/UpdatePolicy";
 import HistoryPaymentList from "../pages/HistoryPaymentList";
 import TypePayment from "../pages/TypePayment";
-import FogotPasswordPage from "../pages/ForgotPasswordPage";
+import BillDetailPage from "../pages/BillDetailPage";
 
 const ProfileRouter = () => {
   return (
@@ -34,6 +34,7 @@ const ProfileRouter = () => {
         <Route path="/resetpw" element={<ResetPasswordPage />} />
         <Route path="/insurance" element={<RegisteredInsurancePage />} />
         <Route path="/bill" element={<BillPage />} />
+        <Route path="/bill/bill_detail" element={<BillDetailPage />} />
 
         {/* <Route path="/activation" element={<ActivationPage />} /> */}
       </Route>
