@@ -23,7 +23,7 @@ const InputInforPage = () => {
       values.birthday = rawDate.toLocaleDateString('vi-VN'); // Định dạng ngày tháng
 
 
-      const data = await api.InputInfoCus(values)
+      const data = await api.register(values);
       if (data) {
         navigate('/login');
       } else {

@@ -7,16 +7,16 @@ const RegisterPage = () => {
   const navigate =useNavigate();
   const onFinish = async (values) => {
     
-    const { username, email, password, passwordConfirm } = values;
+    // const { username, email, password, passwordConfirm } = values;
       // Lưu thông tin vào localStorage
     localStorage.setItem('registrationInfo', JSON.stringify({
      email: values.email}));
     
     // Kiểm tra xem mật khẩu và mật khẩu xác nhận có trùng khớp không
-    if (password !== passwordConfirm) {
-        alert('Mật khẩu xác nhận không trùng khớp với mật khẩu chính');
-        return; // Dừng hàm nếu mật khẩu không trùng khớp
-    }
+    // if (password !== passwordConfirm) {
+    //     alert('Mật khẩu xác nhận không trùng khớp với mật khẩu chính');
+    //     return; // Dừng hàm nếu mật khẩu không trùng khớp
+    // }
     try {
       // Gọi API đăng ký
       const data = await api.register(values);

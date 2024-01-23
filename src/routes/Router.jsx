@@ -23,7 +23,6 @@ import FeeListPage from "../pages/FeeListPage";
 import UpdatePolicyPage from "../pages/UpdatePolicy";
 import HistoryPaymentList from "../pages/HistoryPaymentList";
 import TypePayment from "../pages/TypePayment";
-import BillDetailPage from "../pages/BillDetailPage";
 
 const ProfileRouter = () => {
   return (
@@ -58,8 +57,8 @@ const Router = () => {
           <Route path="/profile/*" element={<ProfileRouter />} />
           <Route path="/product/:id/register" element={<RegisterInsurance />} />
           <Route path="/payment_request" element={<RequestPayment />} />
-          <Route path="/payment_request/type_payment" element={<TypePayment />} />
-
+          <Route path="/type_payment" element={<TypePayment />} />
+          <Route path="/forgot_password" element={<FogotPasswordPage />} />
           <Route path="/admin/" element={<AdminPage />} />
           <Route path="/admin/InsuranceListPage" element={<InsuranceListPage />} />
           <Route path="/admin/ApointmentList" element={<ApointmentList />} />
