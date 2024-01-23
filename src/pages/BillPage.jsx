@@ -1,15 +1,19 @@
 //import { Layout, Sider, Menu, UserOutlined, collapsed } from "antd";
 import React from "react";
-import {
-  MedicineBoxOutlined,
-  MoneyCollectOutlined,
-  IdcardOutlined,
-  UnlockOutlined,
-} from "@ant-design/icons";
+
 import { Layout, Form, Input, Button, Menu, theme, Card, Collapse } from "antd";
 import { Content } from "antd/es/layout/layout";
 import { Space, Table, Tag } from "antd";
+import { useNavigate } from "react-router-dom";
 //import BillCard from "../components/BillCard";
+
+const { Header } = Layout;
+
+const BillPage = () => {
+  const {
+    token: { colorBgContainer },
+  } = theme.useToken();
+  const navigate = useNavigate();
 
 const dataSource = [
   {
@@ -54,7 +58,7 @@ const columns = [
     render: (_, record) => (
       <Space 
       size="middle"
-      onClick={() => navigate("/bill_detail")}
+      onClick={() => navigate("bill_detail")}
       >
         {/* <a>Chi tiết {record.name}</a> */}
         <a>Xem chi tiết</a>
@@ -63,13 +67,6 @@ const columns = [
     ),
   },
 ];
-
-const { Header } = Layout;
-
-const BillPage = () => {
-  const {
-    token: { colorBgContainer },
-  } = theme.useToken();
 
   return (
     <Layout style={{ height: "100%" }}>
