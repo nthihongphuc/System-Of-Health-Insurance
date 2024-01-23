@@ -39,7 +39,7 @@ const columns = [
     key: "name",
   },
   {
-    title: "Thời hạn đăng ký ",
+    title: "Thời hạn thanh toán ",
     dataIndex: "date",
     key: "date",
   },
@@ -49,9 +49,18 @@ const columns = [
     key: "status",
   },
   {
-    title: "Thanh toán",
-    dataIndex: "action",
-    key: "action",
+    title: 'Thanh toán',
+    key: 'action',
+    render: (_, record) => (
+      <Space 
+      size="middle"
+      onClick={() => navigate("/bill_detail")}
+      >
+        {/* <a>Chi tiết {record.name}</a> */}
+        <a>Xem chi tiết</a>
+        {/* Bấm xem chi tiết, sáng trang thanh toán hóa đơn bảo hiểm */}
+      </Space>
+    ),
   },
 ];
 
