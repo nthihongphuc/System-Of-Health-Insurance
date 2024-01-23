@@ -41,18 +41,9 @@ const api = {
       return null;
     }
   },
-  register: async ({ username, password, email }) => {
+  register: async ({ username, password, email, cusname, birthday, gender, phone, address, status }) => {
     try {
-      const { data } = await client.post("/auth/register", { username, password, email });
-      return data;
-    } catch (error) {
-      console.log(error)
-      return null;
-    }
-  },
-  InputInfoCus: async ({ cusname, birthday, gender, phone, email, address, status }) => {
-    try {
-      const { data } = await client.post("/user/customer-register", { cusname, birthday, gender, phone, email, address, status });
+      const { data } = await client.post("/auth/register", { username, password, email, cusname, birthday, gender, phone, address, status });
       return data;
     } catch (error) {
       console.log(error)

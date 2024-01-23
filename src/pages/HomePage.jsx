@@ -45,7 +45,7 @@ const HomePage = () => {
                         <Button
                             style={{ width: "fit-content" }}
                             size="large"
-                            onClick={() => navigate("/product")}
+                            onClick={() => navigate("/product/type/65ae152eaad0c8155f6bcfd4")}
                         >
                             <div>Tìm hiểu ngay</div>
                         </Button>
