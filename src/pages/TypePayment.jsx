@@ -55,11 +55,14 @@ const TypePayment = () => {
   const onFinish = (values) => {
     console.log(values);
   };
+  const [value, setValue] = useState(1);
+  const onChange = (e) => {
+    console.log('radio checked', e.target.value);
+    setValue(e.target.value);
+  };
   return (
     <Layout style={{ height: "100%" }}>
       <Content style={{ margin: 40 }}>
-      <Row>
-      <Col span={12}>
       <Card 
           style={{ width: "100%", minHeight: "100vh" }}
           bodyStyle={{
@@ -72,7 +75,7 @@ const TypePayment = () => {
           <Form
             name="profile_from"
             onFinish={onFinish}
-            style={{ width: 300, textAlign: "center" }}
+            //style={{ width: 300, textAlign: "center" }}
             layout="vertical"
           >
             
@@ -86,13 +89,49 @@ const TypePayment = () => {
                 },
               ]}
             >
-              <Radio.Group>
-                <Radio value="bank"> <p>Ngân hàng</p></Radio>
-                {/* Chèn thêm thông tin ngân hàng */}
-                <Radio value="online"> <p>Momo</p> </Radio>
-                {/* Chèn số điện thoại */}
-                <Radio value="offline"> Tiền mặt </Radio>
-                {/* Chèn địa chỉ công ty */}
+              <Radio.Group onChange={onChange} value={value}>
+                <Space direction="vertical">
+                  <Radio value={1}>Ngân hàng</Radio>
+                  <Radio value={2}>MoMo</Radio>
+                  <Radio value={3}>Tiền mặt</Radio>
+                  <Radio value={4}>Khác</Radio>
+                    {value === 1 ? (
+                      <Input
+                      placeholder="Ngân hàng - Số tài khoản (VD: MB Bank - 0909090909)"
+                        style={{
+                          width: 550,
+                          marginLeft: 10,
+                        }}
+                      />
+                    ) : null}
+                    {value === 2 ? (
+                      <Input
+                      placeholder="MoMo - Số điện thoại (VD: MoMo - 0909090909)"
+                        style={{
+                          width: 550,
+                          marginLeft: 10,
+                        }}
+                      />
+                    ) : null}
+                    {value === 3 ? (
+                      <Input
+                      placeholder="Tiền mặt - Địa chỉ nhận (VD: Tiền mặt - 12 Quang Trung, Q.6)"
+                        style={{
+                          width: 550,
+                          marginLeft: 10,
+                        }}
+                      />
+                    ) : null}
+                    {value === 4 ? (
+                      <Input
+                        placeholder="Nhập yêu cầu khác"
+                        style={{
+                          width: 550,
+                          marginLeft: 10,
+                        }}
+                      />
+                    ) : null}
+                </Space>
               </Radio.Group>
             </Form.Item>
               {/* Nút gửi yêu cầu */}
@@ -109,14 +148,7 @@ const TypePayment = () => {
               Gửi yêu cầu thanh toán
             </Button> */}
           </Form>
-         
         </Card>
-      </Col>
-      <Col span={12}>
-      <h2 style={{ textAlign: "center" }}>Thông tin bảo hiểm của khách hàng đã chọn </h2>
-      ahiahi
-        </Col>
-    </Row>
       </Content>
     </Layout>
   );
