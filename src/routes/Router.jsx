@@ -14,6 +14,7 @@ import ProfileLayout from "../layouts/ProfileLayout";
 import InputInforPage from "../pages/InputInforPage";
 import RegisterInsurance from "../pages/RegisterInsurance";
 import BillPage from "../pages/BillPage";
+import ForgotPasswordPage from "../pages/ForgotPasswordPage";
 import RequestPayment from "../pages/RequestPayment";
 import InsuranceListPage from "../pages/InsuranceListPage";
 import AdminPage from "../pages/AdminPage";
@@ -55,6 +56,7 @@ const Router = () => {
           <Route path="/infor" element={<InputInforPage />} />
           <Route path="/profile/*" element={<ProfileRouter />} />
           <Route path="/product/:id/register" element={<RegisterInsurance />} />
+          <Route path="/forgot-password" element={<ForgotPasswordPage />} />
           <Route path="/payment_request" element={<RequestPayment />} />
           <Route path="/payment_request/type_payment" element={<TypePayment />} />
 

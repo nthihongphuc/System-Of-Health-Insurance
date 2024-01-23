@@ -39,16 +39,6 @@ const FogotPasswordPage = () => {
     };
   return (
     <Layout style={{ height: "100%" }}>
-      <Header
-        style={{
-          padding: 38,
-          background: colorBgContainer,
-          // background: "#yourBackgroundColor",  // Thay #yourBackgroundColor bằng mã màu bạn muốn sử dụng
-          display: "flex",
-          alignItems: "center",
-        }}
-      >
-      </Header>
       <Content style={{ margin: 40 }}>
         <Card
           style={{ width: "100%", minHeight: "100vh" }}
@@ -60,7 +50,7 @@ const FogotPasswordPage = () => {
         >
           <h2 style={{ textAlign: "center" }}>Cấp lại mật khẩu</h2>
           <Form
-            name="fogot_password_form"
+            name="forgot_password_form"
             onFinish={onFinish}
             style={{ width: 300, textAlign: "center" }}
             layout="vertical"
@@ -83,7 +73,7 @@ const FogotPasswordPage = () => {
               <Button
                 type="primary"
                 htmlType="submit"
-                className="fogotpass-form-button"
+                className="forgotpass-form-button"
                 style={{ marginTop: 10 }}
               >
                 Gửi mã yêu cầu
