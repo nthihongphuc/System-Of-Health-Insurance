@@ -1,13 +1,9 @@
-﻿import { useParams, Link, Navigate, useNavigate } from "react-router-dom";
+﻿import { useParams, useNavigate } from "react-router-dom";
 
-import { Row, Col, Space } from "antd";
-import ProductPage from "../pages/ProductPage";
+import { Space } from "antd";
 import { Layout, Menu, theme, Card, Button, Image } from "antd";
 import { Collapse } from "antd";
 import { Content } from "antd/es/layout/layout";
-import home1 from "../assets/home1.jpg";
-import home2 from "../assets/home2.jpg";
-import home3 from "../assets/home3.jpg";
 import { useEffect, useState } from "react";
 import api from "../api/endpoint";
 const { Header } = Layout;
@@ -85,7 +81,7 @@ const ProductDetailPage = () => {
           <Image
             width={700}
             src={product?.imageurl}
-            placeholder={<Image preview={false} src={home1} width={700} />}
+            placeholder={<Image preview={false} src={product?.imageurl} width={700} />}
           />
           <div style={{ padding: 50, width: "100%", justifyContent: "center" }}>
             <h2>{product?.Ins_Name}</h2>
@@ -94,8 +90,7 @@ const ProductDetailPage = () => {
                 product.Benefit.split("\n").map((line, index) => (
                   <span key={index}>
                     {index > 0 && <br />}{" "}
-                    {/* Thêm xuống dòng trừ dòng đầu tiên */}
-                    {`- ${line}`} {/* Thêm đánh dấu a=b vào mỗi dòng */}
+                    {`- ${line}`}
                   </span>
                 ))}
             </div>
