@@ -15,11 +15,13 @@ import {
   message,
   Upload,
   Space,
-  Typography
+  Typography,
+  Row,
 } from "antd";
 import { Content } from "antd/es/layout/layout";
 import { address } from "../data/address";
 import { useNavigate } from "react-router-dom";
+import bg from "../assets/bg.png";
 const { Text } = Typography;
 
 const RequestPayment = () => {
@@ -50,17 +52,28 @@ const RequestPayment = () => {
   const onFinish = (values) => {
     console.log(values);
   };
-  
+
   const [value, setValue] = useState(1);
   const onChange = (e) => {
-    console.log('radio checked', e.target.value);
+    console.log("radio checked", e.target.value);
     setValue(e.target.value);
   };
   return (
     <Layout style={{ height: "100%" }}>
-      <Content style={{ margin: 40 }}>
+      <Row
+        style={{
+          width: "100%",
+          justifyContent: "center",
+          padding: 40,
+          backgroundImage: `url(${bg})`,
+          backgroundPosition: "center",
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+          aspectRatio: "16/8",
+        }}
+      >
         <Card
-          style={{ width: "100%", minHeight: "100vh" }}
+          style={{ width: "100%", height: 1100, maxWidth: 450 }}
           bodyStyle={{
             display: "flex",
             flexDirection: "column",
@@ -166,11 +179,10 @@ const RequestPayment = () => {
             </Card>
             {/* Nút để qua trang chọn hình thức thanh toán */}
             <Form.Item
-              style={{  textAlign:"left", width: 550}}
+              style={{ textAlign: "left", width: 550 }}
               bodyStyle={{
                 display: "flex",
                 flexDirection: "column",
-                
               }}
               label="Chọn hình thức thanh toán"
               name="type-payment"
@@ -181,73 +193,84 @@ const RequestPayment = () => {
                 },
               ]}
             >
-            <Radio.Group onChange={onChange} value={value}>
-            <Space direction="vertical" style={{ display: 'flex', alignItems: 'start', justifyContent: 'flex-end' }}>                
-              <Radio value={1}>Ngân hàng </Radio>
-              <Radio value={2}>MoMo</Radio>
-              <Radio value={3}>Tiền mặt</Radio>
-              <Radio value={4}>Khác</Radio>
-                {value === 1 ? (
+              <Radio.Group onChange={onChange} value={value}>
+                <Space
+                  direction="vertical"
+                  style={{
+                    display: "flex",
+                    alignItems: "start",
+                    justifyContent: "flex-end",
+                  }}
+                >
+                  <Radio value={1}>Ngân hàng </Radio>
+                  <Radio value={2}>MoMo</Radio>
+                  <Radio value={3}>Tiền mặt</Radio>
+                  <Radio value={4}>Khác</Radio>
+                  {value === 1 ? (
                     <div>
-                    <span style={{ fontSize: 12, color: 'gray'}}>Ngân hàng - Số tài khoản (VD: MB Bank - 0909090909) </span>
+                      <span style={{ fontSize: 12, color: "gray" }}>
+                        Ngân hàng - Số tài khoản (VD: MB Bank - 0909090909){" "}
+                      </span>
+                      <Input
+                        placeholder="Ngân hàng - Số tài khoản (VD: MB Bank - 0909090909)"
+                        style={{
+                          width: 300,
+                          marginLeft: 10,
+                          marginTop: 10,
+                        }}
+                      />
+                    </div>
+                  ) : null}
+                  {value === 2 ? (
+                    <div>
+                      <span style={{ fontSize: 12, color: "gray" }}>
+                        MoMo - Số điện thoại (VD: MoMo - 0909090909){" "}
+                      </span>
+                      <Input
+                        placeholder="MoMo - Số điện thoại (VD: MoMo - 0909090909)"
+                        style={{
+                          width: 300,
+                          marginLeft: 10,
+                        }}
+                      />
+                    </div>
+                  ) : null}
+                  {value === 3 ? (
+                    <Text
+                      italic
+                      style={{
+                        width: 300,
+                        textAlign: "left",
+                      }}
+                    >
+                      <p>Khách hàng đến nhận trực tiếp tại công ty.</p>
+                      <p>Địa chỉ: 12 Quang Trung, Q6.</p>
+                    </Text>
+                  ) : null}
+                  {value === 4 ? (
                     <Input
-                      placeholder="Ngân hàng - Số tài khoản (VD: MB Bank - 0909090909)"
+                      placeholder="Nhập yêu cầu khác"
                       style={{
                         width: 300,
                         marginLeft: 10,
-                        marginTop: 10,
                       }}
                     />
-                  </div>
-                ) : null}
-                {value === 2 ? (
-                  <div>
-                  <span style={{ fontSize: 12, color: 'gray'}}>MoMo - Số điện thoại (VD: MoMo - 0909090909) </span>
-                  <Input
-                  placeholder="MoMo - Số điện thoại (VD: MoMo - 0909090909)"
-                    style={{
-                      width: 300,
-                      marginLeft: 10,
-                    }}
-                  />
-                  </div>
-                ) : null}
-                {value === 3 ? (
-                  <Text italic
-                  style={{
-                    width: 300,
-                    textAlign: 'left'
-                  }}
-                    > 
-                  <p>Khách hàng đến nhận trực tiếp tại công ty.</p> 
-                  <p>Địa chỉ: 12 Quang Trung, Q6.</p>
-                  </Text>
-                ) : null}
-                {value === 4 ? (
-                  <Input
-                    placeholder="Nhập yêu cầu khác"
-                    style={{
-                      width: 300,
-                      marginLeft: 10,
-                    }}
-                  />
-                ) : null}
-              </Space>
+                  ) : null}
+                </Space>
               </Radio.Group>
-              
             </Form.Item>
             {/* Nút gửi yêu cầu */}
             <Button
-                type="primary"
-                htmlType="submit"
-                className="request-payment-form-button"
-                style={{ marginTop: 10 }}
-              >
-                Gửi yêu cầu thanh toán
-              </Button>
+              type="primary"
+              htmlType="submit"
+              className="request-payment-form-button"
+              style={{ marginTop: 10 }}
+            >
+              Gửi yêu cầu thanh toán
+            </Button>
           </Form>
         </Card>
-      </Content>
+      </Row>
     </Layout>
   );
 };
