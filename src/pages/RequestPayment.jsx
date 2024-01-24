@@ -166,11 +166,11 @@ const RequestPayment = () => {
             </Card>
             {/* Nút để qua trang chọn hình thức thanh toán */}
             <Form.Item
-              style={{ width: "100%"}}
+              style={{  textAlign:"left", width: 550}}
               bodyStyle={{
                 display: "flex",
                 flexDirection: "column",
-                alignItems: "center",
+                
               }}
               label="Chọn hình thức thanh toán"
               name="type-payment"
@@ -182,7 +182,7 @@ const RequestPayment = () => {
               ]}
             >
             <Radio.Group onChange={onChange} value={value}>
-              <Space direction="vertical" style={{ display: 'flex', alignItems: 'start', justifyContent: 'flex-end' }}>                
+            <Space direction="vertical" style={{ display: 'flex', alignItems: 'start', justifyContent: 'flex-end' }}>                
               <Radio value={1}>Ngân hàng </Radio>
               <Radio value={2}>MoMo</Radio>
               <Radio value={3}>Tiền mặt</Radio>
@@ -233,7 +233,7 @@ const RequestPayment = () => {
                   />
                 ) : null}
               </Space>
-            </Radio.Group>
+              </Radio.Group>
               
             </Form.Item>
             {/* Nút gửi yêu cầu */}
