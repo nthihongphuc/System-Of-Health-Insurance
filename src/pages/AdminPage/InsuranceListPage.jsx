@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { List, Button } from 'antd';
-import api from '../api/endpoint';
+import api from '../../api/endpoint';
 
 const InsuranceListPage = ({ history }) => {
     const [insuranceList, setInsuranceList] = useState([]);
