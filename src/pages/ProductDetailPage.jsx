@@ -6,6 +6,7 @@ import { Collapse } from "antd";
 import { Content } from "antd/es/layout/layout";
 import { useEffect, useState } from "react";
 import api from "../api/endpoint";
+import { toast } from "react-toastify";
 const { Header } = Layout;
 // const { Panel } = Collapse;
 const ProductDetailPage = () => {
@@ -13,7 +14,7 @@ const ProductDetailPage = () => {
     token: { colorBgContainer },
   } = theme.useToken();
   const id = useParams();
-  // console.log(id);
+  console.log(id);
   const [product, setProduct] = useState([]);
   const navigate = useNavigate();
 
@@ -48,7 +49,7 @@ const ProductDetailPage = () => {
       ),
     },
     {
-      key: "12",
+      key: "13",
       label: "Điều khoản loại trừ",
       children: (
         <div>
@@ -102,7 +103,7 @@ const ProductDetailPage = () => {
                 if (!localStorage.getItem("access_token")) {
                   navigate("/login");
                 }else{
-                  navigate(`/product/${id}/register`);
+                  navigate(`register`);
               }}}
             >
               Đăng ký

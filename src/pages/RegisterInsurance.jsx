@@ -13,19 +13,57 @@ import {
   Space,
 } from "antd";
 import { Content } from "antd/es/layout/layout";
-import { Link } from "react-router-dom";
-import { useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { address } from "../data/address";
 import bg from "../assets/bg.png";
+import { toast } from "react-toastify";
+import api from "../api/endpoint";
+import ProductDetailPage from "./ProductDetailPage";
+
 
 const { TextArea } = Input;
 // Define Our component
 const RegisterInsurance = () => {
+  const id = useParams();
+  console.log(id);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await api.getInsuranceDetail(id);
+        setProduct(data.data);
+        console.log(data.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   const onFinish = (values) => {
     console.log(values);
   };
   const [product, setProduct] = useState([]);
+  const [userInfo, setUserInfo] = useState({});
+  const [form] = Form.useForm();
   const items_renamed = [
+    {
+      key: "10",
+      label: "Quyền lợi tham gia",
+      children: (
+        <div style={{ whiteSpace: "pre" }}>
+          {product?.Benefit &&
+            product.Benefit.split("\n").map((line, index) => (
+              <span key={index}>
+                {index > 0 && <br />}
+                {`- ${line}`}
+              </span>
+            ))}
+        </div>
+      ),
+    },
     {
       key: "11",
       label: "Điều kiện tham gia",
@@ -52,30 +90,71 @@ const RegisterInsurance = () => {
         </div>
       ),
     },
+    {
+      key: "13",
+      label: "Phí tham gia bảo hiểm",
+      children: (
+        <div>
+          {product?.Exception && (
+            <pre style={{ whiteSpace: "pre-line" }}>{product.Exception}</pre>
+          )}
+        </div>
+      ),
+    },
   ];
+
+  const fetchUserInfo = async () => {
+    try {
+      const data = await api.GetUserInfo();
+      if (data.success) {
+        localStorage.getItem('access_token', data.data.accessToken);
+        setUserInfo(data.data);
+      } else {
+        toast.error(data.error.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+
+  useEffect(() => {
+    // Fetch user information when the component mounts
+    fetchUserInfo();
+  },[]);
+
+  useEffect(()=>{
+    console.log(userInfo);
+    form.setFieldValue('cusname', userInfo?.Cus?.cusname);
+    form.setFieldValue('phone', userInfo?.Cus?.phone);
+    form.setFieldValue('email', userInfo?.Cus?.email);
+    form.setFieldValue('cccd', userInfo?.Cus?.CCCD);
+    form.setFieldValue('address', userInfo?.Cus?.address);
+    form.setFieldValue('status', userInfo?.infoHealth?.status);
+  },[userInfo])
 
   return (
     <Layout>
-      <Card style={{ width: "100%", height: 1100 }}>
-        <Space size={200}>
+      <Card style={{ width: "100%", height: "100%" }}>
+        <Space size={100}>
           <Card
-            style={{ width: "100%", height: 1000 }}
+            style={{ width: "100%", height: "100%" }}
             bodyStyle={{
               display: "flex",
               flexDirection: "column",
-              alignItems: "center",
+              alignItems:"center",
             }}
           >
             <h2 style={{ textAlign: "center" }}>Đăng ký gói bảo hiểm</h2>
             <Form
               name="register-insurance"
               onFinish={onFinish}
-              style={{ width: 600, textAlign: "center" }}
+              style={{ width: 400, textAlign: "center", marginLeft: 50}}
               layout="vertical"
+              form={form}
             >
               <Form.Item
                 label="Họ và tên"
-                name="name"
+                name="cusname"
                 rules={[
                   {
                     required: true,
@@ -87,7 +166,7 @@ const RegisterInsurance = () => {
               </Form.Item>
               <Form.Item
                 label="CCCD/ CMND"
-                name="identify"
+                name="cccd"
                 rules={[
                   {
                     required: true,
@@ -147,7 +226,7 @@ const RegisterInsurance = () => {
             </Form>
           </Card>
           <Card
-            style={{ width: "100%", height: 1000 }}
+            style={{ width: 900, height: "100%" }}
             bodyStyle={{
               display: "flex",
               flexDirection: "column",
@@ -155,7 +234,7 @@ const RegisterInsurance = () => {
             }}
           >
             <Image
-              width={700}
+              width={400}
               src={product?.imageurl}
               placeholder={
                 <Image preview={false} src={product?.imageurl} width={700} />
@@ -165,14 +244,6 @@ const RegisterInsurance = () => {
               style={{ padding: 50, width: "100%", justifyContent: "center" }}
             >
               <h2>{product?.Ins_Name}</h2>
-              <div style={{ whiteSpace: "pre" }}>
-                {product?.Benefit &&
-                  product.Benefit.split("\n").map((line, index) => (
-                    <span key={index}>
-                      {index > 0 && <br />} {`- ${line}`}
-                    </span>
-                  ))}
-              </div>
             </div>
             <Card
               style={{ width: "100%", maxWidth: 10000, minHeight: "100vh" }}
