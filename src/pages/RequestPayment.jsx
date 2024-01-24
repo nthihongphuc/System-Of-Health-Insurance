@@ -165,11 +165,11 @@ const RequestPayment = () => {
             </Card>
             {/* Nút để qua trang chọn hình thức thanh toán */}
             <Form.Item
-              style={{ width: "100%"}}
+              style={{  textAlign:"left", width: 550}}
               bodyStyle={{
                 display: "flex",
                 flexDirection: "column",
-                alignItems: "center",
+                
               }}
               label="Chọn hình thức thanh toán"
               name="type-payment"
@@ -210,7 +210,8 @@ const RequestPayment = () => {
                         marginLeft: 10,
                       }}
                        > 
-                      <p>Khách hàng đến nhận trực tiếp tại công ty. Địa chỉ: 12 Quang Trung, Q6.</p>
+                      <p>Khách hàng đến nhận trực tiếp tại công ty. </p>
+                      <p>Địa chỉ: 12 Quang Trung, Q6.</p>
                       </Text>
                     ) : null}
                     {value === 4 ? (
