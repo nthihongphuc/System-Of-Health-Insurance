@@ -1,5 +1,5 @@
 //import { Layout, Sider, Menu, UserOutlined, collapsed } from "antd";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { UploadOutlined } from "@ant-design/icons";
 
 import {
@@ -20,18 +20,24 @@ import {
 import { Content } from "antd/es/layout/layout";
 import { address } from "../data/address";
 import { useNavigate } from "react-router-dom";
+import api from "../api/endpoint";
+import { toast } from "react-toastify";
 const { Text } = Typography;
 
 const RequestPayment = () => {
-  const [componentDisabled, setComponentDisabled] = useState(true);
+  // const [componentDisabled, setComponentDisabled] = useState(true);
   const navigate = useNavigate();
+  const [genderValue, setGenderValue] = useState(null);
+
   const {
     token: { colorBgContainer },
   } = theme.useToken();
-
+  const [userInfo, setUserInfo] = useState({});
+  const [form] = Form.useForm();
+  
   const props = {
     name: "file",
-    action: "https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188",
+    action: `https://api.cloudinary.com/v1_1//upload`,
     headers: {
       authorization: "authorization-text",
     },
@@ -47,8 +53,51 @@ const RequestPayment = () => {
     },
   };
 
-  const onFinish = (values) => {
-    console.log(values);
+  const fetchUserInfo = async () => {
+    try {
+      const data = await api.GetUserInfo();
+      if (data.success) {
+        localStorage.getItem('access_token', data.data.accessToken);
+        setUserInfo(data.data);
+        setGenderValue(data.data.Cus.gender);
+      } else {
+        toast.error(data.error.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+
+  useEffect(() => {
+    // Fetch user information when the component mounts
+    fetchUserInfo();
+  },[]);
+
+  useEffect(()=>{
+    console.log(userInfo);
+    form.setFieldValue('cusname', userInfo?.Cus?.cusname);
+    form.setFieldValue('phone', userInfo?.Cus?.phone);
+    form.setFieldValue('gender', userInfo?.Cus?.gender);
+    form.setFieldValue('email', userInfo?.Cus?.email);
+    form.setFieldValue('cccd', userInfo?.Cus?.CCCD);
+    form.setFieldValue('address', userInfo?.Cus?.address);
+  },[userInfo])
+
+
+  const onFinish = async (values) => {
+    // console.log(values);
+    try {
+      const response = await api.RequestPayment(values);
+      if (response.success) {
+        localStorage.getItem('access_token', response.data.accessToken);
+        toast.success(response.message);
+        navigate("/home");
+      } else {
+        toast.error(response.error.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
   
   const [value, setValue] = useState(1);
@@ -73,6 +122,7 @@ const RequestPayment = () => {
             onFinish={onFinish}
             style={{ width: 300, textAlign: "center" }}
             layout="vertical"
+            form={form}
           >
             <Form.Item
               label="Họ và tên"
@@ -96,9 +146,9 @@ const RequestPayment = () => {
                 },
               ]}
             >
-              <Radio.Group>
-                <Radio value="male"> Nam </Radio>
-                <Radio value="female"> Nữ </Radio>
+              <Radio.Group  onChange={onChange}>
+                <Radio value="Nam"> Nam </Radio>
+                <Radio value="Nữ"> Nữ </Radio>
               </Radio.Group>
             </Form.Item>
             <Form.Item
@@ -152,7 +202,7 @@ const RequestPayment = () => {
 
             <Card
               label="Minh chứng hóa đơn"
-              name="bill"
+              name="Type_Payment"
               rules={[
                 {
                   required: true,

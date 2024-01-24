@@ -34,21 +34,16 @@ const SupportPage = () => {
     try {
       const addressString = values.address.join(", ");
       values.address = addressString;
+      
       const data = await api.SupportCustomer(values);
-      if (data) {
+      if (data.success) {
+        toast.success("Gửi thông tin thành công");
         navigate("/home");
       } else {
-        toast.error("Đã có lỗi xảy ra, vui lòng kiểm tra lại");
+        toast.error(data.error.message);
       }
     } catch (error) {
-      if (error.response && error.response.data && error.response.data.error) {
-        // Lấy thông báo lỗi từ backend và hiển thị trong toast
-        const errorMessage = error.response.data.error;
-        toast.error(errorMessage);
-      } else {
-        // Xử lý các trường hợp lỗi khác và hiển thị thông báo mặc định
-        toast.error("Đã có lỗi xảy ra, vui lòng kiểm tra lại");
-      }
+      toast.error(error.message);
     }
   };
   return (

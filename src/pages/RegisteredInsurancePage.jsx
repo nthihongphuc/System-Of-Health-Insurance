@@ -35,10 +35,6 @@ const RegisteredInsurancePage = () => {
     };
     fetchUserInfo();
   }, []);
-  const handleButtonClick = (userId) => {
-    navigate('/product/:id');
-
-  };
   return (
     <Layout style={{ height: "100%" }}>
       <Header style={{ padding: 38, background: colorBgContainer, display: 'flex', alignItems: 'center' }}>

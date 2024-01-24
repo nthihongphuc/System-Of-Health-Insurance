@@ -142,6 +142,23 @@ const api = {
       return null;
     }
   },
+
+  RequestPayment: async ({ Type_Payment }) => {
+    try {
+      const token = localStorage.getItem("access_token");
+      console.log(token);
+      if (!token) {
+        // Xử lý trường hợp token không tồn tại
+        console.error("Access token is missing");
+        return null;
+      }
+      const data = await client.post("/bill/RequestPayment",{ Type_Payment });
+      return data.data;
+    } catch (error) {
+      console.log(error)
+      return null;
+    }
+  },
 };
 
 export default api;

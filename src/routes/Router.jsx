@@ -57,7 +57,6 @@ const Router = () => {
           <Route path="/product/:id/register" element={<RegisterInsurance />} />
           <Route path="/forgot-password" element={<ForgotPasswordPage />} />
           <Route path="/payment_request" element={<RequestPayment />} />
-          <Route path="/forgot_password" element={<ForgotPasswordPage />} />
           <Route path="/admin/" element={<AdminPage />} />
           <Route path="/admin/InsuranceListPage" element={<InsuranceListPage />} />
           <Route path="/admin/ApointmentList" element={<ApointmentList />} />

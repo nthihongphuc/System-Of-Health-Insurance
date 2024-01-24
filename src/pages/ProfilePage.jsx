@@ -33,11 +33,10 @@ const ProfilePage_update = () => {
         localStorage.getItem('access_token', data.data.accessToken);
         setUserInfo(data.data);
       } else {
-        toast.error("Đã có lỗi xảy ra, vui lòng kiểm tra lại");
+        toast.error(data.error.message);
       }
     } catch (error) {
-      console.error("Error fetching user info:", error);
-      toast.error("Đã có lỗi xảy ra, vui lòng kiểm tra lại");
+      toast.error(error.message);
     }
   };
 
@@ -65,19 +64,10 @@ const ProfilePage_update = () => {
         localStorage.getItem('access_token', data.data.accessToken);
         navigate('/profile/account');
       } else {
-        toast.error('Đã có lỗi xảy ra, vui lòng kiểm tra lại');
+        toast.error(data.error.message);
       }
     } catch (error) {
-      console.error('Error during login:', error);
-      // Xử lý lỗi, chẳng hạn hiển thị thông báo lỗi cho người dùng
-      if (error.response && error.response.data && error.response.data.error) {
-        // Lấy thông báo lỗi từ backend và hiển thị trong toast
-        const errorMessage = error.response.data.error;
-        toast.error(errorMessage);
-      } else {
-          // Xử lý các trường hợp lỗi khác và hiển thị thông báo mặc định
-          toast.error('Đã có lỗi xảy ra, vui lòng kiểm tra lại');
-      }
+      toast.error(error.message);
     }
   };
   return (
