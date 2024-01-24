@@ -43,8 +43,9 @@ const api = {
   },
   register: async ({ username, password, email, cusname, birthday, gender, phone, address, status }) => {
     try {
-      const { data } = await client.post("/auth/register", { username, password, email, cusname, birthday, gender, phone, address, status });
-      return data;
+      const data  = await client.post("/auth/register", { username, password, email, cusname, birthday, gender, phone, address, status });
+      console.log(email);
+      return data.data;
     } catch (error) {
       console.log(error)
       return null;

@@ -11,7 +11,6 @@ import ProductPage from "../pages/ProductPage";
 import ProductDetailPage from "../pages/ProductDetailPage";
 import SupportPage from "../pages/SupportPage";
 import ProfileLayout from "../layouts/ProfileLayout";
-import InputInforPage from "../pages/InputInforPage";
 import RegisterInsurance from "../pages/RegisterInsurance";
 import BillPage from "../pages/BillPage";
 import ForgotPasswordPage from "../pages/ForgotPasswordPage";
@@ -23,7 +22,6 @@ import PolicyList from "../pages/PolicyList";
 import FeeListPage from "../pages/FeeListPage";
 import UpdatePolicyPage from "../pages/UpdatePolicy";
 import HistoryPaymentList from "../pages/HistoryPaymentList";
-import TypePayment from "../pages/TypePayment";
 import BillDetailPage from "../pages/BillDetailPage";
 
 const ProfileRouter = () => {
@@ -55,12 +53,10 @@ const Router = () => {
           <Route path="/support" element={<SupportPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
-          <Route path="/infor" element={<InputInforPage />} />
           <Route path="/profile/*" element={<ProfileRouter />} />
           <Route path="/product/:id/register" element={<RegisterInsurance />} />
           <Route path="/forgot-password" element={<ForgotPasswordPage />} />
           <Route path="/payment_request" element={<RequestPayment />} />
-          <Route path="/type_payment" element={<TypePayment />} />
           <Route path="/forgot_password" element={<ForgotPasswordPage />} />
           <Route path="/admin/" element={<AdminPage />} />
           <Route path="/admin/InsuranceListPage" element={<InsuranceListPage />} />

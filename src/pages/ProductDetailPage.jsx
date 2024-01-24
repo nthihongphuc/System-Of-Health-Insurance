@@ -40,8 +40,8 @@ const ProductDetailPage = () => {
           {product?.Require &&
             product.Require.split("\n").map((line, index) => (
               <span key={index}>
-                {index > 0 && <br />} {/* Thêm xuống dòng trừ dòng đầu tiên */}
-                {`- ${line}`} {/* Thêm đánh dấu a=b vào mỗi dòng */}
+                {index > 0 && <br />} 
+                {`- ${line}`}
               </span>
             ))}
         </div>

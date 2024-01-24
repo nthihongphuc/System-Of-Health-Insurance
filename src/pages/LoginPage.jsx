@@ -15,6 +15,7 @@ const LoginPage = () => {
 
   const onFinish = async () => {
     try {
+      
       const data = await api.login({ username, password });
       if (data?.success) {
         localStorage.setItem('access_token', data.data.accessToken);
@@ -41,18 +42,8 @@ const LoginPage = () => {
         aspectRatio: "16/7",
       }}
     >
-      <Col
-        span={12}
-        style={{
-          paddingLeft: 300,
-          justifyContent: "center",
-          display: "flex",
-          flexDirection: "column",
-          height: "100%",
-        }}
-      >
-        <Card
-          style={{ width: "100%", maxWidth: 350, height: 400 }}
+      <Card
+          style={{ width: "100%", maxWidth: 350, height: 400, margin: 100 }}
           bodyStyle={{ textAlign: "left" }}
         >
           <h2 style={{ textAlign: "center" }}>Đăng nhập</h2>
@@ -115,7 +106,6 @@ const LoginPage = () => {
             </Form.Item>
           </Form>
         </Card>
-      </Col>
       <Col span={12} style={{ padding: 20 }}></Col>
     </Row>
   );
