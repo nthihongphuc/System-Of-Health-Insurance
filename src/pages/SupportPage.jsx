@@ -18,7 +18,7 @@ import { address } from "../data/address";
 import api from "../api/endpoint";
 import { Navigate, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import bg from "../assets/bg-01.png";
+import bg from "../assets/bg.png";
 
 const { Header } = Layout;
 const { TextArea } = Input;

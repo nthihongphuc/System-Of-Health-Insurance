@@ -4,7 +4,7 @@ import { Content } from "antd/es/layout/layout";
 import api from "../api/endpoint";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import bg from "../assets/bg-01.png";
+import bg from "../assets/bg.png";
 
 const { Header } = Layout;
 
