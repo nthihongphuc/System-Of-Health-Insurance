@@ -14,16 +14,20 @@ import api from "../api/endpoint";
 import { toast } from "react-toastify";
 import { address } from "../data/address";
 import home1 from "../assets/home.jpg";
+const { TextArea } = Input;
 
 const RegisterPage = () => {
   const navigate = useNavigate();
   const onFinish = async (values) => {
-    
     // const { username, email, password, passwordConfirm } = values;
-      // Lưu thông tin vào localStorage
-    localStorage.setItem('registrationInfo', JSON.stringify({
-     email: values.email}));
-    
+    // Lưu thông tin vào localStorage
+    localStorage.setItem(
+      "registrationInfo",
+      JSON.stringify({
+        email: values.email,
+      })
+    );
+
     // Kiểm tra xem mật khẩu và mật khẩu xác nhận có trùng khớp không
     // if (password !== passwordConfirm) {
     //     alert('Mật khẩu xác nhận không trùng khớp với mật khẩu chính');
@@ -60,7 +64,7 @@ const RegisterPage = () => {
         backgroundPosition: "center",
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
-        aspectRatio: "16/11",
+        aspectRatio: "16/12",
       }}
     >
       <Col
@@ -166,6 +170,9 @@ const RegisterPage = () => {
               ]}
             >
               <Cascader options={address} />
+            </Form.Item>
+            <Form.Item label="Tình trạng sức khỏe" name="status">
+              <TextArea rows={4} />
             </Form.Item>
             <Form.Item
               label="Tên đăng nhập"

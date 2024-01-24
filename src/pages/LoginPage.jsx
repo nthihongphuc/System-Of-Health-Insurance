@@ -17,11 +17,11 @@ const LoginPage = () => {
     try {
       const data = await api.login({ username, password });
       if (data?.success) {
-        localStorage.setItem('access_token', data.data.accessToken);
-        toast.success('Đăng nhập thành công');
-        navigate('/home');
+        localStorage.setItem("access_token", data.data.accessToken);
+        toast.success("Đăng nhập thành công");
+        navigate("/home");
       } else {
-      toast.error(data.error.message);
+        toast.error(data.error.message);
       }
     } catch (error) {
       toast.error(error.message);
@@ -52,8 +52,12 @@ const LoginPage = () => {
         }}
       >
         <Card
-          style={{ width: "100%", maxWidth: 350, height: 400 }}
-          bodyStyle={{ textAlign: "left" }}
+          style={{ width: "100%", maxWidth: 350, height: 450 }}
+          bodyStyle={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
         >
           <h2 style={{ textAlign: "center" }}>Đăng nhập</h2>
           <Form
@@ -63,9 +67,12 @@ const LoginPage = () => {
               remember: true,
             }}
             onFinish={onFinish}
+            style={{ width: 300, textAlign: "center" }}
+            layout="vertical"
           >
             {/* Các trường nhập liệu username và password */}
             <Form.Item
+              label="Tên đăng nhập"
               name="username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
@@ -76,9 +83,10 @@ const LoginPage = () => {
                 },
               ]}
             >
-              <Input placeholder="Tên đăng nhập" />
+              <Input />
             </Form.Item>
             <Form.Item
+              label="Mật khẩu"
               name="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -89,7 +97,7 @@ const LoginPage = () => {
                 },
               ]}
             >
-              <Input.Password type="password" placeholder="Mật khẩu" />
+              <Input.Password type="password" />
             </Form.Item>
 
             <Form.Item style={{ textAlign: "center" }}>
