@@ -48,7 +48,7 @@ const RegisterInsurance = () => {
 
   const onFinish = async(values) => {
     try {
-      const data = await api.RegisterInsurance({values,id});
+      const data = await api.RegisterInsurance(id.id);
       if (data.success) {
         localStorage.getItem('access_token', data.data.accessToken);
         toast.success("Gửi yêu cầu đăng ký thành công");

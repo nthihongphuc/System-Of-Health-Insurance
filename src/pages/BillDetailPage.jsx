@@ -1,5 +1,5 @@
 // //import { Layout, Sider, Menu, UserOutlined, collapsed } from "antd";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Layout,
   theme,
@@ -15,16 +15,57 @@ import {
 import { Content } from "antd/es/layout/layout";
 import { Space, Table } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
+import { Form, useParams } from "react-router-dom";
+import api from "../api/endpoint";
+import { toast } from "react-toastify";
 const { Header } = Layout;
 
 const BillDetailPage = () => {
   const {
     token: { colorBgContainer },
   } = theme.useToken();
+  const [file, setFile] = useState();
+  const [userInfo, setUserInfo] = useState([]);
+  const id= useParams();
+  const handlePaymentButtonClick = () => {
+    // Thực hiện các bước xử lý thanh toán ở đây
+    if (file) {
+      // Nếu có tệp tin được chọn, thực hiện các bước xử lý
+      console.log("File đã được chọn:", file);
+      // Thực hiện các bước xử lý thanh toán khác nếu cần
+      message.success("Thanh toán thành công!");
+    } else {
+      // Nếu không có tệp tin được chọn, hiển thị thông báo lỗi
+      message.error("Vui lòng tải lên hóa đơn trước khi thanh toán!");
+    }
+  };
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      try {
+        const data = await api.getBillDetail(id);
+        if (data) {
+          localStorage.getItem('access_token', data.data.accessToken);
+          setUserInfo(data?.data);
+          // console.log(data.data.bill);
+        } else {
+          toast.error(data.error.message);
+        }
+      } catch (error) {
+        toast.error(error.message);
+      }
+    };
+    fetchUserInfo();
+    // console.log(userInfo);
+  }, []);
+  console.log(userInfo);
 
   return (
     <Layout style={{ height: "100%"}}>
-      <Row>
+      <Row
+      style={{
+        width: "100%",
+      }}
+      >
         <Col
           span={12}
           style={{
@@ -33,6 +74,7 @@ const BillDetailPage = () => {
             paddingLeft: 100,
             background: colorBgContainer,
             display: "flex",
+            width: "100%",
           }}
         >
           <Card>
@@ -45,11 +87,11 @@ const BillDetailPage = () => {
             >
               <h2>Thông tin chi tiết hóa đơn</h2>
             </span>
-            <div style={{ padding: 10 }}>Tên bảo hiểm: ...</div>
-            <div style={{ padding: 10 }}>Loại bảo hiểm: ...</div>
-            <div style={{ padding: 10 }}>Điều kiện tham gia: ...</div>
-            <div style={{ padding: 10 }}>Thời hạn bảo hiểm: ... - ...</div>
-            <div style={{ padding: 10 }}>Tổng hóa đơn: ... (vnđ)</div>
+            <div style={{ padding: 10, width:"100%" }}> Tên bảo hiểm: {userInfo?.insurance?.Ins_Name}</div>
+            <div style={{ padding: 10 }}>Loại bảo hiểm: {userInfo?.type?.Type_Name}</div>
+            <div style={{ padding: 10 }}>Tổng hóa đơn: {userInfo?.insurance?.Year_Cost}</div>
+            <div style={{ padding: 10 }}>Thời hạn bảo hiểm: {userInfo?.registerForm?.Time_Start} - {userInfo?.registerForm?.Time_End}</div>
+            <div style={{ padding: 10 }}>Tình trạng thanh toán: {userInfo?.bill?.Payment_Status} </div>
             <Card
               label="Minh chứng hóa đơn"
               name="Bill"
@@ -60,27 +102,21 @@ const BillDetailPage = () => {
                 },
               ]}
             >
-              {/* <Upload {...props}> */}
-              <Upload 
-                multiple
-                maxCount={1}
-                action={"http://localhost:5173"}
-                showUploadList={{showRemoveIcon: true}}
-                accept=".jpg,.png,.jpeg"
-                beforeUpload={(file)=>{
-                  console.log(file);
-                  message.success(`${file.name} file uploaded successfully`);
-                  return false;
-                }}
-              >
-                <Button icon={<UploadOutlined />}>Tải hóa đơn</Button>
-              </Upload>
+              
+              <input type="file" 
+              style={{ cursor: 'pointer', display: 'block', textAlign: 'center' }}
+              onChange={(e)=>{
+                console.log(e.target.files[0])
+                setFile(e.target.files[0]);
+              }}
+              />
             </Card>
             {/* Nút hoàn tất thanh toán */}
             <Button
               type="primary"
               className="payment-button"
               style={{ marginTop: 10 }}
+              onClick={handlePaymentButtonClick}
             >
               <div>Hoàn tất thanh toán</div>
             </Button>

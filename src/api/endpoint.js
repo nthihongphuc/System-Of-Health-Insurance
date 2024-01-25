@@ -139,7 +139,7 @@ const api = {
     }
   },
 
-  RequestPayment: async ({ Bill_Url,Type_Payment, Detail }) => {
+  RequestPayment: async (formdata) => {
     try {
       const token = localStorage.getItem("access_token");
       console.log(token);
@@ -147,8 +147,11 @@ const api = {
         console.error("Access token is missing");
         return null;
       }
-      const data = await client.post("/bill/RequestPayment",{  Bill_Url,Type_Payment, Detail  },
-      { headers: { Authorization: `Bearer ${token}` } });
+      const data = await client.post("/bill/RequestPayment",formdata,
+      { headers: { 
+        Authorization: `Bearer ${token}`,
+        'Content-Type' : 'multipart/form-data'
+      } });
       return data.data;
     } catch (error) {
       console.log(error)
@@ -164,6 +167,39 @@ const api = {
         return null;
       }
       const data = await client.get("/bill/GetBill",
+      { headers: { Authorization: `Bearer ${token}` } });
+      return data.data;
+    } catch (error) {
+      console.log(error)
+      return null;
+    }
+  },
+  RegisterInsurance: async(id) => {
+    try {
+      const token = localStorage.getItem("access_token");
+      console.log(token);
+      if (!token) {
+        console.error("Access token is missing");
+        return null;
+      }
+      const data = await client.get(`/insurance/RegisterInsurance/${id}`,
+      { headers: { Authorization: `Bearer ${token}` } });
+      return data.data;
+    } catch (error) {
+      console.log(error)
+      return null;
+    }
+  },
+  
+  getBillDetail: async ({ id }) => {
+    try {
+      const token = localStorage.getItem("access_token");
+      console.log(token);
+      if (!token) {
+        console.error("Access token is missing");
+        return null;
+      }
+      const data = await client.get(`bill/GetBillDetail/${id}`,
       { headers: { Authorization: `Bearer ${token}` } });
       return data.data;
     } catch (error) {

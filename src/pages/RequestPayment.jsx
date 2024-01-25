@@ -34,6 +34,7 @@ const RequestPayment = () => {
   } = theme.useToken();
   const [userInfo, setUserInfo] = useState({});
   const [form] = Form.useForm();
+  const [file, setFile] = useState();
 
   const fetchUserInfo = async () => {
     try {
@@ -66,7 +67,14 @@ const RequestPayment = () => {
   const onFinish = async (values) => {
     console.log(values);
     try {
-      const response = await api.RequestPayment(values);
+      console.log(values);
+      console.log(file);
+
+      const formdata = new FormData();
+      formdata.append("file", file);
+      formdata.append("Type_Payment", values.Type_Payment);
+      formdata.append("Detail", values.Detail);
+      const response = await api.RequestPayment(formdata);
       if (response.success) {
         localStorage.getItem("access_token", response.data.accessToken);
         toast.success("Gửi yêu cầu thanh toán thành công");
@@ -200,23 +208,21 @@ const RequestPayment = () => {
                 },
               ]}
             >
+              
               <Card>
                 {/* <Upload {...props}> */}
-                <Upload
-                  multiple
-                  maxCount={1}
-                  action={"http://localhost:5173"}
-                  showUploadList={{showRemoveIcon: true}}
-                  accept=".jpg,.png,.jpeg"
-                  beforeUpload={(file) => {
-                    // console.log(file);
-                    message.success(`${file.name} file uploaded successfully`);
-                    return false;
+                <label htmlFor="fileInput" style={{ cursor: 'pointer', display: 'block', textAlign: 'center' }}>
+                  <input
+                  type="file"
+                  style={{ cursor: 'pointer', display: 'block', textAlign: 'center' }}
+                  onChange={(e)=>{
+                    console.log(e.target.files[0])
+                    setFile(e.target.files[0]);
                   }}
-                >
-                  <Button icon={<UploadOutlined />}>Tải hóa đơn</Button>
-                </Upload>
-                
+                  />
+
+                {/* </input> */}
+                  </label>
               </Card>
             </Form.Item>
             <Form.Item
