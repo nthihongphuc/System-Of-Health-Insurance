@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { List, Button } from 'antd';
+import { List, Button, Space } from 'antd';
 import api from '../../api/endpoint';
 
 const InsuranceListPage = ({ history }) => {
@@ -9,11 +9,11 @@ const InsuranceListPage = ({ history }) => {
         // Fetch danh sách đơn đăng ký bảo hiểm từ API
         const fetchInsuranceList = async () => {
             try {
-                const response = await api.getInsuranceList();
-                if (response.success) {
-                    setInsuranceList(response.data);
+                const response = await api.getAllRegistrations();
+                if (response) {
+                    setInsuranceList(response.allRegistrations);
                 } else {
-                    console.error('Failed to fetch insurance list:', response.message);
+                    console.error('Failed to fetch insurance list');
                 }
             } catch (error) {
                 console.error('Error during fetching insurance list:', error);
@@ -23,10 +23,10 @@ const InsuranceListPage = ({ history }) => {
         fetchInsuranceList();
     }, []);
 
-    const handleViewDetails = (insuranceId) => {
-        // Điều hướng đến trang chi tiết đơn đăng ký bảo hiểm
-        history.push(`/insurance-details/${insuranceId}`);
-    };
+    // const handleViewDetails = (insuranceId) => {
+    //     // Điều hướng đến trang chi tiết đơn đăng ký bảo hiểm
+    //     history.push(`/insurance-details/${insuranceId}`);
+    // };
 
     return (
         <div>
@@ -37,12 +37,15 @@ const InsuranceListPage = ({ history }) => {
                 renderItem={(item) => (
                     <List.Item>
                         <List.Item.Meta
-                            title={item.policyHolderName}
-                            description={`Ngày đăng ký: ${item.registrationDate}`}
+                            title={item.customer.cusname}
+                            description={`Ngày đăng ký: ${item.registerForm.registrationDate}`}
                         />
-                        <Button type="primary" onClick={() => handleViewDetails(item._id)}>
-                            Xem chi tiết
-                        </Button>
+                        <Space>
+                            <Button type="primary" onClick={() => handleViewDetails(item.insurance._id)}>
+                                Xem chi tiết
+                            </Button>
+
+                        </Space>
                     </List.Item>
                 )}
             />

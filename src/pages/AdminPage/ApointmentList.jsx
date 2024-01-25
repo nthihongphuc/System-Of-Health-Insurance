@@ -1,11 +1,26 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import api from '../../api/endpoint';
 
 const AppointmentsList = () => {
-    const appointments = [
-        { id: 1, title: 'Meeting 1', date: '2024-02-15', time: '10:00 AM' },
-        { id: 2, title: 'Meeting 2', date: '2024-02-16', time: '02:30 PM' },
-        // Add more appointments as needed
-    ];
+    const [appointments, setAppointments] = useState([]);
+
+    useEffect(() => {
+        const fetchAppointments = async () => {
+            try {
+                const appointmentsData = await api.getAllAppointments();
+
+                if (appointmentsData) {
+                    setAppointments(appointmentsData);
+                } else {
+                    console.error('Failed to fetch appointments');
+                }
+            } catch (error) {
+                console.error('Error during fetching appointments:', error);
+            }
+        };
+
+        fetchAppointments();
+    }, []);
 
     return (
         <div>
@@ -41,8 +56,8 @@ const AppointmentsList = () => {
                 </thead>
                 <tbody>
                     {appointments.map(appointment => (
-                        <tr key={appointment.id}>
-                            <td>{appointment.id}</td>
+                        <tr key={appointment._id}>
+                            <td>{appointment._id}</td>
                             <td>{appointment.title}</td>
                             <td>{appointment.date}</td>
                             <td>{appointment.time}</td>
