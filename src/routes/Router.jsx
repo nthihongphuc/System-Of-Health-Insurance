@@ -23,7 +23,7 @@ import PolicyList from "../pages/AdminPage/PolicyList";
 import FeeListPage from "../pages/AdminPage/FeeListPage";
 import UpdatePolicyPage from "../pages/AdminPage/UpdatePolicy";
 import HistoryPaymentList from "../pages/AdminPage/HistoryPaymentList";
-import BillDetailPage from "../pages/AdminPage/BillDetailPage";
+import BillDetailPage from "../pages/BillDetailPage";
 
 const ProfileRouter = () => {
   return (
@@ -34,7 +34,7 @@ const ProfileRouter = () => {
         <Route path="/resetpw" element={<ResetPasswordPage />} />
         <Route path="/insurance" element={<RegisteredInsurancePage />} />
         <Route path="/bill" element={<BillPage />} />
-        <Route path="/bill/bill_detail" element={<BillDetailPage />} />
+        <Route path="/bill/:id" element={<BillDetailPage />} />
 
         {/* <Route path="/activation" element={<ActivationPage />} /> */}
       </Route>

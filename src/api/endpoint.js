@@ -9,7 +9,7 @@ const api = {
       const data = await client.post("/auth/login", { username, password });
       return data.data;
     } catch (error) {
-      console.error("Error during login:", error.response ? error.response.data : error.message);
+      console.error(error);
       return null;
     }
   },
@@ -49,12 +49,14 @@ const api = {
   GetUserInfo: async () => {
     try {
       const token = localStorage.getItem("access_token");
+      console.log(token);
       if (!token) {
         // Xử lý trường hợp token không tồn tại
         console.error("Access token is missing");
         return null;
       }
-      const data = await client.get("/user/UserInfo", { headers: { Authorization: `Bearer ${token}` } });
+      const data = await client.get("/user/UserInfo",
+        { headers: { Authorization: `Bearer ${token}` } });
       return data.data;
     } catch (error) {
       console.log(error)
@@ -80,9 +82,18 @@ const api = {
       return null;
     }
   },
+
   getRegisterInsurance: async () => {
     try {
-      const data = await client.get("/insurance/getRegisterInsurance");
+      const token = localStorage.getItem("access_token");
+      console.log(token);
+      if (!token) {
+        // Xử lý trường hợp token không tồn tại
+        console.error("Access token is missing");
+        return null;
+      }
+      const data = await client.get("/insurance/RegisterInsurance",
+        { headers: { Authorization: `Bearer ${token}` } });
       return data.data;
     } catch (error) {
       console.error("Error fetching register insurance:", error);
@@ -130,55 +141,61 @@ const api = {
     }
   },
 
-  RequestPayment: async ({ Type_Payment }) => {
+  RequestPayment: async (formdata) => {
     try {
       const token = localStorage.getItem("access_token");
       console.log(token);
       if (!token) {
-        // Xử lý trường hợp token không tồn tại
         console.error("Access token is missing");
         return null;
       }
-      const data = await client.post("/bill/RequestPayment", { Type_Payment });
+      const data = await client.post("/bill/RequestPayment", formdata,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'multipart/form-data'
+          }
+        });
       return data.data;
     } catch (error) {
       console.log(error)
       return null;
     }
   },
-  getAllRegisterInsurance: async () => {
+  getAllRegistrations: async () => {
     try {
-      const data = await client.get("/RegisterInsurance/all");
-
-      if (data && data.data && data.data.insurances) {
-        // Kiểm tra xem danh sách bảo hiểm có dữ liệu hay không
-        const insurances = data.data.insurances;
-
-        // Xử lý mỗi bảo hiểm để tránh lỗi khi thuộc tính 'Type' không tồn tại
-        const modifiedInsurances = insurances.map(insurance => {
-          if (insurance && insurance.Type) {
-            // Nếu 'Type' tồn tại trong 'insurance', trả về bản ghi được chỉnh sửa
-            return insurance;
-          } else {
-            // Nếu 'Type' không tồn tại, gán giá trị mặc định hoặc xử lý lỗi khác
-            console.error("Invalid or missing 'Type' property in 'insurance'");
-            return { ...insurance, Type: "DefaultType" };
-          }
-        });
-
-        // Trả về danh sách bảo hiểm sau khi đã xử lý
-        return modifiedInsurances;
-      } else {
-        console.error("Invalid response format from the server");
+      const token = localStorage.getItem("access_token");
+      console.log(token);
+      if (!token) {
+        // Handle the case where the token is missing
+        console.error("Access token is missing");
         return null;
       }
+      const data = await client.get("/registrations/all", { headers: { Authorization: `Bearer ${token}` } });
+      return data.data;
     } catch (error) {
-      console.error("Error fetching register insurance:", error);
+      console.log(error);
       return null;
     }
   },
+  getAllInsuranceCostsForAllUsers: async () => {
+    try {
+      const token = localStorage.getItem("access_token");
+      if (!token) {
+        console.error("Access token is missing");
+        return null;
+      }
 
+      const data = await client.get("/bills/all", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
 
+      return data.data;
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
+  },
   getAllTransactions: async () => {
     try {
       const token = localStorage.getItem("access_token");
@@ -200,30 +217,23 @@ const api = {
   getAllAppointments: async () => {
     try {
       const token = localStorage.getItem("access_token");
+      console.log(token);
       if (!token) {
         console.error("Access token is missing");
         return null;
       }
-      else {
 
-        const response = await fetch("/apointment/all", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
+      const data = await client.get("/appointments/all", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
 
-        console.log("Raw response:", response);  // Thêm dòng này để in ra console
-
-        const data = await response.json();
-
-        return data;
-      }
+      return data.data;
     } catch (error) {
-      console.log(error(error));
+      console.error(error);
       return null;
     }
   },
+
 
 
 };
