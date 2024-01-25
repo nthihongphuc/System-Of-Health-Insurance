@@ -6,18 +6,26 @@ const AppointmentsList = () => {
 
     useEffect(() => {
         const fetchAppointments = async () => {
-            try {
-                const appointmentsData = await api.getAllAppointments();
 
-                if (appointmentsData) {
-                    setAppointments(appointmentsData);
-                } else {
-                    console.error('Failed to fetch appointments');
-                }
-            } catch (error) {
+            const response = await fetch("/appointments/all", {
+                method: "GET",
+                headers: {
+
+                    "Content-Type": "application/json",
+                },
+            });
+
+            const data = await response.json();
+
+            if (data.appointments) {
+                // Dữ liệu là một mảng các cuộc hẹn
+                console.log(data.appointments);
+            } else {
                 console.error('Error during fetching appointments:', error);
+
             }
         };
+
 
         fetchAppointments();
     }, []);
@@ -55,14 +63,21 @@ const AppointmentsList = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {appointments.map(appointment => (
-                        <tr key={appointment._id}>
-                            <td>{appointment._id}</td>
-                            <td>{appointment.title}</td>
-                            <td>{appointment.date}</td>
-                            <td>{appointment.time}</td>
+                    {/* Kiểm tra xem appointments có phải là mảng không trước khi sử dụng map */}
+                    {Array.isArray(appointments) ? (
+                        appointments.map(appointment => (
+                            <tr key={appointment._id}>
+                                <td>{appointment._id}</td>
+                                <td>{appointment.title}</td>
+                                <td>{appointment.date}</td>
+                                <td>{appointment.time}</td>
+                            </tr>
+                        ))
+                    ) : (
+                        <tr>
+                            <td colSpan="4">No appointments available</td>
                         </tr>
-                    ))}
+                    )}
                 </tbody>
             </table>
         </div>

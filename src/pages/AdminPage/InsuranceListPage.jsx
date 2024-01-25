@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { List, Button, Space } from 'antd';
+import { Table } from 'antd';
 import api from '../../api/endpoint';
 
-const InsuranceListPage = ({ history }) => {
+const InsuranceListPage = () => {
     const [insuranceList, setInsuranceList] = useState([]);
 
     useEffect(() => {
-        // Fetch danh sách đơn đăng ký bảo hiểm từ API
-        const fetchInsuranceList = async () => {
+        const fetchData = async () => {
             try {
-                const response = await api.getAllRegistrations();
-                if (response) {
-                    setInsuranceList(response.allRegistrations);
+                const response = await api.getAllRegisterInsurance();
+                if (response && response.data && response.data.registers) {
+                    setInsuranceList(response.data.registers);
                 } else {
                     console.error('Failed to fetch insurance list');
                 }
@@ -20,35 +19,47 @@ const InsuranceListPage = ({ history }) => {
             }
         };
 
-        fetchInsuranceList();
-    }, []);
+        fetchData();
+    }, []); // Passing an empty dependency array ensures useEffect runs once after the initial render.
 
-    // const handleViewDetails = (insuranceId) => {
-    //     // Điều hướng đến trang chi tiết đơn đăng ký bảo hiểm
-    //     history.push(`/insurance-details/${insuranceId}`);
-    // };
+    const columns = [
+        {
+            title: 'Cus_ID',
+            dataIndex: 'Cus_ID',
+            key: 'Cus_ID',
+        },
+        {
+            title: 'Ins_ID',
+            dataIndex: 'Ins_ID',
+            key: 'Ins_ID',
+        },
+        {
+            title: 'Time_Regis',
+            dataIndex: 'Time_Regis',
+            key: 'Time_Regis',
+        },
+        {
+            title: 'Time_Start',
+            dataIndex: 'Time_Start',
+            key: 'Time_Start',
+        },
+        {
+            title: 'Time_End',
+            dataIndex: 'Time_End',
+            key: 'Time_End',
+        },
+        {
+            title: 'Status',
+            dataIndex: 'Status',
+            key: 'Status',
+        },
+        // Thêm các cột khác tương ứng với các thuộc tính khác
+    ];
 
     return (
         <div>
             <h2>Danh sách đơn đăng ký bảo hiểm</h2>
-            <List
-                itemLayout="horizontal"
-                dataSource={insuranceList}
-                renderItem={(item) => (
-                    <List.Item>
-                        <List.Item.Meta
-                            title={item.customer.cusname}
-                            description={`Ngày đăng ký: ${item.registerForm.registrationDate}`}
-                        />
-                        <Space>
-                            <Button type="primary" onClick={() => handleViewDetails(item.insurance._id)}>
-                                Xem chi tiết
-                            </Button>
-
-                        </Space>
-                    </List.Item>
-                )}
-            />
+            <Table dataSource={insuranceList} columns={columns} />
         </div>
     );
 };

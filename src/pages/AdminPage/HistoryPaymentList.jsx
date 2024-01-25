@@ -1,54 +1,80 @@
+// HistoryPaymentList.jsx
 import React, { useState, useEffect } from 'react';
-import { List, Button } from 'antd';
 import api from '../../api/endpoint';
 
-const TransactionListPage = ({ history }) => {
-    const [transactions, setTransactions] = useState([]);
+const HistoryPaymentList = () => {
+    const [paymentList, setPaymentList] = useState([]);
 
     useEffect(() => {
-        const fetchTransactions = async () => {
+        const fetchData = async () => {
             try {
-                const transactionsData = await api.getAllTransactions();
-
-                if (transactionsData) {
-                    // Lưu trữ dữ liệu vào state
-                    setTransactions(transactionsData.all_bill_requests);
+                const response = await api.getAllBills();
+                if (response && response.data) {
+                    setPaymentList(response.data);
                 } else {
-                    console.error('Failed to fetch transactions data');
+                    console.error('Failed to fetch payment list');
                 }
             } catch (error) {
-                console.error('Error during fetching transactions data:', error);
+                console.error('Error during fetching payment list:', error);
             }
         };
 
-        fetchTransactions();
+        fetchData();
     }, []);
 
-    const handleViewDetails = (transactionId) => {
-        // Điều hướng đến trang chi tiết giao dịch
-        history.push(`/transaction-details/${transactionId}`);
-    };
-
     return (
-        <div>
-            <h2>Danh sách giao dịch bảo hiểm</h2>
-            <List
-                itemLayout="horizontal"
-                dataSource={transactions}
-                renderItem={(item) => (
-                    <List.Item>
-                        <List.Item.Meta
-                            title={`Giao dịch ${item._id}`}
-                            description={`Số tiền: ${item.Total} - Ngày: ${item.Time}`}
-                        />
-                        <Button type="primary" onClick={() => handleViewDetails(item._id)}>
-                            Xem chi tiết
-                        </Button>
-                    </List.Item>
-                )}
-            />
+        <div className="history-payment-list">
+            <h2>History Payment List</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Total</th>
+                        <th>Time</th>
+                        <th>Time End</th>
+                        <th>Status</th>
+                        <th>Type</th>
+                        <th>Bill Url</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {paymentList.map((payment) => (
+                        <tr key={payment._id}>
+                            <td>{payment._id}</td>
+                            <td>{payment.Total}</td>
+                            <td>{payment.Time}</td>
+                            <td>{payment.Time_End}</td>
+                            <td>{payment.Status}</td>
+                            <td>{payment.Type}</td>
+                            <td>{payment.Bill_Url}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+            <style>{`
+                .history-payment-list {
+                    max-width: 800px;
+                    margin: 0 auto;
+                }
+
+                table {
+                    width: 100%;
+                    border-collapse: collapse;
+                    margin-top: 20px;
+                }
+
+                th, td {
+                    border: 1px solid #ddd;
+                    padding: 8px;
+                    text-align: left;
+                }
+
+                th {
+                    background-color: #f2f2f2;
+                }
+            `}</style>
         </div>
     );
 };
 
-export default TransactionListPage;
+export default HistoryPaymentList;
