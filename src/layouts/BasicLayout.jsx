@@ -41,10 +41,6 @@ const menuItems = [
         label: <a href="/product/type/65ae152eaad0c8155f6bcfd4">Bảo hiểm chăm sóc sức khỏe</a>,
       },
       {
-        key: "65ae1562aad0c8155f6bcfd5",
-        label: <a href="/product/type/65ae1562aad0c8155f6bcfd5">Bảo hiểm y tế</a>,
-      },
-      {
         key: "65ae157aaad0c8155f6bcfd6",
         label: <a href="/product/type/65ae157aaad0c8155f6bcfd6">Bảo hiểm tai nạn</a>
       },
