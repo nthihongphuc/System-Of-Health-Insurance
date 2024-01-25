@@ -15,13 +15,14 @@ import RegisterInsurance from "../pages/RegisterInsurance";
 import BillPage from "../pages/BillPage";
 import ForgotPasswordPage from "../pages/ForgotPasswordPage";
 import RequestPayment from "../pages/RequestPayment";
-import InsuranceListPage from "../pages/InsuranceListPage";
+import InsuranceListPage from "../pages/AdminPage/InsuranceListPage";
+
 import AdminPage from "../pages/AdminPage";
-import ApointmentList from "../pages/ApointmentList";
-import PolicyList from "../pages/PolicyList";
-import FeeListPage from "../pages/FeeListPage";
-import UpdatePolicyPage from "../pages/UpdatePolicy";
-import HistoryPaymentList from "../pages/HistoryPaymentList";
+import ApointmentList from "../pages/AdminPage/ApointmentList";
+import PolicyList from "../pages/AdminPage/PolicyList";
+import FeeListPage from "../pages/AdminPage/FeeListPage";
+import UpdatePolicyPage from "../pages/AdminPage/UpdatePolicy";
+import HistoryPaymentList from "../pages/AdminPage/HistoryPaymentList";
 import BillDetailPage from "../pages/BillDetailPage";
 
 const ProfileRouter = () => {
@@ -33,7 +34,7 @@ const ProfileRouter = () => {
         <Route path="/resetpw" element={<ResetPasswordPage />} />
         <Route path="/insurance" element={<RegisteredInsurancePage />} />
         <Route path="/bill" element={<BillPage />} />
-        <Route path="/bill/bill_detail" element={<BillDetailPage />} />
+        <Route path="/bill/:id" element={<BillDetailPage />} />
 
         {/* <Route path="/activation" element={<ActivationPage />} /> */}
       </Route>

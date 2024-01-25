@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Form, Input, DatePicker, message } from 'antd';
-import api from '../api/endpoint';
+import api from '../../api/endpoint';
 
 const UpdatePolicyPage = () => {
     const [loading, setLoading] = useState(false);

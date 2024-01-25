@@ -1,10 +1,12 @@
 //import { Layout, Sider, Menu, UserOutlined, collapsed } from "antd";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import { Layout, Form, Input, Button, Menu, theme, Card, Collapse } from "antd";
 import { Content } from "antd/es/layout/layout";
 import { Space, Table, Tag } from "antd";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import api from "../api/endpoint";
+import { toast } from "react-toastify";
 //import BillCard from "../components/BillCard";
 
 const { Header } = Layout;
@@ -14,22 +16,28 @@ const BillPage = () => {
     token: { colorBgContainer },
   } = theme.useToken();
   const navigate = useNavigate();
+  const [userInfo, setUserInfo] = useState([]);
+  // const id= useParams();
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      try {
+        const data = await api.getBill();
+        if (data) {
+          localStorage.getItem('access_token', data.data.accessToken);
+          setUserInfo(data?.data?.bill_list);
 
-const dataSource = [
-  {
-    key: "1",
-    name: "Bảo hiểm 1",
-    date: "1/1/2024",
-    status: "Chưa thanh toán",
-    action: "Thanh toán",
-  },
-  {
-    key: "2",
-    name: "Bảo hiểm 2",
-    date: "1/1/2023",
-    status: "Đã thanh toán",
-  },
-];
+        } else {
+          toast.error(data.error.message);
+        }
+      } catch (error) {
+        console.error('Error fetching user info:', error);
+        toast.error(error.message)
+      }
+    };
+    fetchUserInfo();
+    
+  }, []);
+  console.log(userInfo?.bill?._id);
 
 const columns = [
   {
@@ -48,9 +56,14 @@ const columns = [
     key: "date",
   },
   {
-    title: "Tình trạng",
+    title: "Tình trạng xác thực",
     dataIndex: "status",
     key: "status",
+  },
+  {
+    title: "Tình trạng thanh toán",
+    dataIndex: "payment_status",
+    key: "payment_status",
   },
   {
     title: 'Thanh toán',
@@ -58,7 +71,7 @@ const columns = [
     render: (_, record) => (
       <Space 
       size="middle"
-      onClick={() => navigate("bill_detail")}
+      onClick={() => navigate(`${record.action}`)}
       >
         {/* <a>Chi tiết {record.name}</a> */}
         <a>Xem chi tiết</a>
@@ -92,7 +105,16 @@ const columns = [
         flexDirection: "column",
         }}
       >
-      <Table columns={columns} dataSource={dataSource} />
+      <Table columns={columns} 
+      dataSource={userInfo?.map((user, index) => ({
+        key: index +1, 
+        name: user?.insurance?.Ins_Name,
+        date: user?.bill?.Time_End,
+        status: user?.bill?.Status,
+        payment_status: user?.bill?.Payment_Status,
+        action: user?.bill?._id,
+      }))}
+        />
       </Card>
       </Content>
     </Layout>

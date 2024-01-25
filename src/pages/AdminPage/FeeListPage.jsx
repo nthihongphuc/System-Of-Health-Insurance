@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { List, Button } from 'antd';
-import api from '../api/endpoint';
+import api from '../../api/endpoint';
 
 const FeeListPage = ({ history }) => {
     const [feeList, setFeeList] = useState([]);
@@ -9,24 +9,14 @@ const FeeListPage = ({ history }) => {
         // Fetch danh sách chi phí bảo hiểm từ API
         const fetchFeeList = async () => {
             try {
-                // Simulate response from API with sample data
-                const sampleData = [
-                    {
-                        _id: '1',
-                        policyHolderName: 'Nguyễn Văn A',
-                        feeAmount: 1000000,
-                        paymentDate: '2022-01-10',
-                    },
-                    {
-                        _id: '2',
-                        policyHolderName: 'Trần Thị B',
-                        feeAmount: 1500000,
-                        paymentDate: '2022-02-20',
-                    },
-                    // Add more sample data as needed
-                ];
+                const response = await api.getAllInsuranceCostsForAllUsers();
 
-                setFeeList(sampleData);
+                if (response && response.all_bill_requests) {
+                    // Lấy dữ liệu từ API và cập nhật state
+                    setFeeList(response.all_bill_requests);
+                } else {
+                    console.error('Failed to fetch fee list from API');
+                }
             } catch (error) {
                 console.error('Error during fetching fee list:', error);
             }
@@ -49,8 +39,8 @@ const FeeListPage = ({ history }) => {
                 renderItem={(item) => (
                     <List.Item>
                         <List.Item.Meta
-                            title={item.policyHolderName}
-                            description={`Số tiền: ${item.feeAmount} VND - Ngày thanh toán: ${item.paymentDate}`}
+                            title={item.Cus_Id.email}
+                            description={`Số tiền: ${item.Type_Payment} VND - Ngày thanh toán: ${item.createdAt}`}
                         />
                         <Button type="primary" onClick={() => handleViewDetails(item._id)}>
                             Xem chi tiết

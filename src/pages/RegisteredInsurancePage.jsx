@@ -52,9 +52,10 @@ const RegisteredInsurancePage = () => {
             const items = {
               "Tên khách hàng": user?.customer?.cusname,
               "Loại bảo hiểm": user?.TypeInsuranceName?.Type_Name,
-              "Thời gian bắt đầu": user?.registerForm?.timeStart,
-              "Tình trạng": user?.registerForm?.status,
-              "Chi tiết": user?.registerForm?.detail,
+              "Thời gian bắt đầu": user?.registerForm?.Time_Start,
+              "Thời gian kết thúc": user?.registerForm?.Time_End,
+              "Phí bảo hiểm": user?.insurance?.Year_Cost,
+              "Tình trạng": user?.registerForm?.Status,
               "Xem thông tin bảo hiểm": (
                 <div style={{botton: '5px', color:'#1677ff', textDecoration: 'underline', display: 'inline'}}> 
                   <a href={`/product/${key}`}>

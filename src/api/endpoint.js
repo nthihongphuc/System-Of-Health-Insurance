@@ -9,9 +9,11 @@ const api = {
       const data = await client.post("/auth/login", { username, password });
       return data.data;
     } catch (error) {
+      console.error(error);
       return null;
     }
   },
+
 
   changePassword: async ({ currentPassword, newPassword }) => {
     try {
@@ -35,7 +37,7 @@ const api = {
   },
   register: async ({ username, password, email, cusname, birthday, gender, phone, address, status }) => {
     try {
-      const data  = await client.post("/auth/register", { username, password, email, cusname, birthday, gender, phone, address, status });
+      const data = await client.post("/auth/register", { username, password, email, cusname, birthday, gender, phone, address, status });
       console.log(email);
       return data.data;
     } catch (error) {
@@ -47,12 +49,14 @@ const api = {
   GetUserInfo: async () => {
     try {
       const token = localStorage.getItem("access_token");
+      console.log(token);
       if (!token) {
         // Xử lý trường hợp token không tồn tại
         console.error("Access token is missing");
         return null;
       }
-      const data = await client.get("/user/UserInfo",{ headers: { Authorization: `Bearer ${token}` } });
+      const data = await client.get("/user/UserInfo",
+      { headers: { Authorization: `Bearer ${token}` } });
       return data.data;
     } catch (error) {
       console.log(error)
@@ -78,12 +82,12 @@ const api = {
       return null;
     }
   },
+  
   getRegisterInsurance: async () => {
     try {
       const token = localStorage.getItem("access_token");
       console.log(token);
       if (!token) {
-        // Xử lý trường hợp token không tồn tại
         console.error("Access token is missing");
         return null;
       }
@@ -105,7 +109,7 @@ const api = {
       return null;
     }
   },
-  getAllInsurance: async ({id}) => {
+  getAllInsurance: async ({ id }) => {
     try {
       const data = await client.get(`/insurance/InsuranceInfo/${id}`);
       console.log(id);
@@ -143,15 +147,15 @@ const api = {
         console.error("Access token is missing");
         return null;
       }
-      const data = await client.post("/bill/RequestPayment",{ Bill_Url,Type_Payment,Detail }
-        ,{ headers: { Authorization: `Bearer ${token}` } });
+      const data = await client.post("/bill/RequestPayment",{  Bill_Url,Type_Payment, Detail  },
+      { headers: { Authorization: `Bearer ${token}` } });
       return data.data;
     } catch (error) {
       console.log(error)
       return null;
     }
   },
-  RegisterInsurance: async ({ email, id}) => {
+  getBill: async () => {
     try {
       const token = localStorage.getItem("access_token");
       console.log(token);
@@ -159,14 +163,14 @@ const api = {
         console.error("Access token is missing");
         return null;
       }
-      const data = await client.post(`/insurance/RegisterInsurance/${id}`,{email},
-        { headers: { Authorization: `Bearer ${token}` } });
+      const data = await client.get("/bill/GetBill",
+      { headers: { Authorization: `Bearer ${token}` } });
       return data.data;
     } catch (error) {
       console.log(error)
       return null;
     }
-  }
+  },
 };
 
 export default api;

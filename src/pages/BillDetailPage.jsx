@@ -1,4 +1,4 @@
-//import { Layout, Sider, Menu, UserOutlined, collapsed } from "antd";
+// //import { Layout, Sider, Menu, UserOutlined, collapsed } from "antd";
 import React from "react";
 import {
   Layout,
@@ -10,28 +10,13 @@ import {
   Col,
   Upload,
   Button,
+  message,
 } from "antd";
 import { Content } from "antd/es/layout/layout";
 import { Space, Table } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 const { Header } = Layout;
-const props = {
-  name: "file",
-  action: "https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188",
-  headers: {
-    authorization: "authorization-text",
-  },
-  onChange(info) {
-    if (info.file.status !== "uploading") {
-      console.log(info.file, info.fileList);
-    }
-    if (info.file.status === "done") {
-      message.success(`${info.file.name} file uploaded successfully`);
-    } else if (info.file.status === "error") {
-      message.error(`${info.file.name} file upload failed.`);
-    }
-  },
-};
+
 const BillDetailPage = () => {
   const {
     token: { colorBgContainer },
@@ -75,7 +60,19 @@ const BillDetailPage = () => {
                 },
               ]}
             >
-              <Upload {...props}>
+              {/* <Upload {...props}> */}
+              <Upload 
+                multiple
+                maxCount={1}
+                action={"http://localhost:5173"}
+                showUploadList={{showRemoveIcon: true}}
+                accept=".jpg,.png,.jpeg"
+                beforeUpload={(file)=>{
+                  console.log(file);
+                  message.success(`${file.name} file uploaded successfully`);
+                  return false;
+                }}
+              >
                 <Button icon={<UploadOutlined />}>Tải hóa đơn</Button>
               </Upload>
             </Card>

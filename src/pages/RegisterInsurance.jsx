@@ -111,7 +111,7 @@ const RegisterInsurance = () => {
       children: (
         <div>
           {product?.Exception && (
-            <pre style={{ whiteSpace: "pre-line" }}>{product.Exception}</pre>
+            <pre style={{ whiteSpace: "pre-line" }}>{product.Year_Cost}</pre>
           )}
         </div>
       ),
