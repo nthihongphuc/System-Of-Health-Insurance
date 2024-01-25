@@ -13,7 +13,7 @@ const LoginPage = () => {
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
 
-  const onFinish = async () => {
+  const onFinish = async ({username,password}) => {
     try {
       
       const data = await api.login({ username, password });

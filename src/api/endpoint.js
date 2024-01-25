@@ -7,14 +7,6 @@ const api = {
   login: async ({ username, password }) => {
     try {
       const data = await client.post("/auth/login", { username, password });
-      ///////////////// cái dòng ngay trên, gọi api khác thì thay đường dẫn như là '/baohiem/nhantho'
-      ///////////////// api method nào thì gọi client. cái method đó như là client.get, client.post, client.put, client.delete
-      ///////////////// cái client.get không truyền data, chỉ truyền url thôi
-      // client.get('data/123');
-      // Còn post với put thì truyền data
-      // client.post('data', {username:'as'}})
-      // còn delete mà muốn truyền data thì bỏ nó vô data
-      // client.delete('/url', { data: {username:'ab'}})
       return data.data;
     } catch (error) {
       return null;
@@ -95,7 +87,7 @@ const api = {
         console.error("Access token is missing");
         return null;
       }
-      const data = await client.get("/insurance/RegisterInsurance",
+      const data = await client.get("/insurance/GetRegisterInsurance",
         { headers: { Authorization: `Bearer ${token}` } });
       return data.data;
     } catch (error) {
@@ -143,22 +135,38 @@ const api = {
     }
   },
 
-  RequestPayment: async ({ Type_Payment }) => {
+  RequestPayment: async ({ Bill_Url,Type_Payment, Detail }) => {
     try {
       const token = localStorage.getItem("access_token");
       console.log(token);
       if (!token) {
-        // Xử lý trường hợp token không tồn tại
         console.error("Access token is missing");
         return null;
       }
-      const data = await client.post("/bill/RequestPayment",{ Type_Payment });
+      const data = await client.post("/bill/RequestPayment",{ Bill_Url,Type_Payment,Detail }
+        ,{ headers: { Authorization: `Bearer ${token}` } });
       return data.data;
     } catch (error) {
       console.log(error)
       return null;
     }
   },
+  RegisterInsurance: async ({ email, id}) => {
+    try {
+      const token = localStorage.getItem("access_token");
+      console.log(token);
+      if (!token) {
+        console.error("Access token is missing");
+        return null;
+      }
+      const data = await client.post(`/insurance/RegisterInsurance/${id}`,{email},
+        { headers: { Authorization: `Bearer ${token}` } });
+      return data.data;
+    } catch (error) {
+      console.log(error)
+      return null;
+    }
+  }
 };
 
 export default api;

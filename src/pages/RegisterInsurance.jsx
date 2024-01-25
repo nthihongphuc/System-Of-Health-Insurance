@@ -19,7 +19,6 @@ import { address } from "../data/address";
 import bg from "../assets/bg.png";
 import { toast } from "react-toastify";
 import api from "../api/endpoint";
-import ProductDetailPage from "./ProductDetailPage";
 
 
 const { TextArea } = Input;
@@ -32,17 +31,33 @@ const RegisterInsurance = () => {
     const fetchData = async () => {
       try {
         const data = await api.getInsuranceDetail(id);
+        if (data.success) {
+          localStorage.getItem('access_token', data.data.accessToken);
+        } else {
+          toast.error(data.error.message);
+        }
         setProduct(data.data);
         console.log(data.data);
       } catch (error) {
-        console.error("Error fetching data:", error);
+        toast.error(error.message);
       }
     };
 
     fetchData();
   }, []);
 
-  const onFinish = (values) => {
+  const onFinish = async(values) => {
+    try {
+      const data = await api.RegisterInsurance({values,id});
+      if (data.success) {
+        localStorage.getItem('access_token', data.data.accessToken);
+        toast.success("Gửi yêu cầu đăng ký thành công");
+      } else {
+        toast.error(data.error.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
     console.log(values);
   };
   const [product, setProduct] = useState([]);

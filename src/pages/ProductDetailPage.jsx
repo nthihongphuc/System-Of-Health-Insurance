@@ -77,7 +77,7 @@ const ProductDetailPage = () => {
           Thông tin bảo hiểm
         </span>
       </Header>
-      <Content style={{ margin: 40 }}>
+      <Content style={{ margin: 40}}>
         <Space size={12}>
           <Image
             width={700}
@@ -86,11 +86,11 @@ const ProductDetailPage = () => {
           />
           <div style={{ padding: 50, width: "100%", justifyContent: "center" }}>
             <h2>{product?.Ins_Name}</h2>
-            <div style={{ whiteSpace: "pre" }}>
+            <div>
               {product?.Benefit &&
                 product.Benefit.split("\n").map((line, index) => (
                   <span key={index}>
-                    {index > 0 && <br />}{" "}
+                    {index > 0 && <br />}
                     {`- ${line}`}
                   </span>
                 ))}

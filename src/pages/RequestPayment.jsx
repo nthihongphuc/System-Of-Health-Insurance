@@ -29,39 +29,18 @@ const { Text } = Typography;
 const RequestPayment = () => {
   // const [componentDisabled, setComponentDisabled] = useState(true);
   const navigate = useNavigate();
-  const [genderValue, setGenderValue] = useState(null);
-
   const {
     token: { colorBgContainer },
   } = theme.useToken();
   const [userInfo, setUserInfo] = useState({});
   const [form] = Form.useForm();
-  
-  const props = {
-    name: "file",
-    action: `https://api.cloudinary.com/v1_1//upload`,
-    headers: {
-      authorization: "authorization-text",
-    },
-    onChange(info) {
-      if (info.file.status !== "uploading") {
-        console.log(info.file, info.fileList);
-      }
-      if (info.file.status === "done") {
-        message.success(`${info.file.name} file uploaded successfully`);
-      } else if (info.file.status === "error") {
-        message.error(`${info.file.name} file upload failed.`);
-      }
-    },
-  };
 
   const fetchUserInfo = async () => {
     try {
       const data = await api.GetUserInfo();
       if (data.success) {
-        localStorage.getItem('access_token', data.data.accessToken);
+        localStorage.getItem("access_token", data.data.accessToken);
         setUserInfo(data.data);
-        setGenderValue(data.data.Cus.gender);
       } else {
         toast.error(data.error.message);
       }
@@ -71,28 +50,26 @@ const RequestPayment = () => {
   };
 
   useEffect(() => {
-    // Fetch user information when the component mounts
     fetchUserInfo();
-  },[]);
+  }, []);
 
-  useEffect(()=>{
+  useEffect(() => {
     console.log(userInfo);
-    form.setFieldValue('cusname', userInfo?.Cus?.cusname);
-    form.setFieldValue('phone', userInfo?.Cus?.phone);
-    form.setFieldValue('gender', userInfo?.Cus?.gender);
-    form.setFieldValue('email', userInfo?.Cus?.email);
-    form.setFieldValue('cccd', userInfo?.Cus?.CCCD);
-    form.setFieldValue('address', userInfo?.Cus?.address);
-  },[userInfo])
-
+    form.setFieldValue("cusname", userInfo?.Cus?.cusname);
+    form.setFieldValue("phone", userInfo?.Cus?.phone);
+    form.setFieldValue("gender", userInfo?.Cus?.gender);
+    form.setFieldValue("email", userInfo?.Cus?.email);
+    form.setFieldValue("cccd", userInfo?.Cus?.CCCD);
+    form.setFieldValue("address", userInfo?.Cus?.address);
+  }, [userInfo]);
 
   const onFinish = async (values) => {
-    // console.log(values);
+    console.log(values);
     try {
       const response = await api.RequestPayment(values);
       if (response.success) {
-        localStorage.getItem('access_token', response.data.accessToken);
-        toast.success(response.message);
+        localStorage.getItem("access_token", response.data.accessToken);
+        toast.success("Gửi yêu cầu thanh toán thành công");
         navigate("/home");
       } else {
         toast.error(response.error.message);
@@ -100,7 +77,7 @@ const RequestPayment = () => {
     } catch (error) {
       toast.error(error.message);
     }
-  };
+   };
 
   const [value, setValue] = useState(1);
   const onChange = (e) => {
@@ -122,7 +99,7 @@ const RequestPayment = () => {
         }}
       >
         <Card
-          style={{ width: "100%", height: 1100, maxWidth: 450 }}
+          style={{ width: "100%", height: "100%", maxWidth: 450 }}
           bodyStyle={{
             display: "flex",
             flexDirection: "column",
@@ -159,7 +136,7 @@ const RequestPayment = () => {
                 },
               ]}
             >
-              <Radio.Group  onChange={onChange}>
+              <Radio.Group onChange={onChange}>
                 <Radio value="Nam"> Nam </Radio>
                 <Radio value="Nữ"> Nữ </Radio>
               </Radio.Group>
@@ -213,9 +190,9 @@ const RequestPayment = () => {
               <Cascader options={address} />
             </Form.Item>
 
-            <Card
+            <Form.Item
               label="Minh chứng hóa đơn"
-              name="Type_Payment"
+              name="Bill_Url"
               rules={[
                 {
                   required: true,
@@ -223,11 +200,25 @@ const RequestPayment = () => {
                 },
               ]}
             >
-              <Upload {...props}>
-                <Button icon={<UploadOutlined />}>Tải hóa đơn</Button>
-              </Upload>
-            </Card>
-            {/* Nút để qua trang chọn hình thức thanh toán */}
+              <Card>
+                {/* <Upload {...props}> */}
+                <Upload
+                  multiple
+                  maxCount={1}
+                  action={"http://localhost:5173"}
+                  showUploadList={{showRemoveIcon: true}}
+                  accept=".jpg,.png,.jpeg"
+                  beforeUpload={(file) => {
+                    // console.log(file);
+                    message.success(`${file.name} file uploaded successfully`);
+                    return false;
+                  }}
+                >
+                  <Button icon={<UploadOutlined />}>Tải hóa đơn</Button>
+                </Upload>
+                
+              </Card>
+            </Form.Item>
             <Form.Item
               style={{ textAlign: "left", width: 550 }}
               bodyStyle={{
@@ -235,7 +226,7 @@ const RequestPayment = () => {
                 flexDirection: "column",
               }}
               label="Chọn hình thức thanh toán"
-              name="type-payment"
+              name="Type_Payment"
               rules={[
                 {
                   required: true,
@@ -261,14 +252,16 @@ const RequestPayment = () => {
                       <span style={{ fontSize: 12, color: "gray" }}>
                         Ngân hàng - Số tài khoản (VD: MB Bank - 0909090909){" "}
                       </span>
-                      <Input
+                      <Form.Item
+                        name="Detail"
                         placeholder="Ngân hàng - Số tài khoản (VD: MB Bank - 0909090909)"
                         style={{
                           width: 300,
-                          marginLeft: 10,
-                          marginTop: 10,
+                          marginBottom: 0,
                         }}
-                      />
+                      >
+                        <Input />
+                      </Form.Item>
                     </div>
                   ) : null}
                   {value === 2 ? (
@@ -276,13 +269,16 @@ const RequestPayment = () => {
                       <span style={{ fontSize: 12, color: "gray" }}>
                         MoMo - Số điện thoại (VD: MoMo - 0909090909){" "}
                       </span>
-                      <Input
+                      <Form.Item
+                        name = "Detail"
                         placeholder="MoMo - Số điện thoại (VD: MoMo - 0909090909)"
                         style={{
                           width: 300,
-                          marginLeft: 10,
+                          marginBottom: 0,
                         }}
-                      />
+                      >
+                        <Input />
+                        </Form.Item>
                     </div>
                   ) : null}
                   {value === 3 ? (
@@ -298,13 +294,16 @@ const RequestPayment = () => {
                     </Text>
                   ) : null}
                   {value === 4 ? (
-                    <Input
+                    <Form.Item
+                      name = "Detail"
                       placeholder="Nhập yêu cầu khác"
                       style={{
                         width: 300,
-                        marginLeft: 10,
+                          marginBottom: 0,
                       }}
-                    />
+                    >
+                      <Input />
+                    </Form.Item>
                   ) : null}
                 </Space>
               </Radio.Group>
@@ -314,7 +313,6 @@ const RequestPayment = () => {
               type="primary"
               htmlType="submit"
               className="request-payment-form-button"
-              style={{ marginTop: 10 }}
             >
               Gửi yêu cầu thanh toán
             </Button>
