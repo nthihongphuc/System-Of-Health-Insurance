@@ -37,14 +37,9 @@ const ProductDetailPage = () => {
       key: "11",
       label: "Điều kiện tham gia",
       children: (
-        <div style={{ whiteSpace: "pre" }}>
+        <div>
           {product?.Require &&
-            product.Require.split("\n").map((line, index) => (
-              <span key={index}>
-                {index > 0 && <br />} 
-                {`- ${line}`}
-              </span>
-            ))}
+            <pre style={{ whiteSpace: "pre-line" }}>{product.Require }</pre>}
         </div>
       ),
     },
@@ -87,13 +82,9 @@ const ProductDetailPage = () => {
           <div style={{ padding: 50, width: "100%", justifyContent: "center" }}>
             <h2>{product?.Ins_Name}</h2>
             <div>
-              {product?.Benefit &&
-                product.Benefit.split("\n").map((line, index) => (
-                  <span key={index}>
-                    {index > 0 && <br />}
-                    {`- ${line}`}
-                  </span>
-                ))}
+              {product?.Benefit && (
+            <pre style={{ whiteSpace: "pre-line" }}>{product.Benefit }</pre>
+          )}
             </div>
             <Button
               type="primary"

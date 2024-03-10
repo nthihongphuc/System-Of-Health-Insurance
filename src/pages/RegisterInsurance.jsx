@@ -68,14 +68,10 @@ const RegisterInsurance = () => {
       key: "10",
       label: "Quyền lợi tham gia",
       children: (
-        <div style={{ whiteSpace: "pre" }}>
-          {product?.Benefit &&
-            product.Benefit.split("\n").map((line, index) => (
-              <span key={index}>
-                {index > 0 && <br />}
-                {`- ${line}`}
-              </span>
-            ))}
+        <div>
+          {product?.Benefit && (
+            <pre style={{ whiteSpace: "pre-line" }}>{product.Benefit }</pre>
+          )}
         </div>
       ),
     },
@@ -83,14 +79,10 @@ const RegisterInsurance = () => {
       key: "11",
       label: "Điều kiện tham gia",
       children: (
-        <div style={{ whiteSpace: "pre" }}>
-          {product?.Require &&
-            product.Require.split("\n").map((line, index) => (
-              <span key={index}>
-                {index > 0 && <br />}
-                {`- ${line}`}
-              </span>
-            ))}
+        <div >
+          {product?.Require && (
+            <pre style={{ whiteSpace: "pre-line"}}>{product.Require }</pre>
+          )}
         </div>
       ),
     },
